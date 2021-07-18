@@ -3,6 +3,8 @@ import React from 'react';
 import { Switch, Route} from "react-router-dom";
 import SignUp from './signup';
 import AboutUs from './aboutus';
+import Events from './events';
+
 function Main() {
   return (
     <div>
@@ -18,6 +20,10 @@ function Main() {
           <AboutUs/>
         </Route>
         
+        <Route exact path="/event">
+          <Events/>
+        </Route>
+
       </Switch>
 
 
