@@ -11,6 +11,7 @@
 5. Tamara Al-billeh
 
 
+
 ## Summary of the Idea 
 A web app that enables you to view and attend upcoming events as well as creating your own, users can host events on the app where they can share their screens and cameras.
 ## Problem domain 
@@ -45,3 +46,4 @@ For 'events' schema, it will be used for the events created and will have the ne
 ![uml](https://github.com/Fedora-Group/PLEX/blob/dev/public/assets/UML-PLEX.png?raw=true)
 
 [for more clear view click here](https://lucid.app/lucidspark/invitations/accept/inv_4f5cc904-4a6d-456b-9c7a-70386560deed?viewport_loc=-2121%2C-517%2C3841%2C1758%2C0_0)
+
