@@ -13,34 +13,34 @@ export const AuthContext = React.createContext()
 
 function AuthProvider(props) {
 
-    //hooks
-    const [user, setUser] = useState({});
+    // //hooks
+    // const [user, setUser] = useState({});
 
-    //functions
+    // //functions
 
-    const signUp = async function (username, password, role) {
+    // const signUp = async function (username, password, role) {
 
-        let url = `${apiUrl}signup`;
+    //     let url = `${apiUrl}signup`;
 
-        let body = { username, password, role };
+    //     let body = { username, password, role };
 
-        let result = await fetch(
-            url,
-            {
-                method: 'post',
-                mode: 'cors',
-                cache: 'no-cache',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
+    //     let result = await fetch(
+    //         url,
+    //         {
+    //             method: 'post',
+    //             mode: 'cors',
+    //             cache: 'no-cache',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify(body)
 
-            }
-        )
+    //         }
+    //     )
 
-        let user = await result.json();
+    //     let user = await result.json();
 
-        console.log('user', user);
+    //     console.log('user', user);
 
-    }
+    // }
 
     const signIn = async function (username, password) {
         const encoded = base64.encode(`${username}:${password}`)
@@ -61,10 +61,10 @@ function AuthProvider(props) {
     }
 
     const state = {
-        signUp,
+        // signUp,
 
-        user,
-        setUser,
+        // user,
+        // setUser,
 
     }
 

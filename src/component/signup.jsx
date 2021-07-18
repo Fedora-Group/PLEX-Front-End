@@ -1,11 +1,20 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useContext } from 'react'
-import { AuthContext } from '../context/auth'
+// import { useContext } from 'react'
+// import { AuthContext } from '../context/auth'
+import { signUp, addUser } from '../store/signup';
 
-export default function SignUp() {
+export default function SignUp(props) {
+  const dispatch = useDispatch();
 
-  const context = useContext(AuthContext);
+  // const context = useContext(AuthContext);
+  
+//   const state = useSelector(state => {
+//     return {
+//         signup: state.signup
+//     }
+// });
 
 
   const submitHandler = (e) => {
@@ -18,7 +27,8 @@ export default function SignUp() {
       role: e.target.role.value
     }
 
-    context.signUp(user.username, user.password, user.role)
+    // context.signUp(user.username, user.password, user.role)
+    dispatch(signUp(user.username, user.password, user.role))
   }
 
   return (
