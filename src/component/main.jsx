@@ -7,7 +7,6 @@ function Main() {
   return (
     <div>
       <h1>Hello Fedora</h1>
-      <Chat/>
     </div>
   )
 }
