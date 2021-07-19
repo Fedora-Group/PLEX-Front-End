@@ -1,5 +1,7 @@
 // everything but the header and the footer // Note this can be changed /deleted 
 import React from 'react';
+import Chat from './chat'
+
 import { Switch, Route} from "react-router-dom";
 import SignUp from './signup';
 
@@ -7,6 +9,7 @@ import SignIn from './signin';
 
 import AboutUs from './aboutus';
 import Events from './events';
+
 
 
 function Main() {
