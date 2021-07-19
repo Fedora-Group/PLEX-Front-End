@@ -21,8 +21,8 @@ const signInSlice=createSlice({
     
     // logIn(state,action){state[]}
     loggedIn(state,action){state['loggedIn']=action.payload },
-    token(state,action){console.log('ffff');state['token']=action.payload},
-    user(state,action){console.log('hhh');state['user']=action.payload},
+    token(state,action){state['token']=action.payload},
+    user(state,action){state['user']=action.payload},
   }
 
 
