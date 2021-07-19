@@ -2,11 +2,39 @@
 import React from 'react';
 import Chat from './chat'
 
+import { Switch, Route} from "react-router-dom";
+import SignUp from './signup';
+
+import SignIn from './signin';
+
+import AboutUs from './aboutus';
+import Events from './events';
+
+
 
 function Main() {
   return (
     <div>
-      <h1>Hello Fedora</h1>
+
+      {/* change  */}
+      <Switch> 
+
+        <Route exact path="/">
+          <h1>Hello Fedora</h1>
+          <SignUp />
+           <SignIn/>
+        </Route>
+
+        <Route exact path="/aboutus">
+          <AboutUs/>
+        </Route>
+        
+        <Route exact path="/event">
+          <Events/>
+        </Route>
+
+      </Switch>
+
     </div>
   )
 }
