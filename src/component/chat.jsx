@@ -9,8 +9,8 @@ const socket =  io.connect('https://oauth-maq.herokuapp.com');
 export default function Chat(props) {
   
   
-  const [text, setText] = useState({message:'',name:'croco'})
-  const [chat, setChat] = useState([ {name:'wat',message:'weareVEnom'} ])
+  const [text, setText] = useState({message:'',username:'croco'})
+  const [chat, setChat] = useState([ {name:'wat',message:'weareVEnom',time:2} ])
 
   // dev Note using the useref to define the soket didnot work // 
   
@@ -24,27 +24,28 @@ export default function Chat(props) {
   
   const sendMessage = (e)=>{
     e.preventDefault();
+    let val = text.message;
+    
+    socket.emit('send-chat-message',{
+      message:text.message,
+      roomId:'222'
+    });
+    setChat([...chat,{message:text.message,name:text.name}])
+    e.currentTarget.message.value = '';
+		setText({ message: "", username:'croco' });
+    
+
     
 
   }
 
 
-  // socket.on('new-user', payload => {
-  //   socket.emit('old_massage', { message: roomsMassages[payload.roomId] });
-  //   console.log('********************', roomsMassages[payload.roomId]);
-  //   users[socket.id] = payload.name;
-  //   socket.broadcast.to(payload.roomId).emit('user-connected', {
-  //     name: payload.name,
-  //     time: moment().format('h:mm a'),
-  //   });
-  // });
-
   const renderChat = () => {
-		return chat.map(({ name, message }, index) => (
+		return chat.map(({ name, message,time }, index) => (
 			<div key={index}>
-				<h3>
-					{name}: <span>{message}</span>
-				</h3>
+				<p>
+					{name}: <span>{message}</span> : <span> {time} </span>
+				</p>
 			</div>
 		))
 
@@ -54,9 +55,25 @@ export default function Chat(props) {
  
     socket.emit('join-room',{roomId:'222'});
     socket.emit('new-user' , {roomId:'222',name:'famalam'})
-    socket.on('old_massage',payload=>{console.log(payload)})
+    socket.on('old_massage',  (payload) => {
+      if(payload.message){
+      console.log([ ...chat,...[payload.message]])
+         setChat(...[payload.message]);
+        console.log(chat)
+      }
+
+
+    })
   
   }, [])
+
+  useEffect(()=>{
+    
+    socket.on('chat-message',payload=>{
+    setChat([...chat,{message:payload.message,name:payload.name}])
+  });
+
+  },[chat])
   return (
     <div className = 'chatDiv'>
       <form onSubmit={sendMessage}>
@@ -74,6 +91,7 @@ export default function Chat(props) {
 				<h2>Chat Log</h2>
 				{renderChat()}
 			</div>
+      <button>Send</button>
       </form>
       
     </div>
