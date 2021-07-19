@@ -2,18 +2,24 @@
 import React from 'react';
 import { Switch, Route} from "react-router-dom";
 import SignUp from './signup';
+
+import SignIn from './signin';
+
 import AboutUs from './aboutus';
 import Events from './events';
+
 
 function Main() {
   return (
     <div>
+
       {/* change  */}
       <Switch> 
 
         <Route exact path="/">
           <h1>Hello Fedora</h1>
           <SignUp />
+           <SignIn/>
         </Route>
 
         <Route exact path="/aboutus">
@@ -25,7 +31,6 @@ function Main() {
         </Route>
 
       </Switch>
-
 
     </div>
   )
