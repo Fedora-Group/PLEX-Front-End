@@ -4,7 +4,7 @@ import SignUp from './signup';
 const Hero = () => {
   return (
     <div className='flex flex-wrap overflow-hidden w-full h-full'>
-      <div className='w-1/2  flex flex-col items-center justify-center'>
+      <div className='w-1/2  flex flex-col items-center mt-32'>
         <h2 className='text-white text-6xl font-extrabold w-full'>
           Data to enrich your{' '}
           <span className='text-indigo-400'>online busniess</span>

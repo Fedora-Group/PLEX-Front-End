@@ -22,7 +22,7 @@ export default function SignUp(props) {
     let user = {
       username: e.target.username.value,
       password: e.target.password.value,
-      role: e.target.role.value,
+      role: 'user',
     };
 
     // context.signUp(user.username, user.password, user.role)
@@ -34,7 +34,7 @@ export default function SignUp(props) {
       <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden'>
         <div class='px-4 py-8 sm:px-10'>
           <div>
-            <div>Sign in with</div>
+            <div className='pb-3 text-gray-500 font-semibold'>Sign in with</div>
             <button
               type='button'
               class='py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
@@ -61,50 +61,43 @@ export default function SignUp(props) {
               <span class='px-2 text-gray-500 bg-white'>Or</span>
             </div>
           </div>
-          <div class='mt-6'>
+          <form class='mt-6' onSubmit={submitHandler}>
             <div class='w-full space-y-6'>
               <div class='w-full'>
                 <div class=' relative '>
                   <input
                     type='text'
-                    id='search-form-price'
+                    id='form-username'
+                    name='username'
                     class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
-                    placeholder='Your price'
+                    placeholder='Username'
                   />
                 </div>
               </div>
               <div class='w-full'>
                 <div class=' relative '>
                   <input
-                    type='text'
-                    id='search-form-location'
+                    type='password'
+                    name='password'
+                    id='form-password'
                     class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
-                    placeholder='Your location'
+                    placeholder='Password'
                   />
                 </div>
               </div>
-              <div class='w-full'>
-                <div class=' relative '>
-                  <input
-                    type='text'
-                    id='search-form-name'
-                    class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
-                    placeholder='Your name'
-                  />
-                </div>
-              </div>
+
               <div>
                 <span class='block w-full rounded-md shadow-sm'>
                   <button
-                    type='button'
+                    type='submit'
                     class='py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                   >
-                    Search
+                    Create your account
                   </button>
                 </span>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div class='px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10'>
           <p class='text-xs leading-5 text-gray-500'>
@@ -112,23 +105,6 @@ export default function SignUp(props) {
           </p>
         </div>
       </div>
-
-      <form onSubmit={submitHandler}>
-        <h2>signUp</h2>
-        <input type='text' name='username' placeholder='username'></input>
-        <br />
-        <input type='password' name='password' placeholder='password'></input>
-        <br />
-        <select name='role' required>
-          <option value='user' default>
-            user
-          </option>
-          <option value='admin'>admin</option>
-          <option value='editor'>editor</option>
-        </select>
-        <br />
-        <button type='submit'>Submit</button>
-      </form>
     </div>
   );
 }
