@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useHistory, Link } from 'react-router-dom';
 
 const Header = () => {
   const history = useHistory();
@@ -14,29 +14,29 @@ const Header = () => {
           
         </div> */}
         <div className='flex items-center justify-between'>
-          <a href='/'>
+          <Link to='/'>
             <img
               className='h-8 w-auto sm:h-10'
               src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
               alt='logo'
             />
-          </a>
+          </Link>
         </div>
-        <a href='/' className='font-medium text-white hover:text-indigo-500'>
+        <Link to='/' className='font-medium text-white hover:text-indigo-500'>
           Home
-        </a>
-        <a
-          href='/event'
+        </Link>
+        <Link
+          to='/event'
           className='font-medium text-white hover:text-indigo-500'
         >
           Events
-        </a>
-        <a
-          href='/aboutus'
+        </Link>
+        <Link
+          to='/aboutus'
           className='font-medium text-white hover:text-indigo-500'
         >
           About Us
-        </a>
+        </Link>
       </div>
       <Route exact path='/'>
         <div className='w-2/12 overflow-hidden flex justify-end'>
