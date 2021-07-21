@@ -66,10 +66,11 @@ export default function SignUp(props) {
               <div class='w-full'>
                 <div class=' relative '>
                   <input
+                    required
                     type='text'
                     id='form-username'
                     name='username'
-                    class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
+                    class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent'
                     placeholder='Username'
                   />
                 </div>
@@ -77,10 +78,11 @@ export default function SignUp(props) {
               <div class='w-full'>
                 <div class=' relative '>
                   <input
+                    required
                     type='password'
                     name='password'
                     id='form-password'
-                    class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
+                    class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent'
                     placeholder='Password'
                   />
                 </div>
@@ -100,8 +102,18 @@ export default function SignUp(props) {
           </form>
         </div>
         <div class='px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10'>
-          <p class='text-xs leading-5 text-gray-500'>
-            This data are display for information and can change
+          <p class='text-xs leading-5 text-gray-500 font-medium'>
+            By signing up, you agree to our{' '}
+            <span className='font-bold   text-gray-700'>
+              Terms, Data Policy
+            </span>{' '}
+            and
+            <span className='font-bold   text-gray-700'>
+              {' '}
+              Cookies <br />
+              Policy{''}
+            </span>
+            .
           </p>
         </div>
       </div>

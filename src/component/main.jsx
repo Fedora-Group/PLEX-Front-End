@@ -30,6 +30,10 @@ function Main() {
         <Route exact path='/event'>
           <Events />
         </Route>
+        <Route exact path='/login'>
+          <Header />
+          <Hero />
+        </Route>
       </div>
     </Switch>
   );
