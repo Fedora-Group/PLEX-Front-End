@@ -23,7 +23,9 @@ const Hero = () => {
         </div>
       </Route>
       <Route exact path='/login'>
-        <SignIn />
+        <div className='w-1/2 flex  justify-center pt-8'>
+          <SignIn />
+        </div>
       </Route>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 
 const Header = () => {
   const history = useHistory();
@@ -38,15 +38,30 @@ const Header = () => {
           About Us
         </a>
       </div>
-      <div className='w-2/12 overflow-hidden flex justify-end'>
-        <button
-          onClick={login}
-          type='button'
-          className='py-2 px-5 bg-gray-600 hover:bg-gray-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
-        >
-          Login
-        </button>
-      </div>
+      <Route exact path='/'>
+        <div className='w-2/12 overflow-hidden flex justify-end'>
+          <button
+            onClick={login}
+            type='button'
+            className='py-2 px-5 bg-gray-600 hover:bg-gray-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+          >
+            Login
+          </button>
+        </div>
+      </Route>
+      <Route exact path='/login'>
+        <div className='w-2/12 overflow-hidden flex justify-end'>
+          <button
+            onClick={() => {
+              history.push('/');
+            }}
+            type='button'
+            className='py-2 px-5 bg-gray-600 hover:bg-gray-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+          >
+            Sign up
+          </button>
+        </div>
+      </Route>
     </nav>
   );
 };
