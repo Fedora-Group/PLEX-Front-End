@@ -4,11 +4,11 @@ import Header from './Header';
 const CreateRoom = () => {
   return (
     //   https://res.cloudinary.com/eventcreate/image/upload/v1622059377/eventwebsites_rbwjmx.png
-    <div className=' p-8 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
+    <div className=' p-9 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
       <Header />
-      <div>
-        <div class=''>
-          <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden'>
+      <div class='flex justify-center mt-16'>
+        <div>
+          <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden rounded-tr-none rounded-br-none'>
             <div class='px-4 py-8 sm:px-10'>
               <div>
                 <h2>Create Event</h2>
@@ -49,7 +49,7 @@ const CreateRoom = () => {
                     <span class='block w-full rounded-md shadow-sm'>
                       <button
                         type='button'
-                        class='py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                        class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                       >
                         Join Event
                       </button>
@@ -60,7 +60,7 @@ const CreateRoom = () => {
             </div>
           </div>
         </div>
-        <div class=''></div>
+        <div className='bg-sec-Img bg-white rounded-lg shadow sm:max-w-md sm:w-full rounded-tl-none rounded-bl-none px-4 py-8 bg-cover'></div>
       </div>
     </div>
   );
