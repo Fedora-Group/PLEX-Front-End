@@ -8,10 +8,12 @@ const eventsSlice = createSlice({
     initialState: [],
     reducers: {
         get(state, action) {
-            action.payload.forEach((item) => {
-                state.push(item)
-            })
-            console.log('stateFromStore', state);
+            // action.payload.forEach((item) => {
+            //     if (!state.includes (item))
+            //     state.push(item)
+            // })
+            // console.log('stateFromStore', state);
+            return action.payload
         }
     }
 

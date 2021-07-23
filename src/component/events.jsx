@@ -16,7 +16,6 @@ export default function Events(props) {
 
     useEffect(() => {
         dispatch(getEvents())
-
     }, [])
 
 //filter by categories || attendance limit !
