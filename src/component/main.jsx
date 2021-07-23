@@ -9,7 +9,6 @@ import SignIn from './signin';
 
 import AboutUs from './aboutus';
 import Events from './events';
-import Header from './Header';
 import Hero from './Hero';
 
 function Main() {
@@ -17,7 +16,6 @@ function Main() {
     <Switch>
       <div class='flex flex-wrap overflow-hidden p-8 bg-gray-800 h-full'>
         <Route exact path='/'>
-          <Header />
           <Hero />
           {/* <SignUp />
           <SignIn /> */}
@@ -31,7 +29,6 @@ function Main() {
           <Events />
         </Route>
         <Route exact path='/login'>
-          <Header />
           <Hero />
         </Route>
       </div>
