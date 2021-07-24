@@ -1,7 +1,38 @@
 import React from 'react';
 import Header from './Header';
+import axios from 'axios';
+import cookie from 'react-cookies';
+import { useHistory } from 'react-router';
 
 const CreateRoom = () => {
+  const history = useHistory();
+  const createEventRoom = () => {
+    let token = cookie.load('token');
+    let uri = `https://oauth-maq.herokuapp.com/ctreatRoom`;
+    axios
+      .post(
+        uri,
+        {},
+        {
+          headers: {
+            'Accept-Language': 'en',
+            'Content-Type': 'application/json',
+            mode: 'cors',
+            withCredentials: 'true',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(record => {
+        if (record.data.record.category === 'public') {
+          history.push(`/room/${record.data.record.roomId}`);
+        } else {
+          history.push(`/p/room/${record.data.record.roomId}`);
+        }
+        console.log(record.data);
+      })
+      .catch(err => console.log(err));
+  };
   return (
     //   https://res.cloudinary.com/eventcreate/image/upload/v1622059377/eventwebsites_rbwjmx.png
     <div className=' p-9 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
@@ -17,6 +48,7 @@ const CreateRoom = () => {
                 <span class='block w-full rounded-md shadow-sm'>
                   <button
                     type='button'
+                    onClick={createEventRoom}
                     class='py-2 px-4  bg-createEvent hover:bg-createEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                   >
                     Create Event
