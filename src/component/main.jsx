@@ -1,42 +1,42 @@
-// everything but the header and the footer // Note this can be changed /deleted 
+// everything but the header and the footer // Note this can be changed /deleted
 import React from 'react';
-import Chat from './chat'
+import Chat from './chat';
 
-import { Switch, Route} from "react-router-dom";
+import { Switch, Route } from 'react-router-dom';
 import SignUp from './signup';
 
 import SignIn from './signin';
 
 import AboutUs from './aboutus';
 import Events from './events';
-
-
+import Header from './Header';
+import Hero from './Hero';
 
 function Main() {
   return (
-    <div>
-
-      {/* change  */}
-      <Switch> 
-
-        <Route exact path="/">
-          <h1>Hello Fedora</h1>
-          <SignUp />
-           <SignIn/>
+    <Switch>
+      <div class='flex flex-wrap overflow-hidden p-8 bg-gray-800 h-full'>
+        <Route exact path='/'>
+          <Header />
+          <Hero />
+          {/* <SignUp />
+          <SignIn /> */}
         </Route>
 
-        <Route exact path="/aboutus">
-          <AboutUs/>
-        </Route>
-        
-        <Route exact path="/event">
-          <Events/>
+        <Route exact path='/aboutus'>
+          <AboutUs />
         </Route>
 
-      </Switch>
-
-    </div>
-  )
+        <Route exact path='/event'>
+          <Events />
+        </Route>
+        <Route exact path='/login'>
+          <Header />
+          <Hero />
+        </Route>
+      </div>
+    </Switch>
+  );
 }
 
 export default Main;
