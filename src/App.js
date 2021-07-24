@@ -8,6 +8,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
 import Brodcaster from './component/Brodcaster';
+import Watcher from './component/Watcher';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
             <div className='h-screen bg-gray-800 p-8'>
               {/* <Header />
               <Main /> */}
-              <Brodcaster />
+              {/* <Brodcaster /> */}
+              <Watcher />
             </div>
           </Route>
 
