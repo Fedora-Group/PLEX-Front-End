@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 //
+import { createBrowserHistory } from 'history';
+
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
 import base64 from 'base-64';
 //
 import { useDispatch } from 'react-redux';
+export const browserHistory = createBrowserHistory();
 
 require('dotenv').config();
 
@@ -27,6 +30,8 @@ const signInSlice = createSlice({
     },
     user(state, action) {
       state['user'] = action.payload;
+      browserHistory.push('/createRoom') // this can be edited 
+      window.location.reload() 
     },
   },
 });

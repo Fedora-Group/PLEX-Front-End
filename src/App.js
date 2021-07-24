@@ -8,7 +8,9 @@ import Events from './component/events';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
-import   SignIn  from './component/signin'
+import SignIn  from './component/signin'
+import Signup from './component/signup';
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,9 +19,15 @@ function App() {
           {/* <div className='h-screen bg-gray-800'>
           
         </div> */}
-<Route exact path='/signin'>
-<SignIn />
-</Route>
+
+        <Route exact path='/signup'>
+          <Signup />
+        </Route>
+
+        <Route exact path='/signin'>
+          <SignIn />
+        </Route>
+
           {/* <Main /> */}
           <Route exact path='/event'>
           <Events />
