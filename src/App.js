@@ -3,11 +3,12 @@ import Main from './component/main';
 import { Provider } from 'react-redux';
 import store from './store';
 // import AuthProvider from '../src/context/auth';
+import Events from './component/events';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
-
+import   SignIn  from './component/signin'
 function App() {
   return (
     <BrowserRouter>
@@ -16,9 +17,13 @@ function App() {
           {/* <div className='h-screen bg-gray-800'>
           
         </div> */}
-
+<Route exact path='/signin'>
+<SignIn />
+</Route>
           {/* <Main /> */}
-
+          <Route exact path='/event'>
+          <Events />
+        </Route>
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />

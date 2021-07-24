@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { get, getEvents } from '../store/events';
+import { get, getEvents , getEvent} from '../store/events';
 
 export default function Events(props) {
 
@@ -32,6 +32,7 @@ console.log('stateEvents',state);
                             <small>From : {event.from} To : {event.end}</small>
                             <h3>Hosted By: {event.room_owner}</h3>
                             <p>{event.description ? event.description : ' No description Available'}</p>
+                            <button onClick={getEvent(event._id)}>Show details</button>
                         </div>
                     )
                 })

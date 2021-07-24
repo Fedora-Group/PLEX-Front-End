@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import axios from 'axios';
+import cookie from 'react-cookies';
 let apiUrl = 'https://oauth-maq.herokuapp.com/events';
 
 const eventsSlice = createSlice({
@@ -8,10 +9,8 @@ const eventsSlice = createSlice({
     initialState: [],
     reducers: {
         get(state, action) {
-            action.payload.forEach((item) => {
-                state.push(item)
-            })
-            console.log('stateFromStore', state);
+           return action.payload
+            // console.log('stateFromStore', state);
         }
     }
 
@@ -36,6 +35,27 @@ export const getEvents = () => async dispatch => {
 
     dispatch(get(events))
     console.log('check Hi');
+}
+export const getEvent = (id) => async dispatch => {
+let url = `${apiUrl}/${id}`
+const token = cookie.load('token');
+    let result =  axios.get (url , {
+            headers: { 'Content-Type': 'application/json' , Authorization: `${token}`},
+            cache:'no-cache',
+            mode: 'cors',
+            withCredentials: false  ,
+            // authorization: `Bearer ${token}`,
+            Cookie: `token=${token}`
+        })
+        .then (res => {
+         
+            console.log('check0000',res.data);
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+  
+    console.log('check Hi2');
 }
 
 export default eventsSlice.reducer;
