@@ -20,12 +20,11 @@ const Hero = () => {
       <Route exact path='/'>
         <div className='w-1/2 flex  justify-center pt-8'>
           <SignUp />
+          <SignIn />
         </div>
       </Route>
       <Route exact path='/login'>
-        <div className='w-1/2 flex  justify-center pt-8'>
-          <SignIn />
-        </div>
+        <div className='w-1/2 flex  justify-center pt-8'></div>
       </Route>
     </div>
   );

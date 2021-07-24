@@ -7,17 +7,20 @@ import store from './store';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
+import Brodcaster from './component/Brodcaster';
 
 function App() {
   return (
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
-          {/* <div className='h-screen bg-gray-800'>
-          
-        </div> */}
-
-          {/* <Main /> */}
+          <Route exact path='/'>
+            <div className='h-screen bg-gray-800 p-8'>
+              {/* <Header />
+              <Main /> */}
+              <Brodcaster />
+            </div>
+          </Route>
 
           <Route exact path='/createRoom'>
             <div>
