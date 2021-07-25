@@ -3,10 +3,13 @@ import Main from './component/main';
 import { Provider } from 'react-redux';
 import store from './store';
 // import AuthProvider from '../src/context/auth';
+import Events from './component/events';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
+import SignIn  from './component/signin'
+import Signup from './component/signup';
 
 function App() {
   return (
@@ -17,8 +20,11 @@ function App() {
           
         </div> */}
 
-          {/* <Main /> */}
 
+          {/* <Main /> */}
+          <Route exact path='/event'>
+          <Events />
+        </Route>
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />
