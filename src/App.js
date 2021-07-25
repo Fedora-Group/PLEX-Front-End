@@ -16,6 +16,7 @@ import Room from './component/Room';
 import SignIn  from './component/signin'
 import Signup from './component/signup';
 
+import Trail from './component/trail'
 
 function App() {
   return (
@@ -42,6 +43,15 @@ function App() {
 
 
           {/* <Main /> */}
+
+          <Route exact path='/trailtrue/:id' >
+            <Trail isPub = {true} /> 
+          </Route>
+
+          <Route exact path='/trailfalse/:id' >
+            <Trail isPub = {false} /> 
+          </Route>
+
           <Route exact path='/event'>
           <Events />
         </Route>

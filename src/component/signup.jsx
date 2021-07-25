@@ -51,18 +51,22 @@ export default function SignUp(props) {
     const onSuccess = (res)=>{
       let id_token = res.tokenObj.id_token;
       console.log('success',res);
-      // dispatch (googleSignUp(res))
+      dispatch (googleSignUp(res))
 
-      let xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://oauth-maq.herokuapp.com/googleLogin');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = function () {
-        console.log('done');
+      // let xhr = new XMLHttpRequest();
+      // // xhr.open('POST', 'https://oauth-maq.herokuapp.com/googleLogin');
+      // xhr.open('POST', 'http://localhost:4000/googleLogin');
+
+      // xhr.setRequestHeader('Content-Type', 'application/json');
+      // xhr.onload = function () {
+      //   console.log('done');
           
-          // location.assign('/home.html');
+      //     // location.assign('/home.html');
         
-      };
-      xhr.send(JSON.stringify({ token: id_token }));
+      // };
+      // xhr.send(JSON.stringify({ token: id_token }));
+      // var body = xhr.response;
+      
 
 
     }//
