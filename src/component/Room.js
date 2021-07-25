@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies';
+import Chat from './chat';
 
 const Room = () => {
   const location = useLocation();
@@ -14,8 +15,8 @@ const Room = () => {
   const [errorFalse, setErrorFalse] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
-
   let token = cookie.load('token');
+  let username = cookie.load('username');
   useEffect(() => {
     let temp = location.pathname.split('/')[2];
     setId(temp);
@@ -38,37 +39,33 @@ const Room = () => {
       .then(data => {
         setFlag(data.data.OwnerFlag);
       })
-      .catch(err =>{
+      .catch(err => {
         setErrorFalse(false);
 
         setErrorMessage(err.response.data);
 
-        console.log(err.response)});
-      
-        
+        console.log(err.response);
+      });
   };
   custom();
   return (
     <div>
-      <If condition = {errorFalse}>
+      <If condition={errorFalse}>
         <Then>
           <If condition={flag}>
             <Then>
-              <Brodcaster id = {id} />
+              <Brodcaster id={id} />
+              <Chat id={id} username={username} />
             </Then>
 
             <Else>
-              <Watcher id = {id} />
+              <Watcher id={id} />
+              <Chat id={id} username={username} />
             </Else>
           </If>
-
-         </Then>
+        </Then>
         <Else>
-          <div>
-
-          {errorMessage}
-          </div>
-
+          <div>{errorMessage}</div>
         </Else>
       </If>
     </div>

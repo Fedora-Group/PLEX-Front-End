@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import Chat from './chat';
 
 let video = '';
 let peerConnection;
@@ -39,6 +40,7 @@ const Watcher = props => {
   // enable stream audio button event handler
   function enableAudio() {
     video.muted = false;
+    console.log(video);
   }
   // disable stream audio button event handler
 
@@ -110,19 +112,19 @@ const Watcher = props => {
   return (
     <div>
       <video playsInline autoPlay muted></video>
-      <button id='enable-audio' onClick={() => enableAudio}>
+      <button id='enable-audio' class='p-8 bg-gray-700' onClick={enableAudio}>
         Enable Audio
       </button>
-      <button id='disable-audio' onClick={() => disableAudio}>
+      <button id='disable-audio' onClick={disableAudio}>
         Disable Audio
       </button>
       <div id='message-container'></div>
-      <form id='send-container'>
+      {/* <form id='send-container'>
         <input type='text' id='message-input' />
         <button type='submit' id='send-button'>
           submit
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };
