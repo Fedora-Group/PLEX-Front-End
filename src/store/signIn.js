@@ -68,6 +68,7 @@ export const logout = () => {
 
 const setLoginState = (isloggedIn, istoken, isuser) => async dispatch => {
   cookie.save('token', istoken);
+  cookie.save('username', isuser.username);
 
   dispatch(loggedIn(true));
   dispatch(token(istoken));

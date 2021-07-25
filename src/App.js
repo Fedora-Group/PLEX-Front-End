@@ -20,13 +20,6 @@ function App() {
           
         </div> */}
 
-        <Route exact path='/signup'>
-          <Signup />
-        </Route>
-
-        <Route exact path='/signin'>
-          <SignIn />
-        </Route>
 
           {/* <Main /> */}
           <Route exact path='/event'>
