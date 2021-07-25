@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 let videoElement = '';
 let audioSelect = '';
 let videoSelect = '';
+const peerConnections = {};
 
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 const Brodcaster = (props) => {
@@ -19,7 +20,6 @@ const Brodcaster = (props) => {
   const online = document.getElementById('online');
 
   // object contains peers id's which is connected to the broadcaster
-  const peerConnections = {};
 
   // array contains names of connected users(watchers)
   let users = [];

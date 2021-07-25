@@ -2,13 +2,14 @@ import React, { useEffect, useState}from 'react';
 import io from 'socket.io-client';
 
 let video ='';
+let peerConnection;
+
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 const Watcher = (props) => {
   const actualRoomId = props.id;
   console.log(props.id)
 
-  let peerConnection;
 
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
@@ -101,7 +102,7 @@ const Watcher = (props) => {
       socket.emit('watcher', roomId);
     });
     // close on socket/peer connection on closing/refreshing the window
-  },[actualRoomId,peerConnection])
+  },[actualRoomId])
 
   function getCookie() {
     var arrayb = document.cookie.split('; ');
