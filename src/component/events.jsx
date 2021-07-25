@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {get, getEvents , getEvent , createEvent, updateEvent ,deleteEvent} from '../store/events';
+import { getEvents , createEvent} from '../store/events';
 import{useState} from 'react';
 import{Link} from 'react-router-dom';
 
 import cookie from 'react-cookies';
 export default function Events(props) {
 
-const [show,setShow]=useState(false)
+const [form,setForm]=useState(false)
 
     const dispatch = useDispatch();
 
@@ -23,13 +23,10 @@ const [show,setShow]=useState(false)
 
     useEffect(() => {
         dispatch(getEvents())
-        console.log('inside effects',state.events);
+      
 
     },[])
-    // useEffect(() => {
-    //     dispatch(getEvents())
-
-    // }, [state])
+    
     const submitHandler = e =>{
         e.preventDefault()
         let event = {
@@ -44,6 +41,7 @@ const [show,setShow]=useState(false)
             room_owner  :e.target.room_owner.value,
         }
         dispatch(createEvent(event))
+        setForm(false)
     }
 
     // const editHandler =( e ) =>{
@@ -78,15 +76,17 @@ const [show,setShow]=useState(false)
 // console.log('cookie',cookie.load('username'));
 
 const username=cookie.load('username')
+console.log('inside effects',state);
     return (
         <React.Fragment>
 
            {/* { console.log('state',state.events)}; */}
             {
-                state.events.map((event) => {
+                state.events.map((event,i) => {
                     if(username){
                     return (
-                    <div>
+                        <div>
+                    <div key={i}>
                             <h2>{event.name}</h2>
                             <p>{event.description ? event.description : ' No description Available'}</p>
                           
@@ -101,9 +101,13 @@ const username=cookie.load('username')
                            
 
                         <div>
+                        <div>
+                            <button onClick={()=>setForm(true)}>Create Event</button>
+                        </div>
                             {/* <If condition > */}
-                           {event.room_owner===username &&
+                           {username &&setForm&&
                            <>
+                           <p>form</p>
                             {/* <form onSubmit={editHandler }>
                                 <input type='hidden' value={event._id} name='eventId'/>
                                 <input type='text' name='name' placeholder='name' />
@@ -133,6 +137,7 @@ const username=cookie.load('username')
                             {/* </If> */}
                         </div>
 
+                    </div>
                     </div>
                     )}
                     else{

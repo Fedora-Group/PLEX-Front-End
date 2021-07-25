@@ -11,13 +11,14 @@ const eventsSlice = createSlice({
     initialState: [],
     reducers: {
         get(state, action) {
+            console.log('stateFromStore', action.payload);
            return action.payload
-            // console.log('stateFromStore', state);
         },
-        single(state, action) {
-            return action.payload
-             // console.log('stateFromStore', state);
-         }
+        // single(state, action) {
+        //     return action.payload
+        //      // console.log('stateFromStore', state);
+        //  }
+
     }
 
 })
@@ -35,7 +36,7 @@ export const getEvents = () => async dispatch => {
         withCredentials: true}
      })
     .then (res => {
-     console.log('insideEventsss',res.data);
+    //  console.log('insideEventsss',res.data);
 
         // console.log('check',res.data);
         dispatch(get(res.data))
@@ -61,7 +62,8 @@ export const getEvent = (id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
-        dispatch(single(res.data))
+        // dispatch(single(res.data))
+        
     })
     .catch ((err) => console.error (err))
    

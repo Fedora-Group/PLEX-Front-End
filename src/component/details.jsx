@@ -3,27 +3,50 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getEvent,updateEvent,deleteEvent } from '../store/events';
 import cookie from 'react-cookies';
+import axios from 'axios';
+
 import{Link,useHistory,Redirect} from 'react-router-dom';
 
 export default function EventDetails(props){
     const [show,setShow]=useState(false)
-    const [deletedFlag, setDeletedFlag] = useState(false)
+    const [deletedFlag, setDeletedFlag] = useState(false);
+    const [event, setEvent] = useState(null);
     const dispatch = useDispatch();
     const history=useHistory();
     const id=window.location.pathname.split('/')[2]
   
-    const state = useSelector(state => {
-        return {
-            events: state.events
+    // const state = useSelector(state => {
+    //     return {
+    //         events: state.events
 
-        }
-    });
+    //     }
+    // });
     // console.log('props',window.location.pathname.split('/')[2]);
-    
     // console.log('state',state.events);
     
 useEffect(() => {
-  dispatch(getEvent(id))
+   const apiUrl = 'https://oauth-maq.herokuapp.com/events';
+
+const url = `${apiUrl}/${id}`;
+
+const token = cookie.load('token');
+
+(async ()=>{await axios.get (url , {
+    headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Accept-Language':'en',
+    cache:'no-cache',
+    mode: 'cors',
+    withCredentials: true}
+})
+.then (res => {
+    // console.log('check',res.data);
+  setEvent(res.data)
+
+    
+})
+.catch ((err) => console.error (err))})();
 
 }, [])
 
@@ -42,7 +65,7 @@ const editHandler =( e ) =>{
     }
     let id = e.target.eventId.value
     dispatch(updateEvent(event , id))
-    history.push('/event/:id')
+    history.push('/event/')
     setShow(false)
 }
 
@@ -54,33 +77,41 @@ const deleteHandler = id =>{
 const username=cookie.load('username')
 // console.log(username);
 // console.log(state.events.room_owner);
+if(!event){
+    return(
+        <div>loading</div>
+    )
+}
 
 return(
+   
     <>
     <div>
-    <small>From : {state.events.from} To : {state.events.end}</small> 
-     <h3>Hosted By: {state.events.room_owner}</h3>
-     <h3> Location: {state.events.address}</h3>
-     <h3> Type: {state.events.type}</h3>
-     <h3> Category: {state.events.categories}</h3>
-     <h3> Attendance limit: {state.events.attendance_limit}</h3>
+        <h2>Name: {event.name}</h2>
+    <small>From : {event.from} To : {event.end}</small> 
+    <h3>Description: {event.description}</h3>
+     <h3>Hosted By: {event.room_owner}</h3>
+     <h3> Location: {event.address}</h3>
+     <h3> Type: {event.type}</h3>
+     <h3> Category: {event.categories}</h3>
+     <h3> Attendance limit: {event.attendance_limit}</h3>
 
      </div>
 
 <div>
 {/* <If condition > */}
-{state.events.room_owner===username &&
+{event.room_owner===username &&
 <>
 
-
+{/* <Link to={`/event`}> */}
  <button onClick={()=> (show?setShow(false):setShow(true))}>update event</button>
-
-{/* <Link to={`/event/`}> */}
- <button onClick={()=> (deleteHandler (state.events._id))}>delete event</button>
  {/* </Link> */}
+<Link to={`/event/`}>
+ <button onClick={()=> (deleteHandler (event._id))}>delete event</button>
+ </Link>
 {
  show&&<form onSubmit={editHandler }>
-    <input type='hidden' value={state.events._id} name='eventId'/>
+    <input type='hidden' value={event._id} name='eventId'/>
     <input type='text' name='name' placeholder='name' />
     <input type='text' name='description' placeholder='description'/>
     <input type='text' name='from' placeholder='from' />
@@ -92,7 +123,7 @@ return(
 
     <select  name="type">
 
-        <option value="real_word">real_word</option>
+        <option value="real_world">real_world</option>
         <option value="online">online</option>
     </select>
 
@@ -108,8 +139,8 @@ return(
 
 </div>
 {
-    //   deletedFlag&& <Direc to='/event'><button>go</button></Direc>
-     deletedFlag&& <Redirect to='/event'/>
+    //   deletedFlag&& <Link to='/event'><button>go</button></Link>
+    //  deletedFlag&& <Redirect to='/event'/>
     //  <button>go</button></Redirect>
   
 }
