@@ -13,16 +13,15 @@ import Brodcaster from './component/Brodcaster';
 import Watcher from './component/Watcher';
 import Room from './component/Room';
 
-import SignIn  from './component/signin'
+import SignIn from './component/signin';
 import Signup from './component/signup';
-
 
 function App() {
   return (
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
-
+          <Header />
           <Route exact path='/'>
             <div className='h-screen bg-gray-800 p-8'>
               {/* <Header />
@@ -39,11 +38,10 @@ function App() {
           
         </div> */}
 
-
           {/* <Main /> */}
           <Route exact path='/event'>
-          <Events />
-        </Route>
+            <Events />
+          </Route>
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />

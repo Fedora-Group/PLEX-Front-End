@@ -5,11 +5,11 @@ import io from 'socket.io-client';
 let videoElement = '';
 let audioSelect = '';
 let videoSelect = '';
+const peerConnections = {};
 
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
-const Brodcaster = (props) => {
+const Brodcaster = props => {
   const actualRoomId = props.id;
-
 
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
@@ -19,7 +19,6 @@ const Brodcaster = (props) => {
   const online = document.getElementById('online');
 
   // object contains peers id's which is connected to the broadcaster
-  const peerConnections = {};
 
   // array contains names of connected users(watchers)
   let users = [];
@@ -47,7 +46,6 @@ const Brodcaster = (props) => {
 
   // const socket = io.connect(navigator.location.origin);
 
-  
   // close on socket connection on closing/refreshing the navigator
   navigator.onunload = navigator.onbeforeunload = () => {
     socket.close();
@@ -60,69 +58,67 @@ const Brodcaster = (props) => {
     audioSelect = document.querySelector('select#audioSource');
     videoSelect = document.querySelector('select#videoSource');
     getStream().then(getDevices).then(gotDevices);
-    
+
     // assinging a socket to a room
-  socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
+    socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
   }, []);
   //fire event when the dropDown list changed.
   //   audioSelect.onchange = getStream;
   //   videoSelect.onchange = getStream;
 
   useEffect(() => {
-  
+    //reciving the answer and establishing (or refusing) with the watcher.js via its RTCPeerConnection
 
-  //reciving the answer and establishing (or refusing) with the watcher.js via its RTCPeerConnection
+    socket.on('answer', (id, description) => {
+      console.log(id);
+      peerConnections[id].setRemoteDescription(description);
+    });
+    // read connected users and render them on the dom
+    // socket.on('users', userPayload => {
+    //   // console.log(users);
+    //   users.push(userPayload);
+    //   renderUsers(users);
+    // });
+    // // remove/ban watchers
+    // socket.on('remove-user', username => {
+    //   users = users.filter(item => item.username !== username);
+    //   renderUsers(users);
+    // });
+    socket.on('watcher', id => {
+      // creating anew RTC peer connection class and sits its STUN and TURN server
 
-  socket.on('answer', (id, description) => {
-    console.log(id);
-    peerConnections[id].setRemoteDescription(description);
-  });
-  // read connected users and render them on the dom
-  // socket.on('users', userPayload => {
-  //   // console.log(users);
-  //   users.push(userPayload);
-  //   renderUsers(users);
-  // });
-  // // remove/ban watchers
-  // socket.on('remove-user', username => {
-  //   users = users.filter(item => item.username !== username);
-  //   renderUsers(users);
-  // });
-  socket.on('watcher', id => {
-    // creating anew RTC peer connection class and sits its STUN and TURN server
-
-    const peerConnection = new RTCPeerConnection(config);
-    // saving the peer connection in object value and make the socket id for the watcher the key for it
-    peerConnections[id] = peerConnection;
-    // adding the video audio stream(all was retrieved bellow in the code)to the same peer connection value
-    let stream = videoElement.srcObject;
-    stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
-    // event handler when activated when the watcher wants to communicate with broadcaster through the STUN signalling
-    peerConnection.onicecandidate = event => {
-      if (event.candidate) {
-        // sending back the watcher socket id along with the Session Description Protocol SDP
-        socket.emit('candidate', id, event.candidate);
-      }
-    };
-    // creating connection offer and from its SDP creating localDescription and emitting it along with the its description and the watcher id
-    peerConnection
-      .createOffer()
-      .then(sdp => peerConnection.setLocalDescription(sdp))
-      .then(() => {
-        socket.emit('offer', id, peerConnection.localDescription);
-      });
-  });
-  // requiring the ip and the id of an watcher candidate from the stun server
-  socket.on('candidate', (id, candidate) => {
-    peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
-  });
-  // closing the peer connection of  disconnected/banned watcher
-  socket.on('disconnectPeer', id => {
-    peerConnections[id].close();
-    delete peerConnections[id];
-  });
-    
-
+      const peerConnection = new RTCPeerConnection(config);
+      // saving the peer connection in object value and make the socket id for the watcher the key for it
+      peerConnections[id] = peerConnection;
+      // adding the video audio stream(all was retrieved bellow in the code)to the same peer connection value
+      let stream = videoElement.srcObject;
+      stream
+        .getTracks()
+        .forEach(track => peerConnection.addTrack(track, stream));
+      // event handler when activated when the watcher wants to communicate with broadcaster through the STUN signalling
+      peerConnection.onicecandidate = event => {
+        if (event.candidate) {
+          // sending back the watcher socket id along with the Session Description Protocol SDP
+          socket.emit('candidate', id, event.candidate);
+        }
+      };
+      // creating connection offer and from its SDP creating localDescription and emitting it along with the its description and the watcher id
+      peerConnection
+        .createOffer()
+        .then(sdp => peerConnection.setLocalDescription(sdp))
+        .then(() => {
+          socket.emit('offer', id, peerConnection.localDescription);
+        });
+    });
+    // requiring the ip and the id of an watcher candidate from the stun server
+    socket.on('candidate', (id, candidate) => {
+      peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
+    });
+    // closing the peer connection of  disconnected/banned watcher
+    socket.on('disconnectPeer', id => {
+      // peerConnections[id].close();
+      // delete peerConnections[id];
+    });
   });
 
   // requests a list of the available media input and output devices, such as microphones, cameras, headsets, and so forth. The returned Promise is resolved with a MediaDeviceInfo array describing the devices.

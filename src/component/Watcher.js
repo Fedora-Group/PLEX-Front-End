@@ -1,14 +1,13 @@
-import React, { useEffect, useState}from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-let video ='';
+let video = '';
+let peerConnection;
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
-const Watcher = (props) => {
+const Watcher = props => {
   const actualRoomId = props.id;
-  console.log(props.id)
-
-  let peerConnection;
+  console.log(props.id);
 
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
@@ -33,8 +32,6 @@ const Watcher = (props) => {
   const enableAudioButton = document.querySelector('#enable-audio');
   const disableAudioButton = document.querySelector('#disable-audio');
 
-
-  
   window.onunload = window.onbeforeunload = () => {
     socket.close();
     peerConnection.close();
@@ -50,7 +47,6 @@ const Watcher = (props) => {
   }
   // get the username from the cookies
 
-  
   useEffect(() => {
     peerConnection = new RTCPeerConnection(config);
 
@@ -58,13 +54,13 @@ const Watcher = (props) => {
 
     socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
     // resiving an  peer-to-peer offer from the broadcaster via the socket.io-express server  with the ip and the offer description
-
-    
-  }, [])
-
+  }, []);
+  useEffect(() => {
+    // peerConnection = new RTCPeerConnection(config);
+  });
   useEffect(() => {
     socket.on('offer', (id, description) => {
-      console.log(id);
+      console.log('from use effect', id, description);
       peerConnection
         .setRemoteDescription(description)
         .then(() => peerConnection.createAnswer())
@@ -88,20 +84,20 @@ const Watcher = (props) => {
         .addIceCandidate(new RTCIceCandidate(candidate))
         .catch(e => console.error(e));
     });
-  
+
     socket.on('connect', () => {
       let username = getCookie();
-      console.log('we are venom',actualRoomId)
+      console.log('we are venom', actualRoomId);
       socket.emit('watcher', actualRoomId);
       socket.emit('add-connected', { username, actualRoomId });
     });
     // retrieved the broadcaster roomID and emit it to the `watcher` listner on the server.js with its own room id//the should be the same roomID
     socket.on('broadcaster', roomId => {
-      console.log('insid',roomId)
+      console.log('insid', roomId);
       socket.emit('watcher', roomId);
     });
     // close on socket/peer connection on closing/refreshing the window
-  },[actualRoomId,peerConnection])
+  }, [actualRoomId]);
 
   function getCookie() {
     var arrayb = document.cookie.split('; ');
