@@ -71,7 +71,7 @@ console.log('stateEvents',state);
 
                             <button onClick={getEvent(event._id)}>Show details</button>
 
-                            <button onClick={()=> dispatch (deleteHandler (event._id))}>delete Event</button>
+                            <button onClick={()=> deleteHandler (event._id)}>delete Event</button>
 
                         <div>
                             <form onSubmit={editHandler }>
