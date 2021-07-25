@@ -85,13 +85,17 @@ const CreateRoom = () => {
                       <button
                         type='button'
                         class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                        onClick={() => {
+                          history.push(`/room/${eventId}`);
+                        }}
                       >
-                        <a
+                        Join Event
+                        {/* <a
                           class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg'
                           href={`/room/${eventId}`}
                         >
                           Join Event
-                        </a>
+                        </a> */}
                       </button>
                     </span>
                   </div>
