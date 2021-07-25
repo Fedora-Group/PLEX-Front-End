@@ -64,6 +64,15 @@ const validateToken = token => async dispatch => {
 
 export const logout = () => {
   setLoginState(false, null, {});
+  cookie.remove('username')
+  cookie.remove('token')
+  cookie.remove('session-token')
+  window.localStorage.clear();
+  sessionStorage.clear();
+  cookie.remove();
+  window.location.reload();
+
+  
 };
 
 const setLoginState = (isloggedIn, istoken, isuser) => async dispatch => {
