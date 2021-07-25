@@ -1,24 +1,35 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { get, getEvents , getEvent , createEvent, updateEvent ,deleteEvent} from '../store/events';
+import {get, getEvents , getEvent , createEvent, updateEvent ,deleteEvent} from '../store/events';
+import{useState} from 'react';
+import{Link} from 'react-router-dom';
 
+import cookie from 'react-cookies';
 export default function Events(props) {
+
+const [show,setShow]=useState(false)
 
     const dispatch = useDispatch();
 
     const state = useSelector(state => {
         return {
             events: state.events
+
         }
     });
 
+    // dispatch(getEvents())
 
     useEffect(() => {
         dispatch(getEvents())
+        console.log('inside effects',state.events);
 
-    }, [])
+    },[])
+    // useEffect(() => {
+    //     dispatch(getEvents())
 
+    // }, [state])
     const submitHandler = e =>{
         e.preventDefault()
         let event = {
@@ -35,46 +46,65 @@ export default function Events(props) {
         dispatch(createEvent(event))
     }
 
-    const editHandler =( e ) =>{
-        e.preventDefault()
-        let event = {
-            name : e.target.name.value,
-            description :e.target.description.value,
-            from : e.target.from.value,
-            end  : e.target.end.value,
-            attendance_limit :e.target.attendance_limit.value,
-            address : e.target.address.value,
-            catagories :e.target.catagories.value,
-            type : e.target.type.value,
-            room_owner  :e.target.room_owner.value,
-        }
-        let id = e.target.eventId.value
-        dispatch(updateEvent(event , id))
-    }
+    // const editHandler =( e ) =>{
+    //     e.preventDefault()
+    //     let event = {
+    //         name : e.target.name.value,
+    //         description :e.target.description.value,
+    //         from : e.target.from.value,
+    //         end  : e.target.end.value,
+    //         attendance_limit :e.target.attendance_limit.value,
+    //         address : e.target.address.value,
+    //         catagories :e.target.catagories.value,
+    //         type : e.target.type.value,
+    //         room_owner  :e.target.room_owner.value,
+    //     }
+    //     let id = e.target.eventId.value
+    //     dispatch(updateEvent(event , id))
+    // }
 
-    const deleteHandler = id =>{
-        dispatch(deleteEvent( id))
-    }
+    // const deleteHandler = id =>{
+    //     dispatch(deleteEvent( id))
+    // }
+    // const detailsHandler = id =>{
+    //     console.log('in details',id);
+    //      (getEvent( id))
+    //     setShow(true)
+
+    //    console.log(getEvent( id))
+    // }
 //filter by categories || attendance limit !
-console.log('stateEvents',state);
+// console.log('stateEvents',state);
+// console.log('cookie',cookie.load('username'));
+
+const username=cookie.load('username')
     return (
         <React.Fragment>
 
+           {/* { console.log('state',state.events)}; */}
             {
                 state.events.map((event) => {
+                    if(username){
                     return (
                     <div>
                             <h2>{event.name}</h2>
-                            <small>From : {event.from} To : {event.end}</small>
-                            <h3>Hosted By: {event.room_owner}</h3>
                             <p>{event.description ? event.description : ' No description Available'}</p>
+                          
+                            <Link to={`/event/${event._id}`}>
+                            <button 
+                            // onClick={()=>{ }}
+                            >Show details
+                            </button>
+                            </Link>
+                            <hr></hr>
 
-                            <button onClick={getEvent(event._id)}>Show details</button>
-
-                            <button onClick={()=> dispatch (deleteHandler (event._id))}>delete Event</button>
+                           
 
                         <div>
-                            <form onSubmit={editHandler }>
+                            {/* <If condition > */}
+                           {event.room_owner===username &&
+                           <>
+                            {/* <form onSubmit={editHandler }>
                                 <input type='hidden' value={event._id} name='eventId'/>
                                 <input type='text' name='name' placeholder='name' />
                                 <input type='text' name='description' placeholder='description'/>
@@ -93,14 +123,25 @@ console.log('stateEvents',state);
 
                                 <input type='text' name='room_owner' placeholder='room owner'/>
                                 <button type='submit'>submit</button>
-                            </form>
+                            </form> */}
+                             {/* <button onClick={()=> (editHandler (event._id))}>update event</button>
+                             <button onClick={()=> (deleteHandler (event._id))}>delete event</button> */}
+                             <hr></hr>
+                             <hr></hr>
+                             </>
+                    } 
+                            {/* </If> */}
                         </div>
 
                     </div>
-                    )
+                    )}
+                    else{
+                <p>please sign in first </p>
+            }
                 })
             }
-            <div>
+            
+            {/* <div>
             <hr/>
                 <form onSubmit={submitHandler}>
                     <input type='text' name='name' placeholder='name' />
@@ -120,7 +161,7 @@ console.log('stateEvents',state);
                     <input type='text' name='room_owner' placeholder='room owner'/>
                     <button type='submit'>submit</button>
                 </form>
-            </div>
+            </div> */}
         </React.Fragment>
 
     )

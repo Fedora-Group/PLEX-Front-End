@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import cookie from 'react-cookies';
-import superagent from 'superagent'
+// import superagent from 'superagent'
 
 
 let apiUrl = 'https://oauth-maq.herokuapp.com/events';
@@ -13,12 +13,16 @@ const eventsSlice = createSlice({
         get(state, action) {
            return action.payload
             // console.log('stateFromStore', state);
-        }
+        },
+        single(state, action) {
+            return action.payload
+             // console.log('stateFromStore', state);
+         }
     }
 
 })
 
-export const { get } = eventsSlice.actions;
+export const { get,single } = eventsSlice.actions;
 
 export const getEvents = () => async dispatch => {
 
@@ -31,7 +35,9 @@ export const getEvents = () => async dispatch => {
         withCredentials: true}
      })
     .then (res => {
-        console.log('check',res.data);
+     console.log('insideEventsss',res.data);
+
+        // console.log('check',res.data);
         dispatch(get(res.data))
     })
     .catch ((err) => console.error (err))
@@ -55,6 +61,7 @@ export const getEvent = (id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
+        dispatch(single(res.data))
     })
     .catch ((err) => console.error (err))
    
@@ -78,7 +85,7 @@ export const createEvent = (event) => async dispatch => {
         type : 'online',
         room_owner  :user,
     }
-    console.log ('cookies in create ' ,cookie.loadAll() )
+    // console.log ('cookies in create ' ,cookie.loadAll() )
     axios.post(apiUrl,event2,{
         headers :  {  
             Authorization: `Bearer ${token}`,
@@ -113,6 +120,7 @@ export const updateEvent = (event ,id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
+        dispatch(getEvent(id))
     }).catch ((err)=> console.error (err))
 
 }
@@ -135,6 +143,8 @@ export const deleteEvent = (id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
+        // dispatch(getEvents())
+        
     })
     .catch ((err)=> console.error (err))
   
