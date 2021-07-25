@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { user } from "./signIn";
+import cookie from 'react-cookies';
 
 import superagent from 'superagent';
 
 export const browserHistory = createBrowserHistory();//
 
 let apiUrl = 'https://oauth-maq.herokuapp.com/googleLogin';
+// let apiUrl = 'http://localhost:4000/googleLogin'
 
 const googleSlice = createSlice ({
     name : 'googlesignup',
@@ -37,6 +39,8 @@ superagent.post(apiUrl).send(bodyt)
 
 .then ((res)=>{
     console.log('res api',res);
+    cookie.save('token', res.body.token);
+    cookie.save('username', res.body.username);
 }).catch((e)=>{
     console.error(e);
 })
