@@ -10,11 +10,11 @@ export default function SignUp(props) {
 
   // const context = useContext(AuthContext);
 
-  //   const state = useSelector(state => {
-  //     return {
-  //         signup: state.signup
-  //     }
-  // });
+    const state = useSelector(state => {
+      return {
+          signup: state.signup
+      }
+  });
 
   const submitHandler = e => {
     e.preventDefault();
@@ -26,7 +26,9 @@ export default function SignUp(props) {
     };
 
     // context.signUp(user.username, user.password, user.role)
-    dispatch(signUp(user.username, user.password, user.role));
+    dispatch(signUp(user.username, user.password, user.role)).then (()=> console.log (state))
+       
+    
   };
 
   return (

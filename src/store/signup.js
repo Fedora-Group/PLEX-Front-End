@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createBrowserHistory } from 'history';
+
+export const browserHistory = createBrowserHistory();
+
 let apiUrl = 'https://oauth-maq.herokuapp.com/';
 
 const signUpSlice = createSlice ({
@@ -6,7 +10,11 @@ const signUpSlice = createSlice ({
     initialState : {},
       
     reducers : {
-        addUser (state , action){ state['user'] = action.payload }
+        addUser (state , action){ 
+            state['user'] = action.payload;
+            browserHistory.push('/signin') // this can be edited 
+            window.location.reload() 
+        }
     }
     
 })
@@ -31,9 +39,8 @@ export const signUp = (username, password, role) =>async dispatch => {
     )
 
     let user = await result.json();
-    dispatch(addUser(user))
-
     console.log('user', user);
-
+ 
+        dispatch(addUser(user))
 }
 export default signUpSlice.reducer;

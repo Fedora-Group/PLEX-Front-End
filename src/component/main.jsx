@@ -17,17 +17,15 @@ function Main() {
       <div class='flex flex-wrap overflow-hidden p-8 bg-gray-800 h-full'>
         <Route exact path='/'>
           <Hero />
-          {/* <SignUp />
-          <SignIn /> */}
+          <SignUp />
+          <SignIn />
         </Route>
 
         <Route exact path='/aboutus'>
           <AboutUs />
         </Route>
 
-        <Route exact path='/event'>
-          <Events />
-        </Route>
+    
         <Route exact path='/login'>
           <Hero />
         </Route>
