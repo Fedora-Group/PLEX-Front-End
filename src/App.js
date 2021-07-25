@@ -31,7 +31,7 @@ function App() {
               {/* <Watcher /> */}
             </div>
           </Route>
-          <Route path='/room/04c8ea8a-1a27-4fc8-81d1-1adace7a56c8'>
+          <Route exact path='/room/:id'>
             <Room />
           </Route>
 

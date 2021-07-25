@@ -11,6 +11,10 @@ const Room = () => {
   const location = useLocation();
   const [id, setId] = useState('');
   const [flag, setFlag] = useState('');
+  const [errorFalse, setErrorFalse] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+
   let token = cookie.load('token');
   useEffect(() => {
     let temp = location.pathname.split('/')[2];
@@ -34,18 +38,37 @@ const Room = () => {
       .then(data => {
         setFlag(data.data.OwnerFlag);
       })
-      .catch(err => console.log(err));
+      .catch(err =>{
+        setErrorFalse(false);
+
+        setErrorMessage(err.response.data);
+
+        console.log(err.response)});
+      
+        
   };
   custom();
   return (
     <div>
-      <If condition={flag}>
+      <If condition = {errorFalse}>
         <Then>
-          <Brodcaster />
-        </Then>
+          <If condition={flag}>
+            <Then>
+              <Brodcaster id = {id} />
+            </Then>
 
+            <Else>
+              <Watcher id = {id} />
+            </Else>
+          </If>
+
+         </Then>
         <Else>
-          <Watcher />
+          <div>
+
+          {errorMessage}
+          </div>
+
         </Else>
       </If>
     </div>

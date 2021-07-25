@@ -6,11 +6,13 @@ let videoElement = '';
 let audioSelect = '';
 let videoSelect = '';
 
-const Brodcaster = () => {
-  const socket = io.connect('https://oauth-maq.herokuapp.com');
+const socket = io.connect('http://localhost:5000');
+const Brodcaster = (props) => {
+  const actualRoomId = props.id;
 
-  const roomIdFromUrl = window.location.href;
-  const actualRoomId = roomIdFromUrl.split('/')[3];
+
+  // const roomIdFromUrl = window.location.href;
+  // const actualRoomId = roomIdFromUrl.split('/')[3];
 
   // taking the room id from the url
   const onlineUsers = document.getElementById('users');
@@ -45,25 +47,47 @@ const Brodcaster = () => {
 
   // const socket = io.connect(navigator.location.origin);
 
-  // assinging a socket to a room
+  
+  // close on socket connection on closing/refreshing the navigator
+  navigator.onunload = navigator.onbeforeunload = () => {
+    socket.close();
+  };
+
+  // Get camera and microphone
+
+  useEffect(() => {
+    videoElement = document.querySelector('video');
+    audioSelect = document.querySelector('select#audioSource');
+    videoSelect = document.querySelector('select#videoSource');
+    getStream().then(getDevices).then(gotDevices);
+    
+    // assinging a socket to a room
   socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
+  }, []);
+  //fire event when the dropDown list changed.
+  //   audioSelect.onchange = getStream;
+  //   videoSelect.onchange = getStream;
+
+  useEffect(() => {
+  
 
   //reciving the answer and establishing (or refusing) with the watcher.js via its RTCPeerConnection
 
   socket.on('answer', (id, description) => {
+    console.log(id);
     peerConnections[id].setRemoteDescription(description);
   });
   // read connected users and render them on the dom
-  socket.on('users', userPayload => {
-    // console.log(users);
-    users.push(userPayload);
-    renderUsers(users);
-  });
-  // remove/ban watchers
-  socket.on('remove-user', username => {
-    users = users.filter(item => item.username !== username);
-    renderUsers(users);
-  });
+  // socket.on('users', userPayload => {
+  //   // console.log(users);
+  //   users.push(userPayload);
+  //   renderUsers(users);
+  // });
+  // // remove/ban watchers
+  // socket.on('remove-user', username => {
+  //   users = users.filter(item => item.username !== username);
+  //   renderUsers(users);
+  // });
   socket.on('watcher', id => {
     // creating anew RTC peer connection class and sits its STUN and TURN server
 
@@ -97,25 +121,9 @@ const Brodcaster = () => {
     peerConnections[id].close();
     delete peerConnections[id];
   });
-  // close on socket connection on closing/refreshing the navigator
-  navigator.onunload = navigator.onbeforeunload = () => {
-    socket.close();
-  };
+    
 
-  // Get camera and microphone
-
-  useEffect(() => {
-    videoElement = document.querySelector('video');
-    audioSelect = document.querySelector('select#audioSource');
-    videoSelect = document.querySelector('select#videoSource');
-  }, []);
-  //fire event when the dropDown list changed.
-  //   audioSelect.onchange = getStream;
-  //   videoSelect.onchange = getStream;
-
-  useEffect(() => {
-    getStream().then(getDevices).then(gotDevices);
-  }, []);
+  });
 
   // requests a list of the available media input and output devices, such as microphones, cameras, headsets, and so forth. The returned Promise is resolved with a MediaDeviceInfo array describing the devices.
   function getDevices() {
