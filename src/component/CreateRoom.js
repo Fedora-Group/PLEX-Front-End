@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 
 const CreateRoom = () => {
+  const [eventId, setEventId] = useState('');
   const history = useHistory();
   const createEventRoom = () => {
     let token = cookie.load('token');
@@ -73,6 +75,7 @@ const CreateRoom = () => {
                         id='search-form-price'
                         class=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
                         placeholder='Enter Event ID'
+                        onChange={event => setEventId(event.target.value)}
                       />
                     </div>
                   </div>
@@ -83,7 +86,12 @@ const CreateRoom = () => {
                         type='button'
                         class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                       >
-                        Join Event
+                        <a
+                          class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg'
+                          href={`/room/${eventId}`}
+                        >
+                          Join Event
+                        </a>
                       </button>
                     </span>
                   </div>
