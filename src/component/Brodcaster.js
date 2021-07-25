@@ -6,7 +6,7 @@ let videoElement = '';
 let audioSelect = '';
 let videoSelect = '';
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://oauth-maq.herokuapp.com/');
 const Brodcaster = (props) => {
   const actualRoomId = props.id;
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState}from 'react';
 import io from 'socket.io-client';
 
 let video ='';
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 const Watcher = (props) => {
   const actualRoomId = props.id;
@@ -50,7 +50,7 @@ const Watcher = (props) => {
   }
   // get the username from the cookies
 
- 
+  
   useEffect(() => {
     peerConnection = new RTCPeerConnection(config);
 
