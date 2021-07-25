@@ -46,15 +46,15 @@ export const signIn = (username, password) => async dispatch => {
     cache: 'no-cache',
     headers: { Authorization: `Basic ${encoded}` },
   });
-
   const data = await result.json();
+  console.log(data);
   dispatch(validateToken(data.token));
 };
 
 const validateToken = token => async dispatch => {
   try {
     const user = jwt.verify(token, SECRET);
-
+    console.log(user)
     dispatch(setLoginState(!!user, token, user));
   } catch (error) {
     console.error('User is not verified', error.message);

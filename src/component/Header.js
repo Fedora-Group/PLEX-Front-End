@@ -26,6 +26,12 @@ const Header = () => {
           Home
         </Link>
         <Link
+          to='/createRoom'
+          className='font-medium text-white hover:text-indigo-500'
+        >
+          Create Room
+        </Link>
+        <Link
           to='/event'
           className='font-medium text-white hover:text-indigo-500'
         >
