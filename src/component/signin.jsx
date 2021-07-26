@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { signIn } from '../store/signIn';
 
 export default function SignIn(props) {
-  const selector = useSelector(state => state.signIn);
+  // const selector = useSelector(state => state.signIn);
 
   const dispatch = useDispatch();
 
