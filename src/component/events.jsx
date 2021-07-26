@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEvents, createEvent } from "../store/events";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {eventsFromRooms } from '../store/roomsFromEvents'
+
 import cookie from "react-cookies";
 export default function Events(props) {
   const [form, setForm] = useState(false);
@@ -32,11 +32,9 @@ export default function Events(props) {
       address: e.target.address.value,
       catagories: e.target.catagories.value,
       type: e.target.type.value,
-      privacy : e.target.privacy.value,
       room_owner: e.target.room_owner.value,
     };
-    
-    dispatch (eventsFromRooms (event))
+    dispatch(createEvent(event));
     setForm(false);
     history.push("/event");
   };
@@ -48,9 +46,7 @@ export default function Events(props) {
   return (
     <React.Fragment>
       
-      {state.events
-      .filter ((item) => item.privacy === 'public')
-      .map((event, i) => {
+      {state.events.map((event, i) => {
         if (username) {
           return (
             <div>
@@ -98,8 +94,8 @@ export default function Events(props) {
                   placeholder="description"
                   required
                 />
-                <input type="date" name="from" placeholder="from" required />
-                <input type="date" name="end" placeholder="end" required />
+                <input type="text" name="from" placeholder="from" required />
+                <input type="text" name="end" placeholder="end" required />
 
                 <input
                   type="number"
@@ -119,17 +115,11 @@ export default function Events(props) {
                   placeholder="catagories"
                   required
                 />
-                <label>Event Type</label>
+
                 <select name="type">
-                  <option value="real_word">real world</option>
+                  <option value="real_word">real_world</option>
                   <option value="online">online</option>
                 </select>
-                <label>Event Privacy</label>
-                <select name="privacy">
-                  <option value="public">Public</option>
-                  <option value="private">Private</option>
-                </select>
-
                 <input type="hidden" name="room_owner" value={username} />
                 <button type="submit">create</button>
               </form>

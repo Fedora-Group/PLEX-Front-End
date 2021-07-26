@@ -7,7 +7,7 @@ import Events from './component/events';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
-import Header from './component/Header';
+// import Header from './component/Header';
 
 // import Brodcaster from './component/Brodcaster';
 // import Watcher from './component/Watcher';
@@ -18,8 +18,7 @@ import Room from './component/Room';
 import Details from './component/details';
 
 import SignIn from './component/signin';
-import SignUp from './component/signup';
-import MyEvents from './component/myEvents';
+import Signup from './component/signup';
 
 
 function App() {
@@ -64,12 +63,6 @@ function App() {
               <SignIn />
             </div>
           </Route>
-
-          <Route exact path='/myEvents'>
-            <MyEvents/>
-          </Route>
-
-
         </Provider>
       </div>
     </BrowserRouter>

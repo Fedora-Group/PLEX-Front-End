@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateEvent, deleteEvent } from "../store/events";
 import cookie from "react-cookies";
 import axios from "axios";
-import If from './if'
+
 import { Link, useHistory } from "react-router-dom";
 
 export default function EventDetails(props) {
@@ -15,14 +15,6 @@ export default function EventDetails(props) {
   const history = useHistory();
   const id = window.location.pathname.split("/")[2];
 
-
-
-
-  const state = useSelector(state => {
-    return {
-      roomsFromEvent: state.roomsFromEvent
-    }
-});
 
   // console.log('props',window.location.pathname.split('/')[2]);
   // console.log('state',state.events);
@@ -47,38 +39,11 @@ export default function EventDetails(props) {
           },
         })
         .then((res) => {
-          console.log('check...........',res.data);
-
+          // console.log('check',res.data);
           setEvent(res.data);
-          
         })
         .catch((err) => console.error(err));
-    })()
-    // .then(()=>{
-
-    //   (async () => {
-    //     let url2 = `https://oauth-maq.herokuapp.com/${event.roomId}`
-    //     await axios
-    //       .get(url2, {
-    //         headers: {
-    //           Authorization: `Bearer ${token}`,
-    //           "Content-Type": "application/json",
-    //           "Accept-Language": "en",
-    //           cache: "no-cache",
-    //           mode: "cors",
-    //           withCredentials: true,
-    //         },
-    //       })
-    //       .then((res) => {
-    //         console.log('check for private',res);
-  
-    //         // setEvent(res.data);
-            
-    //       })
-    //       .catch((err) => console.error(err));
-    //   })()
-    // })
-
+    })();
   }, []);
 
   const editHandler = (e) => {
@@ -92,7 +57,6 @@ export default function EventDetails(props) {
       address: e.target.address.value,
       catagories: e.target.catagories.value,
       type: e.target.type.value,
-      privacy : e.target.privacy.value,
       room_owner: e.target.room_owner.value,
     };
     let id = e.target.eventId.value;
@@ -111,15 +75,7 @@ export default function EventDetails(props) {
   if (!event) {
     return <div>loading...</div>;
   }
-  /// we need the password ?
-  /// the event only gets the id
-  /// i can get the event and see the res
-  /// from response we take the password 
-  /// where should i get 
-  /// button from jsx to the store or here 
-  /// where to put the button ? 
-  /// after we get // 
-console.log ('state from details222' , state)
+
   return (
     <>
       <div>
@@ -131,19 +87,8 @@ console.log ('state from details222' , state)
         <h3>Hosted By: {event.room_owner}</h3>
         <h3> Location: {event.address}</h3>
         <h3> Type: {event.type}</h3>
-        <h3> Category: {event.catagories}</h3>
+        <h3> Category: {event.categories}</h3>
         <h3> Attendance limit: {event.attendance_limit}</h3>
-        <h3> Privacy: {event.privacy}</h3>
-        <If condition={event.type === 'online'}>
-        <Link to={`/room/p/${event.roomId}?p=${event.password}`}> room : {event.roomId}</Link>
-        {/* <p>{event.privacy === 'public' ?<Link to={`/room/${event.roomId}`}> room : {event.roomId}</Link>:<Link to={`/private/${event.roomId}`}> room : {event.roomId}</Link>}</p> */}
-        </If>
-        
-        {/* 
-        this is a private room : http://localhost:3000/event/60fee7d152294f00155f4945
-        this is a public room : http://localhost:3000/event/60ff060952294f00155f495e
-        
-         */}
       </div>
 
       <div>
@@ -162,14 +107,14 @@ console.log ('state from details222' , state)
             {show && (
               <form onSubmit={editHandler}>
                 <input type="hidden" value={event._id} name="eventId" />
-                <input type="text" name="name" placeholder="name" value={event.name} required/>
+                <input type="text" name="name" placeholder="name" required/>
                 <input
                   type="text"
                   name="description"
                   placeholder="description"
                 />
-                <input type="date" name="from" placeholder="from"  required/>
-                <input type="date" name="end" placeholder="end"  required/>
+                <input type="text" name="from" placeholder="from"  required/>
+                <input type="text" name="end" placeholder="end"  required/>
 
                 <input
                   type="number"
@@ -183,11 +128,6 @@ console.log ('state from details222' , state)
                 <select name="type">
                   <option value="real_word">real_world</option>
                   <option value="online">online</option>
-                </select>
-                <label>Event Privacy</label>
-                <select name="privacy">
-                  <option value="public">Public</option>
-                  <option value="private">Private</option>
                 </select>
 
                 <input type="hidden" name="room_owner" value={username}  />
