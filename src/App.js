@@ -24,7 +24,7 @@ function App() {
           <Header />
           <Route exact path='/'>
             <div className='h-screen bg-gray-800 p-8'>
-              <Signup/>
+              <Signup />
               {/* <Header />
               <Main /> */}
               {/* <Brodcaster /> */}
