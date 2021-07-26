@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import cookie from 'react-cookies';
-// import superagent from 'superagent'
+
 
 
 let apiUrl = 'https://oauth-maq.herokuapp.com/events';
@@ -14,10 +14,7 @@ const eventsSlice = createSlice({
             console.log('stateFromStore', action.payload);
            return action.payload
         },
-        // single(state, action) {
-        //     return action.payload
-        //      // console.log('stateFromStore', state);
-        //  }
+  
 
     }
 
@@ -36,9 +33,7 @@ export const getEvents = () => async dispatch => {
         withCredentials: true}
      })
     .then (res => {
-    //  console.log('insideEventsss',res.data);
 
-        // console.log('check',res.data);
         dispatch(get(res.data))
     })
     .catch ((err) => console.error (err))
@@ -47,27 +42,27 @@ export const getEvents = () => async dispatch => {
 
 
 
-export const getEvent = (id) => async dispatch => {
-    // get event by id with axios // 
-    let url = `${apiUrl}/${id}`
-    const token = cookie.load('token');
-    await axios.get (url , {
-        headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept-Language':'en',
-        cache:'no-cache',
-        mode: 'cors',
-        withCredentials: true}
-    })
-    .then (res => {
-        console.log('check',res.data);
-        // dispatch(single(res.data))
+// export const getEvent = (id) => async dispatch => {
+//     // get event by id with axios // 
+//     let url = `${apiUrl}/${id}`
+//     const token = cookie.load('token');
+//     await axios.get (url , {
+//         headers: {
+//         Authorization: `Bearer ${token}`,
+//         'Content-Type': 'application/json',
+//         'Accept-Language':'en',
+//         cache:'no-cache',
+//         mode: 'cors',
+//         withCredentials: true}
+//     })
+//     .then (res => {
+//         console.log('check',res.data);
+//         // dispatch(single(res.data))
         
-    })
-    .catch ((err) => console.error (err))
+//     })
+//     .catch ((err) => console.error (err))
    
-}
+// }
 
 
 export const createEvent = (event) => async dispatch => {
@@ -77,15 +72,15 @@ export const createEvent = (event) => async dispatch => {
     console.log ('user cookie' , user)
 
     let event2 = { 
-        name :' event.name',
-        description : 'event.description',
-        from : 'event.from',
-        end  : 'event.end' ,
-        attendance_limit : 4,
-        address : 'event.address' ,
-        catagories : 'event.catagories',
-        type : 'online',
-        room_owner  :user,
+            name : event.name,
+            description : event.description,
+            from : event.from,
+            end  : event.end ,
+            attendance_limit : event.attendance_limit,
+            address : event.address ,
+            catagories : event.catagories,
+            type : event.type,
+            room_owner  :event.room_owner
     }
     // console.log ('cookies in create ' ,cookie.loadAll() )
     axios.post(apiUrl,event2,{
@@ -96,8 +91,8 @@ export const createEvent = (event) => async dispatch => {
             mode: 'cors',
             'Content-Type': 'application/json',
             withCredentials : true,
-            username : 'ravi2',
-            "Cookies":  cookie.loadAll() 
+            username : event.room_owner,
+            // "Cookies":  cookie.loadAll() 
         },
     })
     .then (res => {
@@ -122,7 +117,7 @@ export const updateEvent = (event ,id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
-        dispatch(getEvent(id))
+        // dispatch(getEvent(id))
     }).catch ((err)=> console.error (err))
 
 }
