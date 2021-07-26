@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import io from 'socket.io-client';
-
+import moment from 'moment';
 const socket = io.connect('http://localhost:5000');
 
 export default function Chat(props) {
@@ -22,7 +22,14 @@ export default function Chat(props) {
       message: text.message,
       roomId: props.id,
     });
-    setChat([...chat, { message: text.message, name: text.username }]);
+    setChat([
+      ...chat,
+      {
+        message: text.message,
+        name: text.username,
+        time: moment().format('h:mm a'),
+      },
+    ]);
     e.currentTarget.message.value = '';
     setText({ message: '', username: props.username });
   };
@@ -56,7 +63,10 @@ export default function Chat(props) {
       }
     });
     socket.on('chat-message', payload => {
-      setChat([...chat, { message: payload.message, name: payload.name }]);
+      setChat([
+        ...chat,
+        { message: payload.message, name: payload.name, time: payload.time },
+      ]);
     });
   }, [chat]);
   return (

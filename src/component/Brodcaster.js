@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
+
 import { useHistory } from 'react-router';
 import io from 'socket.io-client';
 let videoElement = '';
@@ -162,6 +163,7 @@ const Brodcaster = props => {
       });
     }
     const audioSource = audioSelect.value;
+    console.log('oleeeeeeeeeh', audioSource);
     const videoSource = videoSelect.value;
     const constraints = {
       audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
@@ -259,6 +261,13 @@ const Brodcaster = props => {
         onClick={endMeeting}
       >
         End Meeting
+      </button>
+      <button
+        onClick={() => {
+          videoSelect.muted = true;
+        }}
+      >
+        mute
       </button>
     </div>
   );
