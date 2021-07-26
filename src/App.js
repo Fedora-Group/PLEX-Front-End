@@ -15,6 +15,7 @@ import Room from './component/Room';
 
 import SignIn from './component/signin';
 import Signup from './component/signup';
+import BackToHome from './component/BackToHome';
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
               <CreateRoom />
               <SignIn />
             </div>
+          </Route>
+          <Route path='/backtohome' exact>
+            <BackToHome />
           </Route>
         </Provider>
       </div>
