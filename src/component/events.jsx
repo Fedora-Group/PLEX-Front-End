@@ -72,6 +72,7 @@ export default function Events(props) {
         } else {
           <p>please sign in first </p>;
         }
+
       })}
       <div>
         <div>
@@ -82,6 +83,7 @@ export default function Events(props) {
 
         {username && form && (
           <>
+
             <div>
               <hr />
               <form onSubmit={submitHandler}>
