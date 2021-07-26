@@ -22,9 +22,9 @@ const Header = () => {
             />
           </Link>
         </div>
-        <Link to='/' className='font-medium text-white hover:text-indigo-500'>
+        <a href='/' className='font-medium text-white hover:text-indigo-500'>
           Home
-        </Link>
+        </a>
         <Link
           to='/createRoom'
           className='font-medium text-white hover:text-indigo-500'

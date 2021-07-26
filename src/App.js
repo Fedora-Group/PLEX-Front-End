@@ -18,6 +18,7 @@ import Room from './component/Room';
 import Details from './component/details';
 
 import SignIn from './component/signin';
+import BackToHome from './component/BackToHome';
 import SignUp from './component/signup';
 import MyEvents from './component/myEvents';
 
@@ -64,10 +65,15 @@ function App() {
               <SignIn />
             </div>
           </Route>
+          <Route path='/backtohome' exact>
+            <BackToHome />
+          </Route>
+
 
           <Route exact path='/myEvents'>
             <MyEvents/>
           </Route>
+
 
 
         </Provider>

@@ -10,7 +10,7 @@ import Chat from './chat';
 
 const Room = () => {
   const location = useLocation();
-  const [id, setId] = useState('');
+  const [id, setId] = useState(location.pathname.split('/')[2]);
   const [flag, setFlag] = useState('');
   const [errorFalse, setErrorFalse] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');

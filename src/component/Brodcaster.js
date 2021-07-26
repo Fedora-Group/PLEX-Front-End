@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
+
+import { useHistory } from 'react-router';
 import io from 'socket.io-client';
 let videoElement = '';
 let audioSelect = '';
 let videoSelect = '';
 const peerConnections = {};
 
-const socket = io.connect('https://oauth-maq.herokuapp.com/');
+const socket = io.connect('https://oauth-maq.herokuapp.com');
 const Brodcaster = props => {
+  const history = useHistory();
   const actualRoomId = props.id;
-
+  const [users, setUsers] = useState([]);
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
 
@@ -21,7 +24,6 @@ const Brodcaster = props => {
   // object contains peers id's which is connected to the broadcaster
 
   // array contains names of connected users(watchers)
-  let users = [];
 
   // calling the fucntion to split out the username cookie from the browser
   const cookies = getCookie();
@@ -33,10 +35,10 @@ const Brodcaster = props => {
         urls: 'stun:us-turn8.xirsys.com',
       },
       {
-        urls: 'turn:us-turn8.xirsys.com:3478?transport=tcp',
-        credential: '92f1e7da-cf33-11eb-b4da-0242ac140004',
+        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
+        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
         username:
-          'rBsN8vEH9R6S1z7ZWvq-UiP5dTxxoCzmcpN3F_NDpmuL8XjcManv4pawQPQfeysQAAAAAGDK6MZpYnJhaGltYmFuYXQ=',
+          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
         credentialType: 'password',
       },
     ],
@@ -47,9 +49,6 @@ const Brodcaster = props => {
   // const socket = io.connect(navigator.location.origin);
 
   // close on socket connection on closing/refreshing the navigator
-  navigator.onunload = navigator.onbeforeunload = () => {
-    socket.close();
-  };
 
   // Get camera and microphone
 
@@ -61,6 +60,14 @@ const Brodcaster = props => {
 
     // assinging a socket to a room
     socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
+  }, []);
+
+  useLayoutEffect(() => {
+    return () => {
+      window.onunload = window.onbeforeunload = () => {
+        socket.close();
+      };
+    };
   }, []);
   //fire event when the dropDown list changed.
   //   audioSelect.onchange = getStream;
@@ -74,16 +81,18 @@ const Brodcaster = props => {
       peerConnections[id].setRemoteDescription(description);
     });
     // read connected users and render them on the dom
-    // socket.on('users', userPayload => {
-    //   // console.log(users);
-    //   users.push(userPayload);
-    //   renderUsers(users);
-    // });
-    // // remove/ban watchers
-    // socket.on('remove-user', username => {
-    //   users = users.filter(item => item.username !== username);
-    //   renderUsers(users);
-    // });
+    socket.on('users', userPayload => {
+      console.log('userPayload', userPayload);
+      // users.push(userPayload);
+      setUsers([...users, userPayload]);
+      // renderUsers(users);
+    });
+    // remove/ban watchers
+    socket.on('remove-user', username => {
+      setUsers(() => {
+        return users.filter(item => item.username !== username);
+      });
+    });
     socket.on('watcher', id => {
       // creating anew RTC peer connection class and sits its STUN and TURN server
 
@@ -116,8 +125,12 @@ const Brodcaster = props => {
     });
     // closing the peer connection of  disconnected/banned watcher
     socket.on('disconnectPeer', id => {
-      // peerConnections[id].close();
-      // delete peerConnections[id];
+      if (peerConnections[id]) {
+        console.log('peerConnections[id]', peerConnections, id);
+        peerConnections[id].close();
+        delete peerConnections[id];
+      }
+      console.log('peerConnections[id]', peerConnections, id);
     });
   });
 
@@ -150,6 +163,7 @@ const Brodcaster = props => {
       });
     }
     const audioSource = audioSelect.value;
+    console.log('oleeeeeeeeeh', audioSource);
     const videoSource = videoSelect.value;
     const constraints = {
       audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
@@ -177,30 +191,9 @@ const Brodcaster = props => {
     console.error('Error: ', error);
   }
   // to render users list and the connected user number on the dom
-  const renderUsers = users => {
-    let div = document.createElement('div');
 
-    onlineUsers.innerHTML = '';
-
-    users.forEach(user => {
-      let userDiv = document.createElement('div');
-      let click = document.createElement('button');
-      click.setAttribute('class', 'ban');
-      click.setAttribute('value', `${user.soketId}`);
-      click.addEventListener('click', remove);
-      click.innerHTML = 'Ban';
-      userDiv.innerHTML = user.username;
-      userDiv.appendChild(click);
-      div.appendChild(userDiv);
-    });
-    online.innerHTML = users.length;
-    onlineUsers.append(div);
-  };
   // handling clicking on the ban button from the dom
-  function remove(event) {
-    event.preventDefault();
-    socket.emit('remove-him', event.target.value);
-  }
+
   // get the username from the cookies
   function getCookie() {
     var arrayb = document.cookie.split('; ');
@@ -210,6 +203,17 @@ const Brodcaster = props => {
       }
     }
   }
+  const endMeeting = () => {
+    users.forEach(user => {
+      socket.emit('remove-him', user.soketId);
+      socket.close();
+    });
+    let gg = videoElement.srcObject;
+    gg.getTracks().forEach(function (track) {
+      track.stop();
+    });
+    history.push('/');
+  };
   return (
     <div>
       <section className='select'>
@@ -224,16 +228,47 @@ const Brodcaster = props => {
 
       <video playsInline autoPlay muted></video>
       <div>
-        Online Users: <span id='online'>0</span>
+        Online Users: <span id='online'>{users.length}</span>
       </div>
-      <div id='users'></div>
+
+      <div id='users'>
+        {users.map((user, index) => {
+          return (
+            <div key={index}>
+              <span>{user.username}</span>
+              <button
+                className='ban'
+                value={user.soketId}
+                onClick={e => {
+                  e.preventDefault();
+                  console.log(
+                    'e.target.value',
+                    e.target.value,
+                    e.currentTarget.value
+                  );
+                  socket.emit('remove-him', e.target.value);
+                }}
+              >
+                Ban
+              </button>
+            </div>
+          );
+        })}
+      </div>
       <div id='message-container'></div>
-      <form id='send-container'>
-        <input type='text' id='message-input' />
-        <button type='submit' id='send-button'>
-          submit
-        </button>
-      </form>
+      <button
+        className='bg-red-600 text-white p-2 rounded'
+        onClick={endMeeting}
+      >
+        End Meeting
+      </button>
+      <button
+        onClick={() => {
+          videoSelect.muted = true;
+        }}
+      >
+        mute
+      </button>
     </div>
   );
 };
