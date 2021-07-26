@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 
 let video = '';
 let peerConnection;
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 const Watcher = props => {
   const history = useHistory();
