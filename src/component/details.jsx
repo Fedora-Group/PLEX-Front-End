@@ -61,7 +61,7 @@ export default function EventDetails(props) {
     };
     let id = e.target.eventId.value;
     dispatch(updateEvent(event, id));
-    history.push("/event/");
+    history.push("/event");
     setShow(false);
   };
 

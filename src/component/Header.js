@@ -8,7 +8,7 @@ const Header = () => {
     history.push('/login');
   };
   return (
-    <nav class='flex flex-wrap overflow-hidden w-full h-10' aria-label='Global'>
+    <nav className='flex flex-wrap overflow-hidden w-full h-10' aria-label='Global'>
       <div className='w-10/12 overflow-hidden flex items-center space-x-8'>
         {/* <div className='flex items-center overflow-hidden'>
           
@@ -44,7 +44,7 @@ const Header = () => {
           About Us
         </Link>
       </div>
-      <Route exact path='/'>
+      {/* <Route exact path='/'> */}
         <div className='w-2/12 overflow-hidden flex justify-end'>
           <button
             onClick={login}
@@ -54,20 +54,22 @@ const Header = () => {
             Login
           </button>
         </div>
-      </Route>
-      <Route exact path='/login'>
-        <div className='w-2/12 overflow-hidden flex justify-end'>
+      {/* </Route> */}
+      {/* <Route exact path='/login'> */}
+        <div 
+        className='w-2/12 overflow-hidden flex justify-end'
+        >
           <button
             onClick={() => {
-              history.push('/');
+              history.push('/signup');
             }}
             type='button'
-            className='py-2 px-5 bg-gray-600 hover:bg-gray-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+            className='py-10 px-10 bg-gray-600 hover:bg-gray-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
           >
             Sign up
           </button>
         </div>
-      </Route>
+      {/* </Route> */}
     </nav>
   );
 };
