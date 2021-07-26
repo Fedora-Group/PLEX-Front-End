@@ -3,9 +3,8 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 
-
 let apiUrl = 'https://oauth-maq.herokuapp.com/events';
-
+// let apiUrl = 'http://localhost:4000/events'
 const eventsSlice = createSlice({
     name: 'events',
     initialState: [],
@@ -14,13 +13,12 @@ const eventsSlice = createSlice({
             console.log('stateFromStore', action.payload);
            return action.payload
         },
-  
-
+       
     }
 
 })
 
-export const { get,single } = eventsSlice.actions;
+export const { get,roomCreated } = eventsSlice.actions;
 
 export const getEvents = () => async dispatch => {
 
@@ -66,24 +64,26 @@ export const getEvents = () => async dispatch => {
 
 
 export const createEvent = (event) => async dispatch => {
+ 
      // create events with axios // 
     const token = cookie.load('token');
     let user = cookie.load('username');
     console.log ('user cookie' , user)
 
-    let event2 = { 
-            name : event.name,
-            description : event.description,
-            from : event.from,
-            end  : event.end ,
-            attendance_limit : event.attendance_limit,
-            address : event.address ,
-            catagories : event.catagories,
-            type : event.type,
-            room_owner  :event.room_owner
-    }
+    // let event2 = { 
+    //         name : event.name,
+    //         description : event.description,
+    //         from : event.from,
+    //         end  : event.end ,
+    //         attendance_limit : event.attendance_limit,
+    //         address : event.address ,
+    //         catagories : event.catagories,
+    //         type : event.type,
+    //         privacy : event.privacy,
+    //         room_owner  :event.room_owner
+    // }
     // console.log ('cookies in create ' ,cookie.loadAll() )
-    axios.post(apiUrl,event2,{
+    axios.post(apiUrl,event,{
         headers :  {  
             Authorization: `Bearer ${token}`,
             'Accept-Language':'en',
@@ -98,6 +98,8 @@ export const createEvent = (event) => async dispatch => {
     .then (res => {
         console.log('check',res.data);
     }).catch ((err)=> console.error (err))
+
+    
 
 }
 
