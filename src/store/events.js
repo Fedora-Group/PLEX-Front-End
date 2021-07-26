@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import cookie from 'react-cookies';
-import superagent from 'superagent'
 
 
 let apiUrl = 'https://oauth-maq.herokuapp.com/events';
-
+// let apiUrl = 'http://localhost:4000/events'
 const eventsSlice = createSlice({
     name: 'events',
     initialState: [],
     reducers: {
         get(state, action) {
+            console.log('stateFromStore', action.payload);
            return action.payload
-            // console.log('stateFromStore', state);
-        }
+        },
+       
     }
 
 })
 
-export const { get } = eventsSlice.actions;
+export const { get,roomCreated } = eventsSlice.actions;
 
 export const getEvents = () => async dispatch => {
 
@@ -31,7 +31,7 @@ export const getEvents = () => async dispatch => {
         withCredentials: true}
      })
     .then (res => {
-        console.log('check',res.data);
+
         dispatch(get(res.data))
     })
     .catch ((err) => console.error (err))
@@ -40,46 +40,50 @@ export const getEvents = () => async dispatch => {
 
 
 
-export const getEvent = (id) => async dispatch => {
-    // get event by id with axios // 
-    let url = `${apiUrl}/${id}`
-    const token = cookie.load('token');
-    await axios.get (url , {
-        headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept-Language':'en',
-        cache:'no-cache',
-        mode: 'cors',
-        withCredentials: true}
-    })
-    .then (res => {
-        console.log('check',res.data);
-    })
-    .catch ((err) => console.error (err))
+// export const getEvent = (id) => async dispatch => {
+//     // get event by id with axios // 
+//     let url = `${apiUrl}/${id}`
+//     const token = cookie.load('token');
+//     await axios.get (url , {
+//         headers: {
+//         Authorization: `Bearer ${token}`,
+//         'Content-Type': 'application/json',
+//         'Accept-Language':'en',
+//         cache:'no-cache',
+//         mode: 'cors',
+//         withCredentials: true}
+//     })
+//     .then (res => {
+//         console.log('check',res.data);
+//         // dispatch(single(res.data))
+        
+//     })
+//     .catch ((err) => console.error (err))
    
-}
+// }
 
 
 export const createEvent = (event) => async dispatch => {
+ 
      // create events with axios // 
     const token = cookie.load('token');
     let user = cookie.load('username');
     console.log ('user cookie' , user)
 
-    let event2 = { 
-        name :' event.name',
-        description : 'event.description',
-        from : 'event.from',
-        end  : 'event.end' ,
-        attendance_limit : 4,
-        address : 'event.address' ,
-        catagories : 'event.catagories',
-        type : 'online',
-        room_owner  :user,
-    }
-    console.log ('cookies in create ' ,cookie.loadAll() )
-    axios.post(apiUrl,event2,{
+    // let event2 = { 
+    //         name : event.name,
+    //         description : event.description,
+    //         from : event.from,
+    //         end  : event.end ,
+    //         attendance_limit : event.attendance_limit,
+    //         address : event.address ,
+    //         catagories : event.catagories,
+    //         type : event.type,
+    //         privacy : event.privacy,
+    //         room_owner  :event.room_owner
+    // }
+    // console.log ('cookies in create ' ,cookie.loadAll() )
+    axios.post(apiUrl,event,{
         headers :  {  
             Authorization: `Bearer ${token}`,
             'Accept-Language':'en',
@@ -87,13 +91,15 @@ export const createEvent = (event) => async dispatch => {
             mode: 'cors',
             'Content-Type': 'application/json',
             withCredentials : true,
-            username : 'ravi2',
-            "Cookies":  cookie.loadAll() 
+            username : event.room_owner,
+            // "Cookies":  cookie.loadAll() 
         },
     })
     .then (res => {
         console.log('check',res.data);
     }).catch ((err)=> console.error (err))
+
+    
 
 }
 
@@ -113,6 +119,7 @@ export const updateEvent = (event ,id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
+        // dispatch(getEvent(id))
     }).catch ((err)=> console.error (err))
 
 }
@@ -135,6 +142,8 @@ export const deleteEvent = (id) => async dispatch => {
     })
     .then (res => {
         console.log('check',res.data);
+        // dispatch(getEvents())
+        
     })
     .catch ((err)=> console.error (err))
   
