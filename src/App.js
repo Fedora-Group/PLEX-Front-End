@@ -7,14 +7,19 @@ import Events from './component/events';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
-import Header from './component/Header';
+// import Header from './component/Header';
 
-import Brodcaster from './component/Brodcaster';
-import Watcher from './component/Watcher';
+// import Brodcaster from './component/Brodcaster';
+// import Watcher from './component/Watcher';
 import Room from './component/Room';
+
+
+
+import Details from './component/details';
 
 import SignIn from './component/signin';
 import Signup from './component/signup';
+
 
 function App() {
   return (
@@ -24,7 +29,10 @@ function App() {
           <Header />
           <Route exact path='/'>
             <div className='h-screen bg-gray-800 p-8'>
-              <Signup/>
+
+            <SignIn />
+            <SignUp />
+
               {/* <Header />
               <Main /> */}
               {/* <Brodcaster /> */}
@@ -41,8 +49,14 @@ function App() {
 
           {/* <Main /> */}
           <Route exact path='/event'>
-            <Events />
-          </Route>
+
+          <Events />
+        </Route>
+
+        <Route exact path='/event/:id'>
+          <Details />
+        </Route>
+
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />

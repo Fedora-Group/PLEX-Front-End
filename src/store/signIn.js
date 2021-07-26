@@ -5,8 +5,7 @@ import { createBrowserHistory } from 'history';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
 import base64 from 'base-64';
-//
-import { useDispatch } from 'react-redux';
+
 export const browserHistory = createBrowserHistory();
 
 require('dotenv').config();
@@ -21,7 +20,7 @@ const signInSlice = createSlice({
   name: 'signIn',
   initialState: {},
   reducers: {
-    // logIn(state,action){state[]}
+  
     loggedIn(state, action) {
       state['loggedIn'] = action.payload;
     },
