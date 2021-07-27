@@ -18,8 +18,8 @@ module.exports = {
         joinEventHover: '#19B875',
         rr: '#4c72c2',
         ll: '#59bfe8',
-        card: '#172B4D',
-        header: '#32325D',
+        card: '#5E72E4',
+        header: '#172B4D',
       },
       backgroundPosition: {
         centered: '50%',
@@ -27,6 +27,10 @@ module.exports = {
       },
       fontFamily: {
         fuggle: ['Fuggles', 'cursive'],
+      },
+      boxShadow: {
+        round:
+          '0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07)!important',
       },
     },
   },
