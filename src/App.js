@@ -16,12 +16,12 @@ import Room from './component/Room';
 import SignIn from './component/signin';
 import Signup from './component/signup';
 import BackToHome from './component/BackToHome';
-import Home from './component/Home';
+import Home from './component/home/Home';
 
 function App() {
   return (
     <BrowserRouter>
-      <div class='min-h-screen p-8'>
+      <div class='min-h-screen'>
         <Provider store={store}>
           <Header />
           <Route exact path='/'>

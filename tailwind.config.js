@@ -6,7 +6,7 @@ module.exports = {
       backgroundImage: theme => ({
         'hero-pattern': 'url(/src/assets/register_bg.png)',
         'sec-Img': 'url(/src/assets/secimg.jpg)',
-        'cur-Img': 'url(/src/assets/clip-path.jpeg)',
+        'cur-Img': 'url(/src/assets/s11.jpg)',
         'hero-t':
           'linear-gradient(83.84deg, #0088FF -6.87%, #A033FF 26.54%, #FF5C87 58.58%)',
       }),
@@ -18,6 +18,8 @@ module.exports = {
         joinEventHover: '#19B875',
         rr: '#4c72c2',
         ll: '#59bfe8',
+        card: '#172B4D',
+        header: '#32325D',
       },
       backgroundPosition: {
         centered: '50%',
