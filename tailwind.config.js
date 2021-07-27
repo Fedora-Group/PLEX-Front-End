@@ -7,6 +7,11 @@ module.exports = {
         'hero-pattern': 'url(/src/assets/register_bg.png)',
         'sec-Img': 'url(/src/assets/secimg.jpg)',
 
+        'aboutImg':'url(/src/assets/about2.jpeg)',
+        
+       
+
+
         'patterns-pink': 'url(/src/assets/pattern8.png)',
         'pattern-orange' : 'url(/src/assets/pattern5.svg)',
         'patternre': 'url(/src/assets/patternre.jpeg)',
@@ -18,6 +23,7 @@ module.exports = {
           'linear-gradient(83.84deg, #0088FF -6.87%, #A033FF 26.54%, #FF5C87 58.58%)',
 
       }),
+
       colors: {
         hero: '#172B4D',
         createEvent: '#FB6340',

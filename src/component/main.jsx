@@ -21,9 +21,7 @@ function Main() {
           <SignIn />
         </Route>
 
-        <Route exact path='/aboutus'>
-          <AboutUs />
-        </Route>
+       
 
         <Route exact path='/login'>
           {/* <Hero /> */}

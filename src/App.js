@@ -13,6 +13,10 @@ import Brodcaster from './component/Brodcaster';
 import Watcher from './component/Watcher';
 import Room from './component/Room';
 
+import AboutUs from './component/aboutus';
+
+import Details from './component/details';
+
 import SignIn from './component/signin';
 import SignUp from './component/signup';
 
@@ -63,6 +67,18 @@ function App() {
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>
+
+
+
+          <Route exact path='/myEvents'>
+            <MyEvents/>
+          </Route>
+
+          <Route exact path='/aboutus'>
+          <AboutUs />
+        </Route>
+
+
         </Provider>
       </div>
     </BrowserRouter>
