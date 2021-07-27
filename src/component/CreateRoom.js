@@ -4,8 +4,11 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import { useHistory } from 'react-router';
 import { Redirect } from 'react-router';
+// import { useSelector } from 'react-redux';
 
 const CreateRoom = () => {
+//  const selector = useSelector(state => state.signIn);
+//   console.log(selector);
   const [eventId, setEventId] = useState('');
   const history = useHistory();
   const createEventRoom = () => {

@@ -18,6 +18,7 @@ import Room from './component/Room';
 import Details from './component/details';
 
 import SignIn from './component/signin';
+
 import BackToHome from './component/BackToHome';
 import SignUp from './component/signup';
 import MyEvents from './component/myEvents';
@@ -31,9 +32,9 @@ function App() {
           <Header />
           <Route exact path='/'>
             <div className='h-screen bg-gray-800 p-8'>
-
-            <SignIn />
-            <SignUp />
+           
+            
+            {/* <SignUp /> */}
 
               {/* <Header />
               <Main /> */}
@@ -65,6 +66,14 @@ function App() {
               <SignIn />
             </div>
           </Route>
+
+          <Route exact path='/login'>
+          <SignIn />
+          </Route>
+          <Route exact path='/signup'>
+          <SignUp />
+          </Route>
+
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>
