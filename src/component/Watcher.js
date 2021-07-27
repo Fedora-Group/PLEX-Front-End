@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect,useState } from 'react';
 import io from 'socket.io-client';
 import { useHistory } from 'react-router';
 
@@ -10,25 +10,27 @@ const Watcher = props => {
   const history = useHistory();
   const actualRoomId = props.id;
   console.log(props.id);
+  const [config, setConfig] = useState({iceServers:props.con});
+
 
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
   // taking the room id from the url
 
-  const config = {
-    iceServers: [
-      {
-        urls: 'stun:us-turn8.xirsys.com',
-      },
-      {
-        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
-        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
-        username:
-          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
-        credentialType: 'password',
-      },
-    ],
-  };
+  // const config = {
+  //   iceServers: [
+  //     {
+  //       urls: 'stun:us-turn8.xirsys.com',
+  //     },
+  //     {
+  //       urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
+  //       credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
+  //       username:
+  //         'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
+  //       credentialType: 'password',
+  //     },
+  //   ],
+  // };
   const cookies = getCookie();
   console.log(cookies);
   const enableAudioButton = document.querySelector('#enable-audio');
@@ -104,7 +106,7 @@ const Watcher = props => {
       history.push('/backtohome');
     });
     // close on socket/peer connection on closing/refreshing the window
-  }, [actualRoomId]);
+  }, []);
 
   function getCookie() {
     var arrayb = document.cookie.split('; ');

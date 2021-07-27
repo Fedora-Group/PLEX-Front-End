@@ -14,6 +14,7 @@ const Brodcaster = props => {
   const history = useHistory();
   const actualRoomId = props.id;
   const [users, setUsers] = useState([]);
+  const [config, setConfig] = useState({iceServers:props.con})
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
 
@@ -29,20 +30,20 @@ const Brodcaster = props => {
   const cookies = getCookie();
 
   //setting up params of TURN & STUN servers.
-  const config = {
-    iceServers: [
-      {
-        urls: 'stun:us-turn8.xirsys.com',
-      },
-      {
-        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
-        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
-        username:
-          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
-        credentialType: 'password',
-      },
-    ],
-  };
+  // const config = {
+  //   iceServers: [
+  //     {
+  //       urls: 'stun:us-turn8.xirsys.com',
+  //     },
+  //     {
+  //       urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
+  //       credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
+  //       username:
+  //         'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
+  //       credentialType: 'password',
+  //     },
+  //   ],
+  // };
 
   // opening up(connecting) a socket through express server using http
 
@@ -84,7 +85,9 @@ const Brodcaster = props => {
     socket.on('users', userPayload => {
       console.log('userPayload', userPayload);
       // users.push(userPayload);
-      setUsers([...users, userPayload]);
+      console.log([...users, userPayload],users)
+      let x = [...users, userPayload];
+      setUsers(x);
       // renderUsers(users);
     });
     // remove/ban watchers
@@ -132,7 +135,7 @@ const Brodcaster = props => {
       }
       console.log('peerConnections[id]', peerConnections, id);
     });
-  });
+  },[]);
 
   // requests a list of the available media input and output devices, such as microphones, cameras, headsets, and so forth. The returned Promise is resolved with a MediaDeviceInfo array describing the devices.
   function getDevices() {
