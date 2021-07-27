@@ -1,16 +1,21 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 
 import { useDispatch } from 'react-redux';
 import { Link,useHistory } from 'react-router-dom';
 import cookie from 'react-cookies';
-import { logout, signIn } from '../store/signIn';
+import { logout, signIn} from '../store/signIn';
 import { useSelector } from 'react-redux';
+
 export default function SignIn(props) {
 
   const selector = useSelector(state => {return {signIn:state.signIn}});
-   console.log('from signin',selector.signIn);
+ 
+  //  console.log('from signin',selector.signIn);
  const history=useHistory();
   const dispatch = useDispatch();
+  useEffect(() => {
+
+  }, []);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -20,15 +25,15 @@ export default function SignIn(props) {
       password: e.target.password.value,
     };
 
-    // dispatch(logout());
-    dispatch(signIn(user.username, user.password))
+  dispatch(signIn(user.username, user.password))
+    
 
   };
-
-  if(selector.signIn.errorMessage===''){
-    // console.log('the if', state.signup.errorMessage);
-    history.push('/login')
-  }
+  // console.log('the if', selector.signIn.errorMessage);
+  // if(selector.signIn.errorMessage===undefined){
+  //  console.log('the if', selector.signIn.errorMessage);
+  //   history.push('/event')
+  // }
 
 
   return (
@@ -106,12 +111,13 @@ export default function SignIn(props) {
               <button
                 type='submit'
                 class='py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
-                // onClick={selector.signIn.token?history.push('/'):''}
+                onClick={selector.signIn.token?history.push('/'):''}
               >
                 Login
               </button>
             </div>
-         <p class='text-red-600'>{selector.signIn.errorMessage?'something went wrong please check your username/password':''}</p>
+         <p class='text-red-600'>
+           {selector.signIn.errorMessage?'something went wrong please check your username/password':''}</p>
           </form>
         </div>
      

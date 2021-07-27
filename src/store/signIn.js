@@ -99,7 +99,7 @@ const validateToken = token => async dispatch => {
   }
 };
 
-export const logout = () => {
+export const logout = () =>  async dispatch =>{
   setLoginState(false, null, {});
   cookie.remove('username')
   cookie.remove('token')
@@ -107,7 +107,9 @@ export const logout = () => {
   window.localStorage.clear();
   sessionStorage.clear();
   cookie.remove();
-  // window.location.reload();
+
+//  console.log('hello from logout',cookie.username);
+  window.location.reload();
 
   
 };
@@ -119,6 +121,7 @@ const setLoginState = (isLoggedIn, isToken, isUser) => async dispatch => {
   dispatch(loggedIn(true));
   dispatch(token(isToken));
   dispatch(user(isUser));
+  window.location.reload();
 };
 
 // export reducer
