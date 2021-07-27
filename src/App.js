@@ -14,7 +14,8 @@ import Watcher from './component/Watcher';
 import Room from './component/Room';
 
 import SignIn from './component/signin';
-import Signup from './component/signup';
+import SignUp from './component/signup';
+
 import BackToHome from './component/BackToHome';
 import Home from './component/home/Home';
 
@@ -24,9 +25,9 @@ function App() {
       <div class='min-h-screen'>
         <Provider store={store}>
           <Route exact path='/'>
-            <SignIn />
             <div className='min-h-screen'>
               {/* <Signup /> */}
+
               {/* <Header />
               <Main /> */}
               {/* <Brodcaster /> */}
@@ -51,6 +52,14 @@ function App() {
               <CreateRoom />
             </div>
           </Route>
+
+          <Route exact path='/login'>
+          <SignIn />
+          </Route>
+          <Route exact path='/signup'>
+          <SignUp />
+          </Route>
+
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>

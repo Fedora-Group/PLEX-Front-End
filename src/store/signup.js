@@ -12,21 +12,26 @@ const signUpSlice = createSlice ({
     reducers : {
         addUser (state , action){ 
             state['user'] = action.payload;
-            browserHistory.push('/signin') // this can be edited 
-            window.location.reload() 
-        }
+            // browserHistory.push('/signin') // this can be edited 
+            // window.location.reload() 
+        },
+        error1(state, action){
+            state['errorMessage']=action.payload;
+         console.log('errorMessage',action.payload);
+      
+          }
     }
     
 })
-export const { addUser } = signUpSlice.actions;
+export const { addUser,error1 } = signUpSlice.actions;
 
 export const signUp = (username, password, role) =>async dispatch => {
 
-    let url = `${apiUrl}signup`;
+    const url = `${apiUrl}signup`;
 
-    let body = { username, password, role };
+    const body = { username, password, role };
 
-    let result = await fetch(
+    const result = await fetch(
         url,
         {
             method: 'post',
@@ -37,10 +42,23 @@ export const signUp = (username, password, role) =>async dispatch => {
 
         }
     )
-
-    let user = await result.json();
-    console.log('user', user);
- 
-        dispatch(addUser(user))
+    .then((async res=>{
+      
+        if(res.status===500){
+          console.log('hello from 403',res)
+          dispatch(error1('not valid'))
+        }
+        else{
+  
+          const user =await res.json();
+          console.log('user', user);
+        
+          dispatch(addUser(user))
+          dispatch(error1(''))
+        }
+    // let user = await result.json();
+    // console.log('user', user);
+    }))
+       
 }
 export default signUpSlice.reducer;
