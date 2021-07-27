@@ -218,7 +218,7 @@ const Brodcaster = props => {
   return (
     <React.Fragment>
       <div className='w-1/2 h-full'>
-        <video playsInline autoPlay muted></video>
+        <video playsInline autoPlay muted className='w-full h-64'></video>
         <div>
           <button
             className='bg-red-600 text-white p-2 rounded'
@@ -249,7 +249,7 @@ const Brodcaster = props => {
                   <div className='select-none cursor-pointer flex flex-1 items-center p-4'>
                     <div className='flex-1 pl-1 '>
                       <div className='font-medium dark:text-white w-full flex justify-between items-center'>
-                        <p>Jean Marc</p>
+                        <p>{user.username}</p>
                         <button
                           type='button'
                           className='ban py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
