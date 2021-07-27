@@ -6,7 +6,9 @@ module.exports = {
       backgroundImage: theme => ({
         'hero-pattern': 'url(/src/assets/register_bg.png)',
         'sec-Img': 'url(/src/assets/secimg.jpg)',
-      }),
+        'aboutImg':'url(/src/assets/about2.jpeg)',
+        
+         }),
       colors: {
         hero: '#172B4D',
         createEvent: '#FB6340',

@@ -13,7 +13,7 @@ import Header from './component/Header';
 // import Watcher from './component/Watcher';
 import Room from './component/Room';
 
-
+import AboutUs from './component/aboutus';
 
 import Details from './component/details';
 
@@ -83,7 +83,9 @@ function App() {
             <MyEvents/>
           </Route>
 
-
+          <Route exact path='/aboutus'>
+          <AboutUs />
+        </Route>
 
         </Provider>
       </div>
