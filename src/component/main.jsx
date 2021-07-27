@@ -9,23 +9,22 @@ import SignIn from './signin';
 
 import AboutUs from './aboutus';
 // import Events from './events';
-import Hero from './Hero';
+// import Hero from './Hero';
 
 function Main() {
   return (
     <Switch>
       <div class='flex flex-wrap overflow-hidden p-8 bg-gray-800 h-full'>
         <Route exact path='/'>
-          <Hero />
+          {/* <Hero /> */}
           <SignUp />
           <SignIn />
         </Route>
 
        
 
-    
         <Route exact path='/login'>
-          <Hero />
+          {/* <Hero /> */}
         </Route>
       </div>
     </Switch>

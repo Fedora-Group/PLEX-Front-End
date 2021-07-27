@@ -9,8 +9,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
 
-// import Brodcaster from './component/Brodcaster';
-// import Watcher from './component/Watcher';
+import Brodcaster from './component/Brodcaster';
+import Watcher from './component/Watcher';
 import Room from './component/Room';
 
 import AboutUs from './component/aboutus';
@@ -18,28 +18,25 @@ import AboutUs from './component/aboutus';
 import Details from './component/details';
 
 import SignIn from './component/signin';
+import SignUp from './component/signup';
 
 import BackToHome from './component/BackToHome';
-import SignUp from './component/signup';
-import MyEvents from './component/myEvents';
-
+import Home from './component/home/Home';
 
 function App() {
   return (
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
-          <Header />
           <Route exact path='/'>
-            <div className='h-screen bg-gray-800 p-8'>
-           
-            
-            {/* <SignUp /> */}
+            <div className='min-h-screen'>
+              {/* <Signup /> */}
 
               {/* <Header />
               <Main /> */}
               {/* <Brodcaster /> */}
               {/* <Watcher /> */}
+              <Home />
             </div>
           </Route>
           <Route exact path='/room/:id'>
@@ -52,18 +49,11 @@ function App() {
 
           {/* <Main /> */}
           <Route exact path='/event'>
-
-          <Events />
-        </Route>
-
-        <Route exact path='/event/:id'>
-          <Details />
-        </Route>
-
+            <Events />
+          </Route>
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />
-              <SignIn />
             </div>
           </Route>
 
@@ -79,6 +69,7 @@ function App() {
           </Route>
 
 
+
           <Route exact path='/myEvents'>
             <MyEvents/>
           </Route>
@@ -86,6 +77,7 @@ function App() {
           <Route exact path='/aboutus'>
           <AboutUs />
         </Route>
+
 
         </Provider>
       </div>
