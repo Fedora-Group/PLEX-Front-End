@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import io from 'socket.io-client';
 import moment from 'moment';
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 export default function Chat(props) {
   const [text, setText] = useState({ message: '', username: props.username });

@@ -49,18 +49,20 @@ const Room = () => {
   };
   custom();
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-screen flex p-10'>
       <If condition={errorFalse}>
         <Then>
           <If condition={flag}>
             <Then>
-              <Brodcaster id={id} />
-              <Chat id={id} username={username} />
+              <Brodcaster id={id}>
+                <Chat id={id} username={username} />
+              </Brodcaster>
             </Then>
 
             <Else>
-              <Watcher id={id} />
-              <Chat id={id} username={username} />
+              <Watcher id={id}>
+                <Chat id={id} username={username} />
+              </Watcher>
             </Else>
           </If>
         </Then>

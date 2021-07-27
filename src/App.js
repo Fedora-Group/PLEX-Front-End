@@ -24,6 +24,7 @@ function App() {
       <div class='min-h-screen'>
         <Provider store={store}>
           <Route exact path='/'>
+            <SignIn />
             <div className='min-h-screen'>
               {/* <Signup /> */}
               {/* <Header />
