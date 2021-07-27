@@ -20,6 +20,8 @@ module.exports = {
         ll: '#59bfe8',
         card: '#5E72E4',
         header: '#172B4D',
+        buttono: '#11CDEF',
+        buttonoHover: '#07C3D7',
       },
       backgroundPosition: {
         centered: '50%',

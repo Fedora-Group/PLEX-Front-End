@@ -49,7 +49,7 @@ const Room = () => {
   };
   custom();
   return (
-    <div>
+    <div className='w-full h-full'>
       <If condition={errorFalse}>
         <Then>
           <If condition={flag}>

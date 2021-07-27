@@ -23,7 +23,6 @@ function App() {
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
-          <Header />
           <Route exact path='/'>
             <div className='min-h-screen'>
               {/* <Signup /> */}
@@ -49,7 +48,6 @@ function App() {
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />
-              <SignIn />
             </div>
           </Route>
           <Route path='/backtohome' exact>
