@@ -123,13 +123,7 @@ const Watcher = props => {
       <button id='disable-audio' onClick={disableAudio}>
         Disable Audio
       </button>
-      <div id='message-container'></div>
-      {/* <form id='send-container'>
-        <input type='text' id='message-input' />
-        <button type='submit' id='send-button'>
-          submit
-        </button>
-      </form> */}
+      <div>{props.children}</div>
     </div>
   );
 };
