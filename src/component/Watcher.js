@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import io from 'socket.io-client';
-import Chat from './chat';
+import { useHistory } from 'react-router';
 
 let video = '';
 let peerConnection;
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 const Watcher = props => {
+  const history = useHistory();
   const actualRoomId = props.id;
   console.log(props.id);
 
@@ -20,10 +21,10 @@ const Watcher = props => {
         urls: 'stun:us-turn8.xirsys.com',
       },
       {
-        urls: 'turn:us-turn8.xirsys.com:3478?transport=tcp',
-        credential: '92f1e7da-cf33-11eb-b4da-0242ac140004',
+        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
+        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
         username:
-          'rBsN8vEH9R6S1z7ZWvq-UiP5dTxxoCzmcpN3F_NDpmuL8XjcManv4pawQPQfeysQAAAAAGDK6MZpYnJhaGltYmFuYXQ=',
+          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
         credentialType: 'password',
       },
     ],
@@ -33,10 +34,6 @@ const Watcher = props => {
   const enableAudioButton = document.querySelector('#enable-audio');
   const disableAudioButton = document.querySelector('#disable-audio');
 
-  window.onunload = window.onbeforeunload = () => {
-    socket.close();
-    peerConnection.close();
-  };
   // enable stream audio button event handler
   function enableAudio() {
     video.muted = false;
@@ -57,9 +54,14 @@ const Watcher = props => {
     socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
     // resiving an  peer-to-peer offer from the broadcaster via the socket.io-express server  with the ip and the offer description
   }, []);
-  useEffect(() => {
-    // peerConnection = new RTCPeerConnection(config);
-  });
+  useLayoutEffect(() => {
+    return () => {
+      window.onunload = window.onbeforeunload = () => {
+        socket.close();
+        peerConnection.close();
+      };
+    };
+  }, []);
   useEffect(() => {
     socket.on('offer', (id, description) => {
       console.log('from use effect', id, description);
@@ -97,6 +99,9 @@ const Watcher = props => {
     socket.on('broadcaster', roomId => {
       console.log('insid', roomId);
       socket.emit('watcher', roomId);
+    });
+    socket.on('kick-watcher', () => {
+      history.push('/backtohome');
     });
     // close on socket/peer connection on closing/refreshing the window
   }, [actualRoomId]);

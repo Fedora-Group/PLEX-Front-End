@@ -8,9 +8,9 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import Chat from './chat';
 
-const Room = () => {
+const Private = () => {
   const location = useLocation();
-  const [id, setId] = useState(location.pathname.split('/')[2]);
+  const [id, setId] = useState('');
   const [flag, setFlag] = useState('');
   const [errorFalse, setErrorFalse] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,8 +24,10 @@ const Room = () => {
   let isOwner = true;
 
   const custom = () => {
-    console.log(id);
-    let uri = `https://oauth-maq.herokuapp.com/${id}`;
+    console.log('اول كونسول',id);
+    // `/p/${record.roomId}?p=${encoded}`
+    // let url2 = `${id}?p=${encoded}`
+    let uri = `https://oauth-maq.herokuapp.com/p/${id}`;
     axios
       .get(uri, {
         headers: {
@@ -72,4 +74,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default Private;
