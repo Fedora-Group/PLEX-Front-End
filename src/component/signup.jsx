@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link,useHistory } from 'react-router-dom';
 import { signUp } from '../store/signup';
 
-
 // import {logout} from '../store/signIn';//
-import {googleSignUp}from '../store/google';//
-import {GoogleLogin} from 'react-google-login';//
+import { googleSignUp } from '../store/google'; //
+import { GoogleLogin } from 'react-google-login'; //
 // import {GoogleLogout} from 'react-google-login';//
 
-
-
-const CLIENT_ID='772848863323-99gttoe9te13nujv7m3pb79a1e98dvds.apps.googleusercontent.com';//
+const CLIENT_ID =
+  '772848863323-99gttoe9te13nujv7m3pb79a1e98dvds.apps.googleusercontent.com'; //
 
 export default function SignUp(props) {
   const dispatch = useDispatch();
@@ -19,10 +17,10 @@ export default function SignUp(props) {
   // const context = useContext(AuthContext);
   const history=useHistory();
 
-    const state = useSelector(state => {
-      return {
-          signup: state.signup
-      }
+  const state = useSelector(state => {
+    return {
+      signup: state.signup,
+    };
   });
 console.log('state from sign up', state.signup);
   const onChangeHandler = e => {
@@ -53,6 +51,7 @@ console.log('state from sign up', state.signup);
     };
 
     // context.signUp(user.username, user.password, user.role)
+
     dispatch(signUp(user.username, user.password, user.role))
     .then (()=> console.log ('inside dispatcher',state.signup))
 
@@ -69,11 +68,10 @@ console.log('state from sign up', state.signup);
   //   console.log(response);
   // };//
 
-  
-  const onSuccess = (res)=>{
+  const onSuccess = res => {
     // let id_token = res.tokenObj.id_token;
-    console.log('success',res);
-     dispatch (googleSignUp(res))
+    console.log('success', res);
+    dispatch(googleSignUp(res));
 
     // let xhr = new XMLHttpRequest();
     // // xhr.open('POST', 'https://oauth-maq.herokuapp.com/googleLogin');
@@ -82,22 +80,20 @@ console.log('state from sign up', state.signup);
     // xhr.setRequestHeader('Content-Type', 'application/json');
     // xhr.onload = function () {
     //   console.log('done');
-        
+
     //     // location.assign('/home.html');
-      
+
     // };
     // xhr.send(JSON.stringify({ token: id_token }));
     // var body = xhr.response;
-    
-
-
-  }//
-  const onFailure = (res)=>{
+  }; //
+  const onFailure = res => {
     console.log('failed', res);
-  }////
-  
+  }; ////
+
   // const logoutHandler =()=>{
   //   dispatch (logout)
+
   // } 
 
   if(state.signup.errorMessage===''){
@@ -131,6 +127,36 @@ console.log('state from sign up', state.signup);
               
             </button> */}
             <GoogleLogin
+
+              clientId={CLIENT_ID}
+              buttonText='Login with Google'
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+              isSignedIn={true}
+              render={renderProps => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  class='py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                >
+                  <svg
+                    width='20'
+                    height='20'
+                    fill='currentColor'
+                    class='mr-2'
+                    viewBox='0 0 1792 1792'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'></path>
+                  </svg>
+                  Sign in with Google
+                </button>
+              )}
+            />
+
+            {/* <GoogleLogout
+
   clientId={CLIENT_ID}
   buttonText="Login with Google"
   onSuccess={onSuccess}
@@ -163,6 +189,7 @@ render={
 />
 
 {/* <GoogleLogout
+
  clientId={CLIENT_ID}
 render={
   renderProps => (
@@ -175,8 +202,6 @@ render={
   )
 }
 /> */}
-
-
           </div>
 
           <div class='relative mt-6'>

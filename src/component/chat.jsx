@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import io from 'socket.io-client';
 import moment from 'moment';
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 export default function Chat(props) {
   const [text, setText] = useState({ message: '', username: props.username });
@@ -30,7 +31,7 @@ export default function Chat(props) {
         time: moment().format('h:mm a'),
       },
     ]);
-    e.currentTarget.message.value = '';
+    // e.currentTarget.message.value = '';
     setText({ message: '', username: props.username });
   };
 
@@ -70,8 +71,32 @@ export default function Chat(props) {
     });
   }, [chat]);
   return (
-    <div className='chatDiv'>
-      <form onSubmit={sendMessage}>
+    <div className='chatDiv h-full w-full overflow-y-scroll'>
+      <div className='render-chat'>
+        <h2>Chat Log</h2>
+        {renderChat()}
+      </div>
+      <form className='     justify-center w-full' onSubmit={sendMessage}>
+        <div class=' relative '>
+          <input
+            type='text'
+            id='"form-subscribe-Subscribe'
+            className=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
+            placeholder='Aa'
+            onChange={e => handelChange(e)}
+            value={text.message}
+            variant='outlined'
+            label='Message'
+          />
+        </div>
+        <button
+          className='flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200'
+          type='submit'
+        >
+          <SendRoundedIcon fontSize={'small'} />
+        </button>
+      </form>
+      {/* <form onSubmit={sendMessage}>
         <h2>MessageApp</h2>
         <TextField
           name='message'
@@ -83,12 +108,7 @@ export default function Chat(props) {
         />
 
         <button>Send</button>
-      </form>
-      <div>{props.username}</div>
-      <div className='render-chat'>
-        <h2>Chat Log</h2>
-        {renderChat()}
-      </div>
+      </form> */}
     </div>
   );
 }
