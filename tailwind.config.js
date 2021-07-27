@@ -28,7 +28,7 @@ module.exports = {
         patterncolor1 : '#2d354c',
         patternreplacement : '#d1d1d1',
         tama : '#32325d',
-        formhead : '#f4365c'
+        formhead : '#f4365c',
 
         rr: '#4c72c2',
         ll: '#59bfe8',
