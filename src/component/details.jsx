@@ -80,11 +80,13 @@ const [state2, setState2] = React.useState({
       type: e.target.type.value,
       privacy: e.target.privacy.value,
       room_owner: e.target.room_owner.value,
+      roomId: e.target.roomId.value,
     };
     let id = e.target.eventId.value;
     dispatch(updateEvent(event, id));
     history.push("/event");
     setShow(false);
+    setState2({ ...state2, ['right']: false });
     
   };
 
@@ -242,12 +244,12 @@ const [state2, setState2] = React.useState({
 
           
 <div className="flex  flex-row flex-wrap mt-4 text-l font-semibold ">
-<If condition={event.type === "online"&& username===event.room_owner}>
-              <Link to={`/room/p/${event.roomId}?p=${event.password}`}>
+<If condition={event.type === "online"}>
+              {/* <Link to={`/room/p/${event.roomId}?p=${event.password}`}>
                 {" "}
                 room : {event.roomId}
-              </Link>
-              {/* <p>{event.privacy === 'public' ?<Link to={`/room/${event.roomId}`}> room : {event.roomId}</Link>:<Link to={`/private/${event.roomId}`}> room : {event.roomId}</Link>}</p> */}
+              </Link> */}
+              <p>{event.privacy === 'public' ?<Link to={`/room/${event.roomId}`}> room : {event.roomId}</Link>:<Link to={`/private/${event.roomId}`}> room : {event.roomId}</Link>}</p>
             </If>
 
             {/* 
@@ -303,6 +305,7 @@ const [state2, setState2] = React.useState({
                 >
                   <form  onSubmit={editHandler} className="form block w-full capitalize ">
                   <input type="hidden" value={event._id} name="eventId" />
+                  <input type="hidden" value={event.roomId} name="roomId" />
                     <h3 className="text-hero font-semibold text-2xl text-center mb-8 capitalize ">
                       update your event
                     </h3>
@@ -394,7 +397,7 @@ const [state2, setState2] = React.useState({
                     <input type="hidden" name="room_owner" value={username} />{" "}
                     <div className='py-5 border-b-2 border-gray-200 ' >
                     <button
-                      onClick={toggleDrawer("right", false)}
+                      // onClick={toggleDrawer("right", false)}
                       type="submit"
                       className=" capitalize w-full bg-hero text-white text-xl px-4 py-4 rounded-md hover:bg-gray-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-offset-2  rounded-lg"
                     >

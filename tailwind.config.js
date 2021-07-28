@@ -6,7 +6,9 @@ module.exports = {
       backgroundImage: theme => ({
         'hero-pattern': 'url(/src/assets/register_bg.png)',
         'sec-Img': 'url(/src/assets/secimg.jpg)',
-        'hero-myEvents':'url(/src/assets/myEvents.svg)',
+        'hero-myEvents2':'url(/src/assets/myEvents.png)',
+        'hero-myEvents':'url(/src/assets/009.png)',
+
         'hero-details':'url(/src/assets/details.svg)',
 
         'aboutImg':'url(/src/assets/about2.jpeg)',
@@ -39,8 +41,8 @@ module.exports = {
         details:'#FE5E33',
         iconsInDetails:'#A3E9CB',
         detailsButton:'#FBA7B7',
-
-
+        myEventsButton:'#FFC300',
+        myEventsHeading:'#D3E12E',
         patterncolor1 : '#2d354c',
         patternreplacement : '#d1d1d1',
         tama : '#32325d',
