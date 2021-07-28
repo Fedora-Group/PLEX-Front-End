@@ -37,15 +37,17 @@ export default function SignIn(props) {
 
 
   return (
-    <div>
-      <div class='flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10'>
-        <div class='self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white'>
+    <div className="p-9 bg-hero-login min-h-screen  md:bg-cover w-full min-h-screen  justify-center items-center capitalize">
+    <div className="mt-32 flex flex-wrap flex-row w-full  justify-center content-start items-center capitalize  min-h-screen ">
+
+      <div className='flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 '>
+        <div className='self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white'>
           Login To Your Account
         </div>
         <div>
           <button
             type='button'
-            class='py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+            class='py-2 px-4 flex justify-center items-center    shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
           >
             <svg
               width='20'
@@ -110,14 +112,14 @@ export default function SignIn(props) {
             <div class='flex w-full'>
               <button
                 type='submit'
-                class='py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                class='py-2 px-4  bg-green-600 hover:bg-green-400 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                 onClick={selector.signIn.token?history.push('/'):''}
               >
                 Login
               </button>
             </div>
-         <p class='text-red-600'>
-           {selector.signIn.errorMessage?'something went wrong please check your username/password':''}</p>
+         <p class='text-createEvent mt-4 '>
+           {selector.signIn.errorMessage?'something went wrong please check your username/password 😅 ':''}</p>
           </form>
         </div>
      
@@ -140,6 +142,7 @@ export default function SignIn(props) {
         <br />
         <button type='submit'>Submit</button>
       </form> */}
+    </div>
     </div>
   );
 }

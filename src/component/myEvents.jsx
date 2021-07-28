@@ -86,12 +86,10 @@ export default function MyEvents() {
         </div>
       </div>
       <div 
-      className=" w-1/2 flex     md:bg-repeat-round"
+      className=" w-1/2 flex   bg-hero-myEvents2  md:bg-repeat-round"
       // className="  flex   py-4 my-8  bg-hero-myEvents  md:bg-cover w-1/2 h-full"
       >
-        <img 
-        className=" w-full h-full object-cover"
-        src={hero} alt='hero' />
+
       </div>
       
       </div>
