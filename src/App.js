@@ -26,6 +26,7 @@ function App() {
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
+        
           <Route exact path='/'>
             <div className='min-h-screen'>
               {/* <Signup /> */}
@@ -76,10 +77,6 @@ function App() {
         </Route>
 
 
-        <Route >
-          <NotFound/>
-
-        </Route>
 
 
         </Provider>
