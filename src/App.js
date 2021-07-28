@@ -18,23 +18,22 @@ import SignUp from './component/signup';
 import BackToHome from './component/BackToHome';
 import Home from './component/home/Home';
 
+
 import MyEvents from './component/myEvents';
 import NotFound from './component/NotFound';
+
 
 function App() {
   return (
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
+
           <Header />
           <Switch>
             <Route exact path='/'>
               <div className='min-h-screen'>
-                {/* <Signup /> */}
-                {/* <Header />
-              <Main /> */}
-                {/* <Brodcaster /> */}
-                {/* <Watcher /> */}
+  
                 <Home />
               </div>
             </Route>
@@ -51,6 +50,7 @@ function App() {
             <Route exact path='/event/:id'>
               <Details />
             </Route>
+
 
             <Route exact path='/createRoom'>
               <div>
@@ -73,6 +73,7 @@ function App() {
             <Route exact path='/aboutus'>
               <AboutUs />
             </Route>
+
 
             <Route path='*'>
               <NotFound />

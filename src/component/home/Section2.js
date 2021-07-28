@@ -47,11 +47,10 @@ const Content = () => {
                   </svg>
                 </div>
                 <h6 className='mb-2 font-semibold leading-5'>
-                  The quick, brown fox jumps over a lazy dog
-                </h6>
+                Join PLEX Today                </h6>
                 <p className='text-sm text-gray-900'>
-                  Baseball ipsum dolor sit amet cellar rubber win hack tossed.
-                  Slugging catcher slide bench league.
+                  Join Our Continuously Growing Community 
+                  and explore new features and meet with others
                 </p>
               </div>
             </div>
@@ -72,10 +71,32 @@ const Content = () => {
                 </svg>
               </div>
               <h6 className='mb-2 font-semibold leading-5'>
-                A flower in my garden, a mystery
+              find your people
               </h6>
               <p className='text-sm text-gray-900'>
-                They urge you to put down your sword and come join the winners.
+              Plex brings people together in person (and now online!)              </p>
+            </div>
+            <div>
+              <div className='flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-teal-accent-400'>
+                <svg
+                  className='w-8 h-8 text-teal-900'
+                  stroke='currentColor'
+                  viewBox='0 0 52 52'
+                >
+                  <polygon
+                    strokeWidth='3'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    fill='none'
+                    points='29 13 14 29 25 29 23 39 38 23 27 23'
+                  />
+                </svg>
+              </div>
+              <h6 className='mb-2 font-semibold leading-5'>
+                Sign up Now 
+              </h6>
+              <p className='text-sm text-gray-900'>
+              Join us in our mission of empowering people to achieve personal growth by making real human connections.
               </p>
             </div>
             <div>
@@ -95,35 +116,11 @@ const Content = () => {
                 </svg>
               </div>
               <h6 className='mb-2 font-semibold leading-5'>
-                Skate ipsum dolor sit amet, alley oop
+                Host Events
               </h6>
               <p className='text-sm text-gray-900'>
-                If one examines precultural libertarianism, one is faced with a
-                choice: either accept rationalism.
-              </p>
-            </div>
-            <div>
-              <div className='flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-teal-accent-400'>
-                <svg
-                  className='w-8 h-8 text-teal-900'
-                  stroke='currentColor'
-                  viewBox='0 0 52 52'
-                >
-                  <polygon
-                    strokeWidth='3'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    fill='none'
-                    points='29 13 14 29 25 29 23 39 38 23 27 23'
-                  />
-                </svg>
-              </div>
-              <h6 className='mb-2 font-semibold leading-5'>
-                The first mate and his Skipper too will
-              </h6>
-              <p className='text-sm text-gray-900'>
-                Those options are already baked in with this model shoot me an
-                email clear blue water.
+                Create events or find upcoming events and keep connected to your community.
+
               </p>
             </div>
           </div>

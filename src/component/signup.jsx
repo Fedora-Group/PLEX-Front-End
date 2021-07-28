@@ -102,7 +102,8 @@ console.log('state from sign up', state.signup);
   }
 
   return (
-    <div>
+    <div className="p-9 bg-hero-login min-h-screen  md:bg-cover w-full min-h-screen  justify-center items-center capitalize">
+<div className="mt-32 flex flex-wrap flex-row w-full  justify-center content-start items-center capitalize  min-h-screen ">
       <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden'>
         <div class='px-4 py-8 sm:px-10'>
           <div>
@@ -138,7 +139,7 @@ console.log('state from sign up', state.signup);
                 <button
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
-                  class='py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                  class='py-2 px-4 flex justify-center items-center  bg-createEvent hover:bg-createEventHover focus:ring-createEvent focus:ring-offset-createEvent text-white w-full transition ease-in duration-200 text-center text-base font-semibold focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                 >
                   <svg
                     width='20'
@@ -150,7 +151,7 @@ console.log('state from sign up', state.signup);
                   >
                     <path d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'></path>
                   </svg>
-                  Sign in with Google
+                  Sign up with Google
                 </button>
               )}
             />
@@ -245,7 +246,7 @@ render={
                 <span class='block w-full rounded-md shadow-sm'>
                   <button
                     type='submit'
-                    class='py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                    class='py-2 px-4  bg-green-600 hover:bg-green-400 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                   //  onClick={
                     //  console.log('inside if', state.signup.errorMessage);
                   //  ()=>{state.signup.errorMessage!=='not valid'&&state.signup.errorMessage!==undefined&&history.push('/event')}
@@ -257,7 +258,7 @@ render={
                   </button>
                 </span>
       
-         <p class='text-red-600 py-2'>{state.signup.errorMessage==='not valid'?'duplicate username, please choose another one 😊 ':''}</p>
+         <p class='text-createEvent mt-4 py-2'>{state.signup.errorMessage==='not valid'?'Duplicate username, please choose another one 😊 ':''}</p>
 
               </div>
             </div>
@@ -279,6 +280,7 @@ render={
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

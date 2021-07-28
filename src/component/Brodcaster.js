@@ -54,6 +54,14 @@ const Brodcaster = props => {
 
   // Get camera and microphone
 
+
+
+  // useEffect(() => {
+  // console.log('users for tamara', users);
+  //   // assinging a socket to a room
+  //   // socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
+  // }, [users]);
+
   useEffect(() => {
     videoElement = document.querySelector('video');
     audioSelect = document.querySelector('select#audioSource');

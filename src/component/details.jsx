@@ -148,16 +148,17 @@ const [state2, setState2] = React.useState({
   return (
     <>
       <div className="p-9 bg-hero-details min-h-screen  md:bg-repeat-round w-full min-h-screen items-center capitalize">
-        <div className='flex flex-wrap flex-row '>
-             <div className=" box-border flex  flex-col flex-wrap p-4  my-32 w-2/3 h-full justify-center bg-hero bg-opacity-1 text-white rounded-xl shadow-lg">
-          <div className=" md:pl-2 ">
-            <h2 className="  mb-2 mb-4 text-4xl font-extrabold leading-none ">
+        <div className='flex flex-wrap flex-row w-7/8'>
+             <div className=" box-border flex  flex-col flex-wrap pl-8 py-4  my-32 w-2/3 h-full justify-center bg-hero bg-opacity-1 text-white rounded-xl shadow-lg">
+          <div className=" md:pl-2 mt-4 ">
+            <h2 className="  mb-2 mb-4 text-5xl font-extrabold leading-none ">
               {event.name}
             </h2>
-            <div className="flex  flex-row mt-8">
+            <div className="flex  flex-row mt-8 ">
+            <div className="flex  flex-row flex-wrap w-1/2  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
+                class="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -169,12 +170,14 @@ const [state2, setState2] = React.useState({
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <p className=" text-l font-semibold pl-2 w-1/2 ">
+              <p className=" text-xl font-semibold pl-2 w-1/2 ">
                 {event.from} - {event.end}
               </p>
+              </div>
+              <div className="flex  flex-row flex-wrap w-1/2 justify-center ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-24"
+                className="h-8 w-8 ml-8"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -184,23 +187,24 @@ const [state2, setState2] = React.useState({
                   clip-rule="evenodd"
                 />
               </svg>
-              <p className=" text-l font-semibold  md:pl-2 ">
+              <p className=" text-xl font-semibold  md:pl-2 ">
                 {event.address}{" "}
               </p>
+              </div>
             </div>
-            <h3 className=" text-l font-semibold mt-4">
+            <h3 className=" text-xl font-normal mt-4">
               Hosted By: {event.room_owner}
             </h3>
             <div className="flex  flex-col my-4">
-              <h3 className=" text-xl font-semibold mt-2">event description</h3>
-              <span>{event.description}</span>
+              <h3 className=" text-2xl font-semibold mt-2">event description</h3>
+              <span className=" text-ءl font-normal mt-2">{event.description}</span>
             </div>
 
-            <div className="flex  flex-row flex-wrap mt-4 text-iconsInDetails">
-              <div className="flex  flex-row flex-wrap w-1/2">
+            <div className="flex  flex-row flex-wrap mt-4 text-iconsInDetails ">
+              <div className="flex  flex-row flex-wrap w-1/2 justify-start">
                      <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -214,20 +218,20 @@ const [state2, setState2] = React.useState({
               </svg>
               
               {event.type === "real_word" ? (
-                <p className=" text-l font-semibold  md:pl-2  w-1/2">
+                <p className=" text-xl font-semibold  md:pl-2  w-1/2">
                   {" "}
                   real world
                 </p>
               ) : (
-                <p className=" text-l font-semibold  md:pl-2 "> {" "} Online </p>
+                <p className=" text-xl font-semibold  md:pl-2 "> {" "} Online </p>
               )}
               </div>
          
-              <div className="flex  flex-row flex-wrap w-1/2">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex  flex-row flex-wrap w-1/2 justify-center ">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
 </svg>
-              <p className=" text-l font-semibold  md:pl-2  ">
+              <p className=" text-xl font-semibold  md:pl-2  ">
                  {event.privacy} event
               </p>
 
@@ -238,18 +242,29 @@ const [state2, setState2] = React.useState({
             {/* <h3>Type: {event.type}</h3> */}
 
             <div className="flex  flex-row flex-wrap mt-8 ">
-            <h3 className=" text-l font-semibold   w-1/2">Category: {event.catagories}</h3>
-            <h3 className=" text-l font-semibold  md:pl-20 w-1/2 ">Attendance limit: {event.attendance_limit}</h3>
+              <div className= "flex  flex-row flex-wrap  w-1/2">
+                 <h3 className=" text-xl font-semibold  ">Category: {event.catagories}</h3>
+              </div>
+           <div className= "flex  flex-row flex-wrap  w-1/2 justify-center pl-32 ">
+           <h3 className=" text-xl font-semibold  ">Attendance limit: {event.attendance_limit}</h3>    
+           </div>
+          
             </div>
 
           
-<div className="flex  flex-row flex-wrap mt-4 text-l font-semibold ">
+<div className="flex  flex-row w-full mt-16  font-semibold  ">
 <If condition={event.type === "online"}>
               {/* <Link to={`/room/p/${event.roomId}?p=${event.password}`}>
                 {" "}
                 room : {event.roomId}
               </Link> */}
-              <p>{event.privacy === 'public' ?<Link to={`/room/${event.roomId}`}> room : {event.roomId}</Link>:<Link to={`/private/${event.roomId}`}> room : {event.roomId}</Link>}</p>
+            
+              <button
+              
+              className=" justify-center ml-80 mt-16 p-4 w-1/4  capitalize text-xl bg-pink-600  hover:bg-detailsButton focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-offset-2  rounded-lg "
+
+              
+              >{event.room_owner === username ?<Link to={`/room/${event.roomId}`}> Start event</Link>:<Link to={`/room/${event.roomId}`}>  attend event</Link>}</button>
             </If>
 
             {/* 
