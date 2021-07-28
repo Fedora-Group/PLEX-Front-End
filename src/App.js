@@ -8,81 +8,77 @@ import Events from './component/events';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
-
-// import Brodcaster from './component/Brodcaster';
-// import Watcher from './component/Watcher';
+import Brodcaster from './component/Brodcaster';
+import Watcher from './component/Watcher';
 import Room from './component/Room';
-
-
-
+import AboutUs from './component/aboutus';
 import Details from './component/details';
-
 import SignIn from './component/signin';
-
-import BackToHome from './component/BackToHome';
 import SignUp from './component/signup';
-import MyEvents from './component/myEvents';
+import BackToHome from './component/BackToHome';
+import Home from './component/home/Home';
 
+import MyEvents from './component/myEvents'
+import NotFound from './component/NotFound'
 
 function App() {
   return (
     <BrowserRouter>
       <div class='min-h-screen'>
         <Provider store={store}>
-          <Header />
           <Route exact path='/'>
-            <div className='h-screen bg-gray-800 p-8'>
-           
-            
-            {/* <SignUp /> */}
-
+            <div className='min-h-screen'>
+              {/* <Signup /> */}
               {/* <Header />
               <Main /> */}
               {/* <Brodcaster /> */}
               {/* <Watcher /> */}
+              <Home />
             </div>
           </Route>
           <Route exact path='/room/:id'>
             <Room />
           </Route>
-
           {/* <div className='h-screen bg-gray-800'>
-          
         </div> */}
-
           {/* <Main /> */}
           <Route exact path='/event'>
+            <Events />
+          </Route>
 
-          <Events />
-        </Route>
-
-        <Route exact path='/event/:id'>
-          <Details />
-        </Route>
+          <Route exact path='/event/:id'>
+            <Details />
+          </Route>
 
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />
-              <SignIn />
             </div>
           </Route>
-
           <Route exact path='/login'>
-          <SignIn />
+            <SignIn />
           </Route>
           <Route exact path='/signup'>
-          <SignUp />
+            <SignUp />
           </Route>
-
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>
 
 
           <Route exact path='/myEvents'>
-            <MyEvents/>
-          </Route>
+            <MyEvents />
 
+          </Route>
+          <Route exact path='/aboutus'>
+
+          <AboutUs />
+        </Route>
+
+        {/* <Route >
+          <NotFound/>
+
+        </Route> */}
 
 
         </Provider>
@@ -90,5 +86,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

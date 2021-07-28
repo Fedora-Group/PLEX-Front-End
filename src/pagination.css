@@ -1,0 +1,51 @@
+.pagination {
+    margin: auto auto;
+    display: flex;
+    list-style: none;
+    outline: none;
+    /* margin-left: calc(50% - width) ; */
+  }
+  .pgination {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      padding: 0 auto;
+      display: flex;
+      /* background-color: blue; */
+  }
+  .pagination > .active > a{
+    background-color: #FB6340 ;
+    border-color: #FB6340 ;
+    color: #fff;
+  }
+  .pagination > li > a{
+    border: 1px solid #FB6340;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    display : hidden
+  }
+  .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #FB6340 ;
+    border-color: #FB6340;
+    outline: none ;
+  }
+  .pagination > li > a, .pagination > li > span{
+    color: #FB6340
+  }
+  .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+    border-radius: unset
+  }
+
+  /* .create-event-container {
+      background-image: url(/src/assets/patternre.jpeg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-width: 50%;
+      display: block;
+     
+      backdrop-filter: opacity(20%);
+      
+  } */
+

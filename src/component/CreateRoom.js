@@ -39,7 +39,6 @@ const CreateRoom = () => {
       .catch(err => console.log(err));
   };
   return (
-    //   https://res.cloudinary.com/eventcreate/image/upload/v1622059377/eventwebsites_rbwjmx.png
     <div className=' p-9 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
       <Header />
       <div class='flex justify-center mt-16'>
@@ -47,7 +46,7 @@ const CreateRoom = () => {
           <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden rounded-tr-none rounded-br-none'>
             <div class='px-4 py-8 sm:px-10'>
               <div>
-                <h2>Create Event</h2>
+                <h2>Create Room</h2>
               </div>
               <div>
                 <span class='block w-full rounded-md shadow-sm'>
@@ -56,7 +55,7 @@ const CreateRoom = () => {
                     onClick={createEventRoom}
                     class='py-2 px-4  bg-createEvent hover:bg-createEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                   >
-                    Create Event
+                    Create Room
                   </button>
                 </span>
               </div>
@@ -93,12 +92,6 @@ const CreateRoom = () => {
                         }}
                       >
                         Join Event
-                        {/* <a
-                          class='py-2 px-4  bg-joinEvent hover:bg-joinEventHover focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg'
-                          href={`/room/${eventId}`}
-                        >
-                          Join Event
-                        </a> */}
                       </button>
                     </span>
                   </div>

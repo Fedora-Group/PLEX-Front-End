@@ -4,6 +4,7 @@ import  {addUser,removeUser} from '../store/users';
 
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
+import Accordion from './Accordion';
 
 import { useHistory } from 'react-router';
 import io from 'socket.io-client';
@@ -224,61 +225,78 @@ const Brodcaster = props => {
     history.push('/');
   };
   return (
-    <div>
-      <section className='select'>
-        <label htmlFor='audioSource'>Audio source: </label>
-        <select id='audioSource' onChange={() => getStream}></select>
-      </section>
+    <React.Fragment>
+      <div className='w-1/2 h-full'>
+        <video playsInline autoPlay muted className='w-full h-64'></video>
+        <div>
+          <button
+            type='button'
+            className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
+            onClick={endMeeting}
+          >
+            End Meeting
+          </button>
+        </div>
 
-      <section className='select'>
-        <label htmlFor='videoSource'>Video source: </label>
-        <select id='videoSource' onChange={() => getStream}></select>
-      </section>
+        <section className=''>
+          <label htmlFor='audioSource' className='text-gray-700'>
+            Audio
+          </label>
+          <select
+            id='audioSource'
+            onChange={() => getStream}
+            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+          ></select>
+        </section>
 
-      <video playsInline autoPlay muted></video>
-      <div>
-        Online Users: <span id='online'>{users.length}</span>
+        <section className='select'>
+          <label htmlFor='videoSource' className='text-gray-700'>
+            Video
+          </label>
+          <select
+            id='videoSource'
+            onChange={() => getStream}
+            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+          ></select>
+        </section>
       </div>
 
-      <div id='users'>
-        {users.map((user, index) => {
-          return (
-            <div key={index}>
-              <span>{user.username}</span>
-              <button
-                className='ban'
-                value={user.soketId}
-                onClick={e => {
-                  e.preventDefault();
-                  // console.log(
-                  //   'e.target.value',
-                  //   e.target.value,
-                  //   e.currentTarget.value
-                  // );
-                  socket.emit('remove-him', e.target.value);
-                }}
-              >
-                Ban
-              </button>
-            </div>
-          );
-        })}
+
+      <div className='w-1/2 flex flex-col items-center h-full px-8'>
+        <div className='h-1/2 w-full relative'>{props.children}</div>
+        <div className=' h-1/2 w-full pt-2'>
+          <Accordion length={users.length}>
+            {users.map((user, index) => {
+              return (
+                <li className='flex flex-row' key={index}>
+                  <div className='select-none cursor-pointer flex flex-1 items-center p-4'>
+                    <div className='flex-1 pl-1 '>
+                      <div className='font-medium dark:text-white w-full flex justify-between items-center'>
+                        <p>{user.username}</p>
+                        <button
+                          type='button'
+                          className='ban py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                          value={user.soketId}
+                          onClick={e => {
+                            e.preventDefault();
+
+                            socket.emit('remove-him', e.target.value);
+                          }}
+                        >
+                          Kick
+                        </button>
+                      </div>
+
+                      <div></div>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </Accordion>
+        </div>
       </div>
-      <div id='message-container'></div>
-      <button
-        className='bg-red-600 text-white p-2 rounded'
-        onClick={endMeeting}
-      >
-        End Meeting
-      </button>
-      <button
-        onClick={() => {
-          videoSelect.muted = true;
-        }}
-      >
-        mute
-      </button>
-    </div>
+    </React.Fragment>
   );
 };
 
