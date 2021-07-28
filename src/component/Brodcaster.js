@@ -194,6 +194,8 @@ const Brodcaster = props => {
       option => option.text === stream.getVideoTracks()[0].label
     );
     videoElement.srcObject = stream;
+    console.log(actualRoomId);
+
     socket.emit('broadcaster', { roomId: actualRoomId });
   }
   // logging any unexpected error

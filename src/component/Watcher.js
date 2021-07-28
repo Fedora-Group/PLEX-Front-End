@@ -10,7 +10,12 @@ const Watcher = props => {
   const history = useHistory();
   const actualRoomId = props.id;
   console.log(props.id);
-  const [config, setConfig] = useState({iceServers:props.con});
+  if(props.con.iceServers){
+
+    console.log({iceServers:props.con.iceServers.iceServers})
+    peerConnection = new RTCPeerConnection({iceServers:props.con.iceServers.iceServers});
+    // const [config, setConfig] = useState({iceServers:props.con});
+  }
 
 
   // const roomIdFromUrl = window.location.href;
@@ -49,15 +54,15 @@ const Watcher = props => {
   // get the username from the cookies
 
   useEffect(() => {
-    console.log({iceServers:config.iceServers.iceServers});
-    peerConnection = new RTCPeerConnection({iceServers:config.iceServers.iceServers});
+  
 
     video = document.querySelector('video');
 
     socket.emit('join-room', { roomId: actualRoomId, cookies: cookies });
     // resiving an  peer-to-peer offer from the broadcaster via the socket.io-express server  with the ip and the offer description
-  }, []);
+  },[]);
   useLayoutEffect(() => {
+  
     return () => {
       window.onunload = window.onbeforeunload = () => {
         socket.close();
@@ -66,8 +71,11 @@ const Watcher = props => {
     };
   }, []);
   useEffect(() => {
+
+
+    
     socket.on('offer', (id, description) => {
-      console.log('from use effect', id, description);
+      console.log('from use effect', id);
       peerConnection
         .setRemoteDescription(description)
         .then(() => peerConnection.createAnswer())
@@ -87,6 +95,8 @@ const Watcher = props => {
     });
     //  Creating an ICE candidate from the broadcaster SDP  that  describes the protocols and routing needed for WebRTC to be able to communicate with a remote device.
     socket.on('candidate', (id, candidate) => {
+      console.log('from use effect', id);
+
       peerConnection
         .addIceCandidate(new RTCIceCandidate(candidate))
         .catch(e => console.error(e));
