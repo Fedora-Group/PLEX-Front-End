@@ -14,16 +14,22 @@ module.exports = {
         "hero-login": "url(/src/assets/login.jpeg)",
         aboutImg: "url(/src/assets/about2.jpeg)",
 
-        //tama
-        "patterns-pink": "url(/src/assets/pattern8.png)",
-        "pattern-orange": "url(/src/assets/pattern5.svg)",
-        patternre: "url(/src/assets/patternre.jpeg)",
-        pattern5: "url(/src/assets/p8.svg)",
-        404: "url(/src/assets/notFound.png)",
 
-        "cur-Img": "url(/src/assets/s11.jpg)",
-        "hero-t":
-          "linear-gradient(83.84deg, #0088FF -6.87%, #A033FF 26.54%, #FF5C87 58.58%)",
+        'aboutImg':'url(/src/assets/pexels-photo-a2.jpeg)',
+        
+       
+
+        //tama 
+        'patterns-pink': 'url(/src/assets/pattern8.png)',
+        'pattern-orange' : 'url(/src/assets/pattern5.svg)',
+        'patternre': 'url(/src/assets/patternre.jpeg)',
+        'pattern5' : 'url(/src/assets/p8.svg)',
+        '404' : 'url(/src/assets/notFound.png)',
+        'kicked-img' : 'url(/src/assets/kicked.svg)',
+
+        'cur-Img': 'url(/src/assets/s11.jpg)',
+        'hero-t':
+          'linear-gradient(83.84deg, #0088FF -6.87%, #A033FF 26.54%, #FF5C87 58.58%)',
       }),
 
       colors: {

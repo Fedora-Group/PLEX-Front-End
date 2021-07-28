@@ -19,7 +19,7 @@ import BackToHome from './component/BackToHome';
 import Home from './component/home/Home';
 
 import MyEvents from './component/myEvents'
-import NotFound from './component/NotFound'
+// import NotFound from './component/NotFound'
 
 function App() {
   return (
@@ -75,7 +75,6 @@ function App() {
 
           <AboutUs />
         </Route>
-
 
 
 

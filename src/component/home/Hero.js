@@ -19,9 +19,7 @@ const Hero = () => {
           </span>
         </h2>
         <p className=' text-gray-400 text-xl pt-10 '>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s
+        Join a group to meet people, make friends, find support, grow a business, and explore your interests. Thousands of events are happening every day, both online and in person!
         </p>
       </div>
 
