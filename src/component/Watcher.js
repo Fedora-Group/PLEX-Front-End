@@ -115,15 +115,36 @@ const Watcher = props => {
     }
   }
   return (
-    <div>
-      <video playsInline autoPlay muted></video>
-      <button id='enable-audio' class='p-8 bg-gray-700' onClick={enableAudio}>
-        Enable Audio
-      </button>
-      <button id='disable-audio' onClick={disableAudio}>
-        Disable Audio
-      </button>
-      <div>{props.children}</div>
+    <div className='w-full h-full flex'>
+      <div className='w-1/2 h-full'>
+        <video playsInline autoPlay muted className='w-full h-80'></video>
+        <div className='flex gap-2 justify-center'>
+          <button
+            type='button'
+            className='ban py-2 px-4 flex justify-center items-center  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+            id='enable-audio'
+            onClick={enableAudio}
+          >
+            Enable Audio
+          </button>
+          <button
+            type='button'
+            className='ban py-2 px-4 flex justify-center items-center   bg-white hover:bg-gray-100 focus:ring-white-500 focus:ring-offset-white-200 text-indigo-600  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+            id='disable-audio'
+            onClick={disableAudio}
+          >
+            Disable Audio
+          </button>
+        </div>
+        {/* <button id='enable-audio' class='p-8 bg-gray-700' onClick={enableAudio}>
+          Enable Audio
+        </button>
+        <button id='disable-audio' onClick={disableAudio}>
+          Disable Audio
+        </button>
+      </div> */}
+      </div>
+      <div className='w-1/2 h-full'>{props.children}</div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
 import Accordion from './Accordion';
+import FiberManualRecordRoundedIcon from '@material-ui/icons/FiberManualRecordRounded';
 
 import { useHistory } from 'react-router';
 import io from 'socket.io-client';
@@ -217,43 +218,42 @@ const Brodcaster = props => {
   };
   return (
     <React.Fragment>
-      <div className='w-1/2 h-full'>
+      <div className='w-1/2 h-1/2'>
         <video playsInline autoPlay muted className='w-full h-64'></video>
-        <div>
-          <button
-            type='button'
-            className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
-            onClick={endMeeting}
-          >
-            End Meeting
-          </button>
+        <div className='flex items-center justify-center'>
+          <div className='flex gap-3'>
+            <section className=''>
+              <label htmlFor='audioSource' className='text-gray-700'>
+                Audio
+              </label>
+              <select
+                id='audioSource'
+                onChange={() => getStream}
+                className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+              ></select>
+            </section>
+
+            <section className='select'>
+              <label htmlFor='videoSource' className='text-gray-700'>
+                Video
+              </label>
+              <select
+                id='videoSource'
+                onChange={() => getStream}
+                className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+              ></select>
+            </section>
+          </div>
+          <div className='self-end'>
+            <button
+              type='button'
+              className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 h-10 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
+              onClick={endMeeting}
+            >
+              End Meeting
+            </button>
+          </div>
         </div>
-
-        <section className=''>
-          <label htmlFor='audioSource' className='text-gray-700'>
-            Audio
-          </label>
-          <select
-            id='audioSource'
-            onChange={() => getStream}
-            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
-          ></select>
-        </section>
-
-        <section className='select'>
-          <label htmlFor='videoSource' className='text-gray-700'>
-            Video
-          </label>
-          <select
-            id='videoSource'
-            onChange={() => getStream}
-            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
-          ></select>
-        </section>
-      </div>
-
-      <div className='w-1/2 flex flex-col items-center h-full px-8'>
-        <div className='h-1/2 w-full relative'>{props.children}</div>
         <div className=' h-1/2 w-full pt-2'>
           <Accordion length={users.length}>
             {users.map((user, index) => {
@@ -262,10 +262,17 @@ const Brodcaster = props => {
                   <div className='select-none cursor-pointer flex flex-1 items-center p-4'>
                     <div className='flex-1 pl-1 '>
                       <div className='font-medium dark:text-white w-full flex justify-between items-center'>
-                        <p>{user.username}</p>
+                        <p>
+                          {user.username}
+                          <span className='ml-1'>
+                            <FiberManualRecordRoundedIcon
+                              style={{ fontSize: '14px', color: '#31A24C' }}
+                            />
+                          </span>
+                        </p>
                         <button
                           type='button'
-                          className='ban py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                          className='ban py-2 px-4 flex justify-center items-center  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
                           value={user.soketId}
                           onClick={e => {
                             e.preventDefault();
@@ -285,6 +292,10 @@ const Brodcaster = props => {
             })}
           </Accordion>
         </div>
+      </div>
+
+      <div className='w-1/2 flex flex-col items-center h-full px-8'>
+        <div className='h-full w-full relative mb-4 '>{props.children}</div>
       </div>
     </React.Fragment>
   );
