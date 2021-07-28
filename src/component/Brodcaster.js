@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import  {addUser,removeUser} from '../store/users';
+
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
 import Accordion from './Accordion';
@@ -14,7 +17,11 @@ const socket = io.connect('https://oauth-maq.herokuapp.com');
 const Brodcaster = props => {
   const history = useHistory();
   const actualRoomId = props.id;
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([{test:'2'}]);
+  const [config, setConfig] = useState({iceServers:props.con})
+  const users = useSelector(state => state.user);
+  console.log(users);
+  const dispatch = useDispatch();
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
 
@@ -30,20 +37,20 @@ const Brodcaster = props => {
   const cookies = getCookie();
 
   //setting up params of TURN & STUN servers.
-  const config = {
-    iceServers: [
-      {
-        urls: 'stun:us-turn8.xirsys.com',
-      },
-      {
-        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
-        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
-        username:
-          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
-        credentialType: 'password',
-      },
-    ],
-  };
+  // const config = {
+  //   iceServers: [
+  //     {
+  //       urls: 'stun:us-turn8.xirsys.com',
+  //     },
+  //     {
+  //       urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
+  //       credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
+  //       username:
+  //         'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
+  //       credentialType: 'password',
+  //     },
+  //   ],
+  // };
 
   // opening up(connecting) a socket through express server using http
 
@@ -78,21 +85,23 @@ const Brodcaster = props => {
     //reciving the answer and establishing (or refusing) with the watcher.js via its RTCPeerConnection
 
     socket.on('answer', (id, description) => {
-      console.log(id);
+      // console.log(id);
       peerConnections[id].setRemoteDescription(description);
     });
     // read connected users and render them on the dom
     socket.on('users', userPayload => {
       console.log('userPayload', userPayload);
-      // users.push(userPayload);
-      setUsers([...users, userPayload]);
+      if(userPayload){
+      dispatch(addUser(userPayload));
+      }
       // renderUsers(users);
     });
     // remove/ban watchers
     socket.on('remove-user', username => {
-      setUsers(() => {
-        return users.filter(item => item.username !== username);
-      });
+      console.log(username);
+      dispatch(removeUser(username));
+
+     
     });
     socket.on('watcher', id => {
       // creating anew RTC peer connection class and sits its STUN and TURN server
@@ -127,13 +136,13 @@ const Brodcaster = props => {
     // closing the peer connection of  disconnected/banned watcher
     socket.on('disconnectPeer', id => {
       if (peerConnections[id]) {
-        console.log('peerConnections[id]', peerConnections, id);
+        // console.log('peerConnections[id]', peerConnections, id);
         peerConnections[id].close();
         delete peerConnections[id];
       }
-      console.log('peerConnections[id]', peerConnections, id);
+      // console.log('peerConnections[id]', peerConnections, id);
     });
-  });
+  },[]);
 
   // requests a list of the available media input and output devices, such as microphones, cameras, headsets, and so forth. The returned Promise is resolved with a MediaDeviceInfo array describing the devices.
   function getDevices() {
@@ -164,7 +173,7 @@ const Brodcaster = props => {
       });
     }
     const audioSource = audioSelect.value;
-    console.log('oleeeeeeeeeh', audioSource);
+    // console.log('oleeeeeeeeeh', audioSource);
     const videoSource = videoSelect.value;
     const constraints = {
       audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
@@ -251,6 +260,7 @@ const Brodcaster = props => {
           ></select>
         </section>
       </div>
+
 
       <div className='w-1/2 flex flex-col items-center h-full px-8'>
         <div className='h-1/2 w-full relative'>{props.children}</div>

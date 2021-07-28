@@ -4,6 +4,7 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import io from 'socket.io-client';
 import cookie from 'react-cookies';
 import moment from 'moment';
+
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
@@ -11,6 +12,7 @@ const socket = io.connect('https://oauth-maq.herokuapp.com/');
 export default function Chat(props) {
   const [text, setText] = useState({ message: '', username: props.username });
   const [chat, setChat] = useState([]);
+
   const [userfromC, userfromCName] = useState('');
   console.log('props', props.username);
   // dev Note using the useref to define the soket didnot work //
@@ -22,7 +24,7 @@ export default function Chat(props) {
   const sendMessage = e => {
     e.preventDefault();
     let val = text.message;
-    console.log('props1', props.username);
+    // console.log('props1', props.username);
     socket.emit('send-chat-message', {
       message: text.message,
       roomId: props.id,
@@ -70,21 +72,21 @@ export default function Chat(props) {
     userfromCName(co);
   }, []);
   useEffect(() => {
-    console.log('useEffect []', props.id, props.username);
+    // console.log('useEffect []', props.id, props.username);
     socket.emit('join-room', { roomId: props.id });
-    console.log('props.name', props.username);
-    console.log('props.id llllll44', props.id);
+    // console.log('props.name', props.username);
+    // console.log('props.id llllll44', props.id);
     socket.emit('new-user', { roomId: props.id, name: props.username });
   }, []);
 
   useEffect(() => {
     socket.on('old_massage', payload => {
-      console.log('if payload.message', payload.message);
+      // console.log('if payload.message', payload.message);
 
       if (payload.message) {
-        console.log([...chat, ...[payload.message]]);
+        // console.log([...chat, ...[payload.message]]);
         setChat(payload.message);
-        console.log('payload.message', payload.message);
+        // console.log('payload.message', payload.message);
       }
     });
     socket.on('chat-message', payload => {

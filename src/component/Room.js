@@ -14,6 +14,7 @@ const Room = () => {
   const [flag, setFlag] = useState('');
   const [errorFalse, setErrorFalse] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const [config, setConfig] = useState([]);
 
   let token = cookie.load('token');
   let username = cookie.load('username');
@@ -36,8 +37,19 @@ const Room = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(data => {
-        setFlag(data.data.OwnerFlag);
+      .then( async (res) => {
+        let data = await  axios.get('https://oauth-maq.herokuapp.com/configs/', {
+              headers: {
+                'Accept-Language': 'en',
+              'Content-Type': 'application/json',
+                mode: 'cors',
+               withCredentials: 'true',
+              Authorization: `Bearer ${token}`,
+            },
+        })
+        setConfig(data.data.config)
+        console.log(config,'happy',data.data.config);
+        setFlag(res.data.OwnerFlag);
       })
       .catch(err => {
         setErrorFalse(false);
@@ -47,13 +59,14 @@ const Room = () => {
         console.log(err.response);
       });
   };
-  custom();
+  useEffect(()=> custom(),[])
   return (
     <div className='w-full h-screen flex p-10'>
       <If condition={errorFalse}>
         <Then>
-          <If condition={flag}>
+          <If condition={flag} >
             <Then>
+
               <Brodcaster id={id}>
                 <Chat id={id} username={username} />
               </Brodcaster>
@@ -64,7 +77,10 @@ const Room = () => {
                 <Chat id={id} username={username} />
               </Watcher>
             </Else>
+
           </If>
+          <Chat id={id} username={username} />
+
         </Then>
         <Else>
           <div>{errorMessage}</div>
