@@ -6,15 +6,23 @@ module.exports = {
       backgroundImage: theme => ({
         'hero-pattern': 'url(/src/assets/register_bg.png)',
         'sec-Img': 'url(/src/assets/secimg.jpg)',
-        'hero-myEvents': 'url(/src/assets/myEvents.svg)',
-        'hero-details': 'url(/src/assets/details.svg)',
 
-        aboutImg: 'url(/src/assets/about2.jpeg)',
+        'hero-myEvents2':'url(/src/assets/myEvents.png)',
+        'hero-myEvents':'url(/src/assets/009.png)',
 
+        'hero-details':'url(/src/assets/details.svg)',
+
+        'aboutImg':'url(/src/assets/about2.jpeg)',
+        
+       
+
+        //tama 
         'patterns-pink': 'url(/src/assets/pattern8.png)',
-        'pattern-orange': 'url(/src/assets/pattern5.svg)',
-        patternre: 'url(/src/assets/patternre.jpeg)',
-        pattern5: 'url(/src/assets/p8.svg)',
+        'pattern-orange' : 'url(/src/assets/pattern5.svg)',
+        'patternre': 'url(/src/assets/patternre.jpeg)',
+        'pattern5' : 'url(/src/assets/p8.svg)',
+        '404' : 'url(/src/assets/notFound.png)',
+
 
         'cur-Img': 'url(/src/assets/s11.jpg)',
         'hero-t':
@@ -28,16 +36,19 @@ module.exports = {
         joinEvent: '#2DCE89',
         joinEventHover: '#19B875',
 
-        myEvents: '#5E72E4',
-        myEventsHover: '#F5365C',
-        details: '#FE5E33',
-        iconsInDetails: '#A3E9CB',
-        detailsButton: '#FBA7B7',
 
-        patterncolor1: '#2d354c',
-        patternreplacement: '#d1d1d1',
-        tama: '#32325d',
-        formhead: '#f4365c',
+        myEvents:'#5E72E4',
+        myEventsHover:'#F5365C',
+        details:'#FE5E33',
+        iconsInDetails:'#A3E9CB',
+        detailsButton:'#FBA7B7',
+        myEventsButton:'#FFC300',
+        myEventsHeading:'#D3E12E',
+        patterncolor1 : '#2d354c',
+        patternreplacement : '#d1d1d1',
+        tama : '#32325d',
+        formhead : '#f4365c',
+
 
         rr: '#4c72c2',
         ll: '#59bfe8',
