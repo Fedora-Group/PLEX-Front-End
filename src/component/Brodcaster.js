@@ -33,13 +33,13 @@ const Brodcaster = props => {
   const config = {
     iceServers: [
       {
-        urls: 'stun:us-turn8.xirsys.com',
+        urls: 'stun:bn-turn1.xirsys.com',
       },
       {
         urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
-        credential: '623a9ff2-edf5-11eb-98f1-0242ac140004',
+        credential: 'ec14f6fe-efae-11eb-ba8f-0242ac140004',
         username:
-          'N4lRiJq6BOOjXlA5VG_uwUtS450cDuzSannpaBm6UmvtJKOw6X8gmC8Cp24JweZQAAAAAGD-gtVpYnJhaGltYmFuYXQ=',
+          '0CK4pQDRsJHGNigsjORfn7foe-FaupCv_3m6k0QOWm0mKxyyViClQcil1h2qt4b0AAAAAGEBZ5xpYnJhaGltYmFuYXQ=',
         credentialType: 'password',
       },
     ],
