@@ -72,7 +72,7 @@ export default function Events(props) {
         // const first = last - perPage;
         let data2 = data.filter((item) => item.privacy === "public");
         console.log ('data 2 for rendering' , data2)
-        const slice = data2.slice((offset - 2 )* 5  + perPage );
+        const slice = data2.slice((offset * 5 ), (offset * 5 ) + 5);
         // const slice = data.filter ((item) => item.privacy === 'public').slice(first, last);
 
         console.log("this is the slice", slice);
@@ -140,7 +140,7 @@ export default function Events(props) {
     //   }
     // }
     // setSelected(selectedPage)
-    setOffset(selectedPage + 1)
+    setOffset(selectedPage )//2 
   };
 
 
