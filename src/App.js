@@ -23,6 +23,9 @@ import SignUp from './component/signup';
 import BackToHome from './component/BackToHome';
 import Home from './component/home/Home';
 
+import MyEvents from './component/myEvents'
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -51,6 +54,12 @@ function App() {
           <Route exact path='/event'>
             <Events />
           </Route>
+
+
+          <Route exact path='/event/:id'>
+            <Details />
+          </Route>
+
           <Route exact path='/createRoom'>
             <div>
               <CreateRoom />
@@ -70,7 +79,7 @@ function App() {
 
 
 
-          <Route exact path='/myEvents'>
+          <Route exact path='/myevents'>
             <MyEvents/>
           </Route>
 
