@@ -128,6 +128,17 @@ function AboutUs() {
                         </ul>
                     </div>
 
+
+                    <div class="img-wrapper">
+                        <img src="https://avatars.githubusercontent.com/u/78385348?v=4" alt="Atul Prajapati" />
+                        <h2>Neveen Beiram</h2>
+                        <ul>
+                            <li><a href="https://github.com/NeveenBeiram"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>
+                            </a></li>
+                            <li><a href="https://www.linkedin.com/in/neveen-beiram/"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a></li>
+                        </ul>
+                    </div>
+
                     <div class="img-wrapper">
                         <img src="https://avatars.githubusercontent.com/u/78374286?v=4" alt="Atul Prajapati" />
                         <h2>Tamara Alrashed</h2>
@@ -138,15 +149,7 @@ function AboutUs() {
                         </ul>
                     </div>
 
-                <div class="img-wrapper">
-                        <img src="https://avatars.githubusercontent.com/u/55441454?v=4" alt="Atul Prajapati" />
-                        <h2>Ibrahim Banat</h2>
-                        <ul>
-                            <li><a href="https://github.com/ibrahimBanat"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>
-                            </a></li>
-                            <li><a href="https://www.linkedin.com/in/ibrba/"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a></li>
-                        </ul>
-                    </div>
+               
 
                     {/* <div className='transform hover: transition duration-500 hover:scale-125 m-auto max-w-sm rounded overflow-hidden shadow-lg mb-14'>
                         <img className='w-full m-auto' src="https://avatars.githubusercontent.com/u/55441454?v=4" alt='ibrahim' style={{ 'width': '200px', 'height': '200px' }} />
@@ -208,15 +211,19 @@ function AboutUs() {
 
 
 
+                   
+
+
                     <div class="img-wrapper">
-                        <img src="https://avatars.githubusercontent.com/u/78385348?v=4" alt="Atul Prajapati" />
-                        <h2>Neveen Beiram</h2>
+                        <img src="https://avatars.githubusercontent.com/u/55441454?v=4" alt="Atul Prajapati" />
+                        <h2>Ibrahim Banat</h2>
                         <ul>
-                            <li><a href="https://github.com/NeveenBeiram"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>
+                            <li><a href="https://github.com/ibrahimBanat"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>
                             </a></li>
-                            <li><a href="https://www.linkedin.com/in/neveen-beiram/"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a></li>
+                            <li><a href="https://www.linkedin.com/in/ibrba/"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a></li>
                         </ul>
                     </div>
+
 
 {/* 
                     <div className='transform hover: transition duration-500 hover:scale-125 m-auto max-w-sm rounded overflow-hidden shadow-lg mb-14'>
