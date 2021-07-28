@@ -38,7 +38,7 @@ const Room = () => {
         },
       })
       .then( async (res) => {
-        let data = await  axios.get('http://localhost:5000/configs/', {
+        let data = await  axios.get('https://oauth-maq.herokuapp.com/configs/', {
               headers: {
                 'Accept-Language': 'en',
               'Content-Type': 'application/json',

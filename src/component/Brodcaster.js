@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import  {addUser,removeUser} from '../store/users';
+
 // import { getStream, getDevices, gotDevices } from '../scripts/boradcaster';
 // import ScriptTag from 'react-script-tag';
 
@@ -13,8 +16,11 @@ const socket = io.connect('https://oauth-maq.herokuapp.com');
 const Brodcaster = props => {
   const history = useHistory();
   const actualRoomId = props.id;
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([{test:'2'}]);
   const [config, setConfig] = useState({iceServers:props.con})
+  const users = useSelector(state => state.user);
+  console.log(users);
+  const dispatch = useDispatch();
   // const roomIdFromUrl = window.location.href;
   // const actualRoomId = roomIdFromUrl.split('/')[3];
 
@@ -78,23 +84,23 @@ const Brodcaster = props => {
     //reciving the answer and establishing (or refusing) with the watcher.js via its RTCPeerConnection
 
     socket.on('answer', (id, description) => {
-      console.log(id);
+      // console.log(id);
       peerConnections[id].setRemoteDescription(description);
     });
     // read connected users and render them on the dom
     socket.on('users', userPayload => {
       console.log('userPayload', userPayload);
-      // users.push(userPayload);
-      console.log([...users, userPayload],users)
-      let x = [...users, userPayload];
-      setUsers(x);
+      if(userPayload){
+      dispatch(addUser(userPayload));
+      }
       // renderUsers(users);
     });
     // remove/ban watchers
     socket.on('remove-user', username => {
-      setUsers(() => {
-        return users.filter(item => item.username !== username);
-      });
+      console.log(username);
+      dispatch(removeUser(username));
+
+     
     });
     socket.on('watcher', id => {
       // creating anew RTC peer connection class and sits its STUN and TURN server
@@ -129,11 +135,11 @@ const Brodcaster = props => {
     // closing the peer connection of  disconnected/banned watcher
     socket.on('disconnectPeer', id => {
       if (peerConnections[id]) {
-        console.log('peerConnections[id]', peerConnections, id);
+        // console.log('peerConnections[id]', peerConnections, id);
         peerConnections[id].close();
         delete peerConnections[id];
       }
-      console.log('peerConnections[id]', peerConnections, id);
+      // console.log('peerConnections[id]', peerConnections, id);
     });
   },[]);
 
@@ -166,7 +172,7 @@ const Brodcaster = props => {
       });
     }
     const audioSource = audioSelect.value;
-    console.log('oleeeeeeeeeh', audioSource);
+    // console.log('oleeeeeeeeeh', audioSource);
     const videoSource = videoSelect.value;
     const constraints = {
       audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
@@ -244,11 +250,11 @@ const Brodcaster = props => {
                 value={user.soketId}
                 onClick={e => {
                   e.preventDefault();
-                  console.log(
-                    'e.target.value',
-                    e.target.value,
-                    e.currentTarget.value
-                  );
+                  // console.log(
+                  //   'e.target.value',
+                  //   e.target.value,
+                  //   e.currentTarget.value
+                  // );
                   socket.emit('remove-him', e.target.value);
                 }}
               >
