@@ -22,7 +22,7 @@ module.exports = {
         'patternre': 'url(/src/assets/patternre.jpeg)',
         'pattern5' : 'url(/src/assets/p8.svg)',
         '404' : 'url(/src/assets/notFound.png)',
-
+        'kicked-img' : 'url(/src/assets/kicked.svg)',
 
         'cur-Img': 'url(/src/assets/s11.jpg)',
         'hero-t':
