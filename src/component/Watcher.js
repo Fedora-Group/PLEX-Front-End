@@ -49,7 +49,8 @@ const Watcher = props => {
   // get the username from the cookies
 
   useEffect(() => {
-    peerConnection = new RTCPeerConnection(config);
+    console.log({iceServers:config.iceServers.iceServers});
+    peerConnection = new RTCPeerConnection({iceServers:config.iceServers.iceServers});
 
     video = document.querySelector('video');
 

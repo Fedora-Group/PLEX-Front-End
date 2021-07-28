@@ -105,8 +105,8 @@ const Brodcaster = props => {
     });
     socket.on('watcher', id => {
       // creating anew RTC peer connection class and sits its STUN and TURN server
-
-      const peerConnection = new RTCPeerConnection(config);
+      console.log(config.iceServers.iceServers,'sad*******************',config.iceServers);
+      const peerConnection = new RTCPeerConnection({iceServers:config.iceServers.iceServers});
       // saving the peer connection in object value and make the socket id for the watcher the key for it
       peerConnections[id] = peerConnection;
       // adding the video audio stream(all was retrieved bellow in the code)to the same peer connection value

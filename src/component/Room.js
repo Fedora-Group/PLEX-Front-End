@@ -47,8 +47,9 @@ const Room = () => {
               Authorization: `Bearer ${token}`,
             },
         })
-        setConfig(data.data.config)
-        console.log(config,'happy',data.data.config);
+        setConfig(data.data)
+        console.log(config,'happy',data.data);
+        console.log(res.data.OwnerFlag)
         setFlag(res.data.OwnerFlag);
       })
       .catch(err => {
@@ -66,14 +67,14 @@ const Room = () => {
         <Then>
           <If condition={flag} >
             <Then>
-
-              <Brodcaster id={id}>
+            {console.log(config)}
+              <Brodcaster id={id} con={config}>
                 <Chat id={id} username={username} />
               </Brodcaster>
             </Then>
 
             <Else>
-              <Watcher id={id}>
+              <Watcher id={id}  con={config}>
                 <Chat id={id} username={username} />
               </Watcher>
             </Else>
