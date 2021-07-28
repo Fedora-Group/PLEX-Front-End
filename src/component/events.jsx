@@ -25,7 +25,7 @@ export default function Events(props) {
   const [form, setForm] = useState(false);
 
   // pagination
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
   const [perPage] = useState(5);
   const [pageCount, setPageCount] = useState(0);
@@ -72,7 +72,7 @@ export default function Events(props) {
         // const first = last - perPage;
         let data2 = data.filter((item) => item.privacy === "public");
         console.log ('data 2 for rendering' , data2)
-        const slice = data2.slice(offset - 1 , offset - 1  + perPage );
+        const slice = data2.slice((offset - 2 )* 5  + perPage );
         // const slice = data.filter ((item) => item.privacy === 'public').slice(first, last);
 
         console.log("this is the slice", slice);
@@ -129,20 +129,29 @@ export default function Events(props) {
   const handlePageClick = (e) => {
     
     const selectedPage = e.selected;
-    if (selected < selectedPage){
-      setOffset(offset + 5);
-    }else if (selected > selectedPage){
-      if (offset >= 5){
+    // if (selected < selectedPage){
+    //   setOffset(offset + 5);
+    // }else if (selected > selectedPage){
+    //   if (offset >= 5){
 
-        setOffset(offset -5);
-      }else {
-        setOffset (0)
-      }
-    }
-    setSelected(selectedPage)
+    //     setOffset(offset -5);
+    //   }else {
+    //     setOffset (0)
+    //   }
+    // }
+    // setSelected(selectedPage)
+    setOffset(selectedPage + 1)
   };
 
+
+  const toggleHandler = (e) =>{
+    console.log ('hehe')
+    setState2({ ...state2, ['right']: false });
+    toggleDrawer ("right" , false )
+  }
   const submitHandler = (e) => {
+    
+    // toggleDrawer("right", true)
     e.preventDefault();
     let event = {
       name: e.target.name.value,
@@ -157,10 +166,13 @@ export default function Events(props) {
       room_owner: e.target.room_owner.value,
     };
 
+    toggleHandler (event)
+
+
     dispatch(eventsFromRooms(event));
     setForm(false);
-
-    history.push("/event");
+    
+    // history.push("/event");
   };
 
   const useStyles = makeStyles({
@@ -173,6 +185,9 @@ export default function Events(props) {
       width: "auto",
     },
   });
+  
+    
+  
 
   const classes = useStyles();
 
@@ -202,7 +217,7 @@ export default function Events(props) {
 
         <If condition={username}>
           <div className="bg-white mt-52 text-center">
-          <div className='text-center m-auto '>
+          <div className='pgination text-center m-auto'>
 
             <ReactPaginate
               previousLabel={"prev"}
@@ -330,7 +345,7 @@ export default function Events(props) {
                     <div className='py-5 border-b-2 border-gray-200 ' >
 
                     <button
-                      onClick={toggleDrawer("right", false)}
+                      // onClick={}
                       type="submit"
                       className="w-full bg-joinEvent hover:bg-joinEventHover text-white px-2 py-2 rounded-md"
                     >
@@ -338,6 +353,7 @@ export default function Events(props) {
                     </button>
                     </div>
                   </form>
+                  
                 </div>
               </Drawer>
             </div>

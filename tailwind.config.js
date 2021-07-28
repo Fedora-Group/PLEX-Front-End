@@ -15,12 +15,13 @@ module.exports = {
         
        
 
-
+        //tama 
         'patterns-pink': 'url(/src/assets/pattern8.png)',
         'pattern-orange' : 'url(/src/assets/pattern5.svg)',
         'patternre': 'url(/src/assets/patternre.jpeg)',
         'pattern5' : 'url(/src/assets/p8.svg)',
-    
+        '404' : 'url(/src/assets/notFound.png)',
+
 
         'cur-Img': 'url(/src/assets/s11.jpg)',
         'hero-t':
