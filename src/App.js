@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 // import AuthProvider from '../src/context/auth';
 import Events from './component/events';
-
+import MyEvents from './component/myEvents';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
@@ -14,7 +14,6 @@ import Watcher from './component/Watcher';
 import Room from './component/Room';
 
 import AboutUs from './component/aboutus';
-
 import Details from './component/details';
 
 import SignIn from './component/signin';
@@ -58,27 +57,23 @@ function App() {
           </Route>
 
           <Route exact path='/login'>
-          <SignIn />
+            <SignIn />
           </Route>
           <Route exact path='/signup'>
-          <SignUp />
+            <SignUp />
           </Route>
 
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>
 
-
-
           <Route exact path='/myEvents'>
-            <MyEvents/>
+            <MyEvents />
           </Route>
 
           <Route exact path='/aboutus'>
-          <AboutUs />
-        </Route>
-
-
+            <AboutUs />
+          </Route>
         </Provider>
       </div>
     </BrowserRouter>

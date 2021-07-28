@@ -51,7 +51,7 @@ const Section3 = () => {
             <h4 className='text-3xl text-header mt-8'>Phone</h4>
             <p className='text-l text-gray-400 mt-5'>+9(62) 535 3523</p>
           </div>
-          <div className='w-1/4 flex flex-col items-center h-52 border-r border-gray-300 justify-center'>
+          <div className='w-1/4 flex flex-col items-center h-52  justify-center'>
             <div className='inline-flex items-center justify-center shadow-round w-16 h-16 rounded-full p-4'>
               <ContactSupportRoundedIcon
                 fontSize={'large'}

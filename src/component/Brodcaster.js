@@ -221,7 +221,8 @@ const Brodcaster = props => {
         <video playsInline autoPlay muted className='w-full h-64'></video>
         <div>
           <button
-            className='bg-red-600 text-white p-2 rounded'
+            type='button'
+            className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
             onClick={endMeeting}
           >
             End Meeting
@@ -229,19 +230,31 @@ const Brodcaster = props => {
         </div>
 
         <section className=''>
-          <label htmlFor='audioSource'>Audio source: </label>
-          <select id='audioSource' onChange={() => getStream}></select>
+          <label htmlFor='audioSource' className='text-gray-700'>
+            Audio
+          </label>
+          <select
+            id='audioSource'
+            onChange={() => getStream}
+            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+          ></select>
         </section>
 
         <section className='select'>
-          <label htmlFor='videoSource'>Video source: </label>
-          <select id='videoSource' onChange={() => getStream}></select>
+          <label htmlFor='videoSource' className='text-gray-700'>
+            Video
+          </label>
+          <select
+            id='videoSource'
+            onChange={() => getStream}
+            className='block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500'
+          ></select>
         </section>
       </div>
 
       <div className='w-1/2 flex flex-col items-center h-full px-8'>
-        <div className='h-1/2 w-full'>{props.children}</div>
-        <div className=' h-1/2 w-full'>
+        <div className='h-1/2 w-full relative'>{props.children}</div>
+        <div className=' h-1/2 w-full pt-2'>
           <Accordion length={users.length}>
             {users.map((user, index) => {
               return (
