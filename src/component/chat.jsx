@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import io from 'socket.io-client';
 import cookie from 'react-cookies';
 import moment from 'moment';
-import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
+import DoneRounded from '@material-ui/icons/DoneRounded';
+
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
@@ -40,30 +40,47 @@ export default function Chat(props) {
   };
 
   const renderChat = () => {
-    return chat.map(({ name, message, time }, index) => (
-      <div
-        key={index}
-        className='min-h-di p-2 border border-gray-100 max-w-cc rounded-xl shadow-message mb-3'
-      >
-        <p className='text-xl text-mess font-light'>{message}</p>
-        <p className='flex justify-between'>
+    return chat.map(({ name, message, time }, index) =>
+      name === userfromC ? (
+        <div
+          key={index}
+          className='h-auto p-2 max-w-cc rounded-xl shadow-message mb-3 self-end min-w-di flex flex-col h-auto bg-whats'
+        >
           <div>{name === userfromC ? '' : name}</div>
-          <div className='text-mess flex items-center'>
-            {time}{' '}
-            <span className='ml-1'>
-              {name === userfromC ? (
-                <DoneAllRoundedIcon
-                  fontSize={'small'}
-                  style={{ color: '#4FC3F7' }}
-                />
-              ) : (
-                <ScheduleRoundedIcon fontSize={'small'} />
-              )}
-            </span>
+          <p className='text-l  font-light inline-flex break-words flex-wrap w-full h-auto break-all'>
+            {message}
+          </p>
+          <p className='flex  text-xs  items-center justify-end'>
+            <div className='text-whatsgray font-light flex justify-center items-center'>
+              {time}{' '}
+              <span className='ml-1'>
+                <DoneRounded fontSize={'small'} />
+              </span>
+            </div>
+          </p>
+        </div>
+      ) : (
+        <div
+          key={index}
+          className='h-auto p-2 max-w-cc rounded-xl shadow-message mb-3 self-start min-w-di flex flex-col h-auto bg-white'
+        >
+          <div className='-mt-1 text-whatsname font-semibold'>
+            {name === userfromC ? '' : name}
           </div>
-        </p>
-      </div>
-    ));
+          <p className='text-l   inline-flex break-words flex-wrap w-full h-auto break-all'>
+            {message}
+          </p>
+          <p className='flex  text-xs   justify-end'>
+            <div className='text-whatsgray font-light'>
+              {time}{' '}
+              <span className='ml-1'>
+                <DoneRounded fontSize={'small'} />
+              </span>
+            </div>
+          </p>
+        </div>
+      )
+    );
   };
   useEffect(() => {
     let co = cookie.load('username');
@@ -109,31 +126,30 @@ export default function Chat(props) {
 
         <button>Send</button>
       </form> */}
-      <div className='chatDiv overflow-y-scroll h-5/6 p-2'>{renderChat()}</div>
-
-      <div className='w-full absolute bottom-0 '>
-        <form
-          className='inline-flex w-full justify-center '
-          onSubmit={sendMessage}
-        >
-          <div class=' relative w-5/6'>
+      <div className='chatDiv overflow-y-scroll h-5/6 p-2 flex flex-col bg-whatsbg rounded-lg rounded-b-none bg-cover '>
+        {renderChat()}
+      </div>
+      <div className='w-full  p-2 sticky bottom-0 bg-whatsgraylight rounded-t-none rounded-lg '>
+        <form className=' w-full   ' onSubmit={sendMessage}>
+          <div class='  w-full h-4/6  flex items-center justify-center'>
             <input
               type='text'
               id='"form-subscribe-Subscribe'
-              className=' rounded-lg border-transparent  flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none '
+              className=' rounded-lg border-transparent rounded-full flex-1 appearance-none border border-gray-300 w-7/8 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none h-full'
               placeholder='Aa'
               onChange={e => handelChange(e)}
               value={text.message}
               variant='outlined'
               label='Message'
+              autoComplete='none'
             />
+            <button className='w-1/8 ml-2 outline-none' type='submit'>
+              <SendRoundedIcon
+                fontSize={'medium'}
+                style={{ color: '#9A9A9A' }}
+              />
+            </button>
           </div>
-          <button
-            className='flex-shrink-0 ml-1 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none'
-            type='submit'
-          >
-            <SendRoundedIcon fontSize={'small'} />
-          </button>
         </form>
       </div>
     </>

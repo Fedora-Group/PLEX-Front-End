@@ -7,8 +7,8 @@ import { Redirect } from 'react-router';
 // import { useSelector } from 'react-redux';
 
 const CreateRoom = () => {
-//  const selector = useSelector(state => state.signIn);
-//   console.log(selector);
+  //  const selector = useSelector(state => state.signIn);
+  //   console.log(selector);
   const [eventId, setEventId] = useState('');
   const history = useHistory();
   const createEventRoom = () => {
@@ -39,8 +39,7 @@ const CreateRoom = () => {
       .catch(err => console.log(err));
   };
   return (
-    <div className=' p-9 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
-      <Header />
+    <div className=' p-8 bg-hero-pattern min-h-screen bg-hero bg-centered bg-cover w-full h-full'>
       <div class='flex justify-center mt-16'>
         <div>
           <div class='bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden rounded-tr-none rounded-br-none'>

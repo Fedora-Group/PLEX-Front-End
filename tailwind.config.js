@@ -7,6 +7,9 @@ module.exports = {
         "hero-pattern": "url(/src/assets/register_bg.png)",
         "sec-Img": "url(/src/assets/secimg.jpg)",
 
+
+        whatsbg: 'url(/src/assets/whats.png)',
+
         "hero-myEvents2": "url(/src/assets/myEvents.png)",
         "hero-myEvents": "url(/src/assets/009.png)",
 
@@ -19,13 +22,16 @@ module.exports = {
         
        
 
-        //tama 
+
+        //tama
         'patterns-pink': 'url(/src/assets/pattern8.png)',
+
         'pattern-orange' : 'url(/src/assets/pattern5.svg)',
         'patternre': 'url(/src/assets/patternre.jpeg)',
         'pattern5' : 'url(/src/assets/p8.svg)',
         '404' : 'url(/src/assets/notFound.png)',
         'kicked-img' : 'url(/src/assets/kicked.svg)',
+
 
         'cur-Img': 'url(/src/assets/s11.jpg)',
         'hero-t':
@@ -33,6 +39,7 @@ module.exports = {
       }),
 
       colors: {
+
         hero: "#172B4D",
         createEvent: "#FB6340",
         createEventHover: "#E74F2C",
@@ -59,6 +66,11 @@ module.exports = {
         buttonoHover: "#07C3D7",
         mess: "#525f7f",
         end: "#ea4335",
+        whats: '#DCF8C6',
+        whatsgray: '#9A9A9A',
+        whatsgraylight: '#F0F0F0',
+        whatsname: '#FFA97A',
+
       },
       backgroundPosition: {
         centered: "50%",
@@ -84,7 +96,9 @@ module.exports = {
         di: "60px",
       },
       maxWidth: {
+
         cc: "300px",
+
       },
 
       width: {
