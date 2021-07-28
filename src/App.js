@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 // import AuthProvider from '../src/context/auth';
 import Events from './component/events';
+
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateRoom from './component/CreateRoom';
 import Header from './component/Header';
@@ -55,19 +56,22 @@ function App() {
             </div>
           </Route>
           <Route exact path='/login'>
-          <SignIn />
+            <SignIn />
           </Route>
           <Route exact path='/signup'>
-          <SignUp />
+            <SignUp />
           </Route>
           <Route path='/backtohome' exact>
             <BackToHome />
           </Route>
 
-          <Route exact path='/myevents'>
-            <MyEvents/>
+
+          <Route exact path='/myEvents'>
+            <MyEvents />
+
           </Route>
           <Route exact path='/aboutus'>
+
           <AboutUs />
         </Route>
 

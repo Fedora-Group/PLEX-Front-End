@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import io from 'socket.io-client';
+import cookie from 'react-cookies';
 import moment from 'moment';
+import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
+import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 const socket = io.connect('https://oauth-maq.herokuapp.com/');
 
 export default function Chat(props) {
   const [text, setText] = useState({ message: '', username: props.username });
   const [chat, setChat] = useState([]);
+  const [userfromC, userfromCName] = useState('');
   console.log('props', props.username);
   // dev Note using the useref to define the soket didnot work //
 
@@ -37,14 +41,34 @@ export default function Chat(props) {
 
   const renderChat = () => {
     return chat.map(({ name, message, time }, index) => (
-      <div key={index}>
-        <p>
-          {name}: <span>{message}</span> : <span> {time} </span>
+      <div
+        key={index}
+        className='min-h-di p-2 border border-gray-100 max-w-cc rounded-xl shadow-message mb-3'
+      >
+        <p className='text-xl text-mess font-light'>{message}</p>
+        <p className='flex justify-between'>
+          <div>{name === userfromC ? '' : name}</div>
+          <div className='text-mess flex items-center'>
+            {time}{' '}
+            <span className='ml-1'>
+              {name === userfromC ? (
+                <DoneAllRoundedIcon
+                  fontSize={'small'}
+                  style={{ color: '#4FC3F7' }}
+                />
+              ) : (
+                <ScheduleRoundedIcon fontSize={'small'} />
+              )}
+            </span>
+          </div>
         </p>
       </div>
     ));
   };
-
+  useEffect(() => {
+    let co = cookie.load('username');
+    userfromCName(co);
+  }, []);
   useEffect(() => {
     console.log('useEffect []', props.id, props.username);
     socket.emit('join-room', { roomId: props.id });
@@ -71,31 +95,7 @@ export default function Chat(props) {
     });
   }, [chat]);
   return (
-    <div className='chatDiv h-full w-full overflow-y-scroll'>
-      <div className='render-chat'>
-        <h2>Chat Log</h2>
-        {renderChat()}
-      </div>
-      <form className='     justify-center w-full' onSubmit={sendMessage}>
-        <div class=' relative '>
-          <input
-            type='text'
-            id='"form-subscribe-Subscribe'
-            className=' rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
-            placeholder='Aa'
-            onChange={e => handelChange(e)}
-            value={text.message}
-            variant='outlined'
-            label='Message'
-          />
-        </div>
-        <button
-          className='flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200'
-          type='submit'
-        >
-          <SendRoundedIcon fontSize={'small'} />
-        </button>
-      </form>
+    <>
       {/* <form onSubmit={sendMessage}>
         <h2>MessageApp</h2>
         <TextField
@@ -109,6 +109,33 @@ export default function Chat(props) {
 
         <button>Send</button>
       </form> */}
-    </div>
+      <div className='chatDiv overflow-y-scroll h-5/6 p-2'>{renderChat()}</div>
+
+      <div className='w-full absolute bottom-0 '>
+        <form
+          className='inline-flex w-full justify-center '
+          onSubmit={sendMessage}
+        >
+          <div class=' relative w-5/6'>
+            <input
+              type='text'
+              id='"form-subscribe-Subscribe'
+              className=' rounded-lg border-transparent  flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none '
+              placeholder='Aa'
+              onChange={e => handelChange(e)}
+              value={text.message}
+              variant='outlined'
+              label='Message'
+            />
+          </div>
+          <button
+            className='flex-shrink-0 ml-1 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none'
+            type='submit'
+          >
+            <SendRoundedIcon fontSize={'small'} />
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
