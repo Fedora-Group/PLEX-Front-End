@@ -75,11 +75,10 @@ function App() {
           <AboutUs />
         </Route>
 
-
-        <Route >
+        {/* <Route >
           <NotFound/>
 
-        </Route>
+        </Route> */}
 
 
         </Provider>

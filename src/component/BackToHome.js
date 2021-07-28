@@ -4,9 +4,12 @@ import { useHistory } from 'react-router';
 const BackToHome = () => {
   const history = useHistory();
   return (
-    <div>
+    <div
+    className=''
+    >
       sorry you have been kicked
       <button
+      className=''
         onClick={() => {
           history.push('/');
         }}
