@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 const BackToHome = () => {
   const history = useHistory();
   return (
+
     <div className=" min-h-screen bg-center bg-origin-content bg-kicked-img bg-cover bg-no-repeat  ">
       <div>
         <p
@@ -26,6 +27,7 @@ const BackToHome = () => {
         </button>
       </div>
      </div>
+
   );
 };
 

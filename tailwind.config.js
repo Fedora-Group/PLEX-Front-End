@@ -12,7 +12,7 @@ module.exports = {
 
         'hero-details':'url(/src/assets/details.svg)',
 
-        'aboutImg':'url(/src/assets/about2.jpeg)',
+        'aboutImg':'url(/src/assets/pexels-photo-a2.jpeg)',
         
        
 
