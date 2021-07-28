@@ -18,8 +18,8 @@ import SignUp from './component/signup';
 import BackToHome from './component/BackToHome';
 import Home from './component/home/Home';
 
-import MyEvents from './component/myEvents'
-import NotFound from './component/NotFound'
+import MyEvents from './component/myEvents';
+import NotFound from './component/NotFound';
 
 function App() {
   return (
@@ -65,23 +65,17 @@ function App() {
             <BackToHome />
           </Route>
 
-
           <Route exact path='/myEvents'>
             <MyEvents />
-
           </Route>
           <Route exact path='/aboutus'>
+            <AboutUs />
+          </Route>
 
-          <AboutUs />
-        </Route>
-
-
-        <Route >
+          {/* <Route >
           <NotFound/>
 
-        </Route>
-
-
+        </Route> */}
         </Provider>
       </div>
     </BrowserRouter>
