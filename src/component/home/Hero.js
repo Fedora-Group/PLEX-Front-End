@@ -10,7 +10,7 @@ const Hero = () => {
     <div className='flex flex-wrap overflow-hidden w-full h-full'>
       <div className='w-1/2  flex flex-col items-center mt-32 leading-snug pl-8'>
         <h2 className='text-white  w-full'>
-          <span className='  text-header  text-6xl font-bold'>
+          <span className='  text-header  text-6xl font-bold text-buttono'>
             Dive in!
             <br />
             <span className='text-6xl font-bold text-header'>
@@ -18,8 +18,10 @@ const Hero = () => {
             </span>
           </span>
         </h2>
-        <p className=' text-gray-400 text-xl pt-10 '>
-        Join a group to meet people, make friends, find support, grow a business, and explore your interests. Thousands of events are happening every day, both online and in person!
+        <p className=' text-gray-500 text-xl pt-10 font-semibold mt-8'>
+          Join a group to meet people, make friends, find support, grow a
+          business, and explore your interests. Thousands of events are
+          happening every day, both online and in person!
         </p>
       </div>
 
