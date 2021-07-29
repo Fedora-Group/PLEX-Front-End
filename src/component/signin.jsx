@@ -1,21 +1,20 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import cookie from 'react-cookies';
-import { logout, signIn} from '../store/signIn';
+import { logout, signIn } from '../store/signIn';
 import { useSelector } from 'react-redux';
 
 export default function SignIn(props) {
+  const selector = useSelector(state => {
+    return { signIn: state.signIn };
+  });
 
-  const selector = useSelector(state => {return {signIn:state.signIn}});
- 
   //  console.log('from signin',selector.signIn);
- const history=useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -25,9 +24,7 @@ export default function SignIn(props) {
       password: e.target.password.value,
     };
 
-  dispatch(signIn(user.username, user.password))
-    
-
+    dispatch(signIn(user.username, user.password));
   };
   // console.log('the if', selector.signIn.errorMessage);
   // if(selector.signIn.errorMessage===undefined){
@@ -35,106 +32,120 @@ export default function SignIn(props) {
   //   history.push('/event')
   // }
 
-
   return (
-    <div className="p-9 bg-hero-login min-h-screen  md:bg-cover w-full min-h-screen  justify-center items-center capitalize">
-    <div className="mt-32 flex flex-wrap flex-row w-full  justify-center content-start items-center capitalize  min-h-screen ">
-
-      <div className='flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 '>
-        <div className='self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white'>
-          Login To Your Account
-        </div>
-        <div>
-          <button
-            type='button'
-            class='py-2 px-4 flex justify-center items-center    shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
-          >
-            <svg
-              width='20'
-              height='20'
-              fill='currentColor'
-              class='mr-2'
-              viewBox='0 0 1792 1792'
-              xmlns='http://www.w3.org/2000/svg'
+    <div className='p-9 bg-hero-login min-h-screen  md:bg-cover w-full min-h-screen  justify-center items-center capitalize'>
+      <div className='mt-32 flex flex-wrap flex-row w-full  justify-center content-start items-center capitalize  min-h-screen '>
+        <div className='flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 '>
+          <div className='self-center mb-6 text-xl font-semibold text-gray-600 sm:text-2xl dark:text-white'>
+            Login To Your Account
+          </div>
+          <div className='flex justify-center'>
+            <button
+              type='button'
+              class='transition ease-in duration-200 py-2 px-4 flex bg-red-500 hover:bg-red-600 text-white justify-center items-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
             >
-              <path d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'></path>
-            </svg>
-            Sign In With Google
-          </button>
-        </div>
-        <div class='mt-8'>
-          <form onSubmit={submitHandler} autoComplete='off' method='POST'>
-            <div class='flex flex-col mb-2'>
-              <div class='flex relative '>
-                <span class='rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm'>
-                  <svg
-                    width='15'
-                    height='15'
-                    fill='currentColor'
-                    viewBox='0 0 1792 1792'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z'></path>
-                  </svg>
-                </span>
-                <input
-                  name='username'
-                  type='text'
-                  id='sign-username'
-                  class=' rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent'
-                  placeholder='Username'
-                />
-              </div>
-            </div>
-            <div class='flex flex-col mb-6'>
-              <div class='flex relative '>
-                <span class='rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm'>
-                  <svg
-                    width='15'
-                    height='15'
-                    fill='currentColor'
-                    viewBox='0 0 1792 1792'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M1376 768q40 0 68 28t28 68v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-320q0-185 131.5-316.5t316.5-131.5 316.5 131.5 131.5 316.5q0 26-19 45t-45 19h-64q-26 0-45-19t-19-45q0-106-75-181t-181-75-181 75-75 181v320h736z'></path>
-                  </svg>
-                </span>
-                <input
-                  name='password'
-                  type='password'
-                  id='sign-password'
-                  class=' rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent'
-                  placeholder='Password'
-                />
-              </div>
-            </div>
-
-            <div class='flex w-full'>
-              <button
-                type='submit'
-                class='py-2 px-4  bg-green-600 hover:bg-green-400 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
-                onClick={selector.signIn.token?history.push('/'):''}
+              <svg
+                width='20'
+                height='20'
+                fill='currentColor'
+                class='mr-2'
+                viewBox='0 0 1792 1792'
+                xmlns='http://www.w3.org/2000/svg'
               >
-                Login
-              </button>
+                <path d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'></path>
+              </svg>
+              Sign In With Google
+            </button>
+          </div>
+          <div class='relative mt-6'>
+            <div class='absolute inset-0 flex items-center'>
+              <div class='w-full border-t border-gray-300'></div>
             </div>
-         <p class='text-createEvent mt-4 '>
-           {selector.signIn.errorMessage?'something went wrong please check your username/password 😅 ':''}</p>
-          </form>
-        </div>
-     
-        <div class='flex items-center justify-center mt-6'>
-        
-          <Link
-            to='/'
-            class='inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white'
-          >
-            <span class='ml-2'>You don&#x27;t have an account?</span>
-          </Link>
-        </div>
-      </div>
+            <div class='relative flex justify-center text-sm leading-5'>
+              <span class='px-2 text-gray-500 bg-white'>Or</span>
+            </div>
+          </div>
+          <div class='mt-8'>
+            <form onSubmit={submitHandler} autoComplete='off' method='POST'>
+              <div class='flex flex-col mb-2'>
+                <div class='flex relative '>
+                  <span class='rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm'>
+                    <svg
+                      width='15'
+                      height='15'
+                      fill='currentColor'
+                      viewBox='0 0 1792 1792'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        style={{ color: '#2DCE89' }}
+                        d='M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z'
+                      ></path>
+                    </svg>
+                  </span>
+                  <input
+                    name='username'
+                    type='text'
+                    id='sign-username'
+                    class=' rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent'
+                    placeholder='Username'
+                  />
+                </div>
+              </div>
+              <div class='flex flex-col mb-6'>
+                <div class='flex relative '>
+                  <span class='rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm'>
+                    <svg
+                      width='15'
+                      height='15'
+                      fill='currentColor'
+                      viewBox='0 0 1792 1792'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        style={{ color: '#2DCE89' }}
+                        d='M1376 768q40 0 68 28t28 68v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-320q0-185 131.5-316.5t316.5-131.5 316.5 131.5 131.5 316.5q0 26-19 45t-45 19h-64q-26 0-45-19t-19-45q0-106-75-181t-181-75-181 75-75 181v320h736z'
+                      ></path>
+                    </svg>
+                  </span>
+                  <input
+                    name='password'
+                    type='password'
+                    id='sign-password'
+                    class=' rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-300  focus:border-transparent'
+                    placeholder='Password'
+                  />
+                </div>
+              </div>
 
-      {/* <form onSubmit={submitHandler}>
+              <div class='flex w-full'>
+                <button
+                  type='submit'
+                  class='py-2 px-4  bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '
+                  onClick={selector.signIn.token ? history.push('/') : ''}
+                >
+                  Login
+                </button>
+              </div>
+              <p class='text-createEvent mt-4 '>
+                {selector.signIn.errorMessage
+                  ? 'something went wrong please check your username/password 😅 '
+                  : ''}
+              </p>
+            </form>
+          </div>
+
+          <div class='flex items-center justify-center mt-6'>
+            <Link
+              to='/signup'
+              class='inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white'
+            >
+              <span class='ml-2'>You don&#x27;t have an account?</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* <form onSubmit={submitHandler}>
         <h2>Log in</h2>
         <input type='text' name='username' placeholder='username'></input>
         <br />
@@ -142,7 +153,7 @@ export default function SignIn(props) {
         <br />
         <button type='submit'>Submit</button>
       </form> */}
-    </div>
+      </div>
     </div>
   );
 }
