@@ -18,13 +18,13 @@ const Watcher = props => {
   const config = {
     iceServers: [
       {
-        urls: 'stun:bn-turn1.xirsys.com',
+        urls: 'stun:sp-turn2.xirsys.com',
       },
       {
-        urls: 'turn:bn-turn1.xirsys.com:3478?transport=tcp',
-        credential: 'ec14f6fe-efae-11eb-ba8f-0242ac140004',
+        urls: 'turn:sp-turn2.xirsys.com:3478?transport=tcp',
+        credential: '57eaecfc-f03c-11eb-b409-0242ac120004',
         username:
-          '0CK4pQDRsJHGNigsjORfn7foe-FaupCv_3m6k0QOWm0mKxyyViClQcil1h2qt4b0AAAAAGEBZ5xpYnJhaGltYmFuYXQ=',
+          'la9l9OExQKT_lXBu0g5-48EytlKTrMx7D5OoxRNUdXO9zkSzYP9O0idbNnlaJF9QAAAAAGECVOBpYnJhaGltYmFuYXQ=',
         credentialType: 'password',
       },
     ],
